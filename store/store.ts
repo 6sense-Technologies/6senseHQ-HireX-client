@@ -2,7 +2,7 @@ import {
     combineReducers,
     configureStore,
   } from "@reduxjs/toolkit";
-  import authReducer from "../slices/authSlice";
+  import authReducer from "../redux/slices/authSlice";
   import { persistReducer, persistStore } from "redux-persist";
   import storage from "redux-persist/lib/storage";
   
