@@ -3,6 +3,7 @@ import './globals.css';
 import { WebVitals } from './_components/web-vitals';
 import { Inter } from 'next/font/google';
 import Script from 'next/script';
+import Provider from '@/components/provider';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -20,8 +21,9 @@ export default function RootLayout({
     <html>
       <body className={inter.className}>
         <WebVitals />
+        <Provider>
         {children}
-
+        </Provider>
         {/* Script Optimaization Started*/}
         <Script
           src='https://www.googletagmanager.com/gtag/js?id=YOUR_GA_TRACKING_ID'

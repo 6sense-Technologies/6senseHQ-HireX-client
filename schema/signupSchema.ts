@@ -6,8 +6,8 @@ import { z } from 'zod';
 export const SignupSchema = z
   .object({
     name: z
-      .string({ required_error: 'Full Name is required.' })
-      .min(1, { message: 'Full Name is required.' }),
+      .string({ required_error: 'Full name is required.' })
+      .min(1, { message: 'Full name is required.' }),
     email: z
       .string({ required_error: 'Email address is required.' })
       .min(1, { message: 'Email address is required.' })
@@ -17,7 +17,7 @@ export const SignupSchema = z
       .min(8, 'Password requirements not fulfilled.')
       .regex(passwordRegex, 'Password requirements not fulfilled.'),
     Cpassword: z
-      .string({ required_error: 'Confirm Password is required.' })
+      .string({ required_error: 'Confirm password is required.' })
       .min(8, 'Password requirements not fulfilled.')
       .regex(passwordRegex, 'Password requirements not fulfilled.'),
     roleNames: z

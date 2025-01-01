@@ -1,22 +1,41 @@
 'use client';
-import React from 'react'
-import { useSearchParams } from 'next/navigation'
+import React, { useEffect } from 'react';
+import { useRouter, useSearchParams } from 'next/navigation';
+import { handleGoogleLogin } from '@/api/Auth/authApi';
+import { useMutation } from '@tanstack/react-query';
 
+const GoogleAuthCallback = () => {
+  const searchParams = useSearchParams();
+  const router = useRouter();
 
-const page = () => {
+  const code = searchParams.get('code');
 
-  const searchParams = useSearchParams()
+  const googleLoginMutation = useMutation({
+    mutationFn: handleGoogleLogin,
+    onSuccess: () => {
+      router.push('/dashboards/dashboard');
+    },
+    onError: (error) => {
+      console.log('Login failed:', error);
+    },
+  });
 
-  console.log(searchParams.get('code'))
+  useEffect(() => {
+    if (code) {
+      googleLoginMutation.mutate({
+        provider: 'google',
+        idToken: code,
+      });
+    }
+  }, []);
 
   return (
     <div className='px-10'>
-    <div className='bg-white w-full h-screen border'>
-      <h1 className='text-2xl text-black pt-3 pl-3'>Dashboard</h1>
+      <div className='h-screen w-full border bg-white'>
+        <h1 className='pl-3 pt-3 text-2xl text-black'>Processing...</h1>
+      </div>
     </div>
-    </div>
+  );
+};
 
-  )
-}
-
-export default page
+export default GoogleAuthCallback;

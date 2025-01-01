@@ -8,17 +8,17 @@ import { Button } from "@/components/ui/button";
 const Page = () => {
   const router = useRouter();
 
-  const user = useSelector((state: RootState) => state.auth.user);
-  const auth = useSelector((state: RootState) => state.auth.auth);
-
-  const checkToken = () => {
-    const token = localStorage.getItem("accessToken");
-    if (!token) {
-      router.push("/login");
-    }
-  };
+  const userInfo = useSelector((state: RootState) => state.auth.userInfo);
+  const tokens = useSelector((state: RootState) => state.auth.tokens);
 
   useEffect(() => {
+    const checkToken = () => {
+      const token = localStorage.getItem("accessToken");
+      if (!token) {
+        router.push("/login");
+      }
+    };
+
     checkToken();
 
     const handleStorageChange = (event: StorageEvent) => {
@@ -32,7 +32,7 @@ const Page = () => {
     return () => {
       window.removeEventListener("storage", handleStorageChange);
     };
-  }, []);
+  }, [router]);
 
   const handleLogout = () => {
     router.push("/login");
@@ -40,7 +40,7 @@ const Page = () => {
     localStorage.removeItem("refreshToken");
   };
 
-  console.log(user);
+  console.log("Checking Redux Working or not ", userInfo);
 
   return (
     <div className="dashboard-area w-full bg-white px-4">
@@ -48,6 +48,12 @@ const Page = () => {
         <h1 className="text-3xl font-bold mt-1 lg:mt-1 lg:ml-5">
           Dashboard Details
         </h1>
+        <Button
+          className="w-24 bg-red-500 text-white relative bottom-0 lg:bottom-0"
+          onClick={handleLogout}
+        >
+          Logout
+        </Button>
       </div>
     </div>
   );

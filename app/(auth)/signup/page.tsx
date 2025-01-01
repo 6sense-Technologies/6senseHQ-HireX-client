@@ -1,7 +1,7 @@
 'use client';
 import * as React from 'react';
 import { useForm, SubmitHandler } from 'react-hook-form';
-import { Eye, EyeSlash, X } from '@phosphor-icons/react';
+import { Circle, Eye, EyeSlash, X } from '@phosphor-icons/react';
 import Link from 'next/link';
 import Image from 'next/image';
 import Logo from '../../../public/logos/Main-logo.svg';
@@ -13,6 +13,8 @@ import { SignupSchema } from '@/schema/signupSchema';
 import { SingupFormInputs } from '@/types/Auth/types';
 import Dropdown from '@/components/dropdown';
 import { Input } from '@/components/ui/input';
+import { useMutation } from '@tanstack/react-query';
+import { handleSignup } from '@/api/Auth/authApi';
 
 const Signup = () => {
   const [passwordVisible, setPasswordVisible] = useState(false);
@@ -41,7 +43,6 @@ const Signup = () => {
     setPasswordVisible(!passwordVisible);
   };
 
-  
   const handleConfirmPasswordVisibility = () => {
     setCPasswordVisible(!cPasswordVisible);
   };
@@ -52,11 +53,20 @@ const Signup = () => {
     { value: 'admin', label: 'Admin' },
   ];
 
+  const signupMutation = useMutation({
+    mutationFn: handleSignup,
+    onSuccess: () => {
+      router.push('/login');
+    },
+  });
+
   const handleSubmission: SubmitHandler<SingupFormInputs> = (data) => {
-    console.log(data);
-    const { Cpassword, ...rest} = data;
-    rest.roleNames = Array.isArray(rest.roleNames) ? rest.roleNames : [rest.roleNames];
-    console.log(rest);
+    const { Cpassword, ...rest } = data;
+    rest.roleNames = Array.isArray(rest.roleNames)
+      ? rest.roleNames
+      : [rest.roleNames];
+
+    signupMutation.mutate(rest);
   };
 
   console.log(errors);
@@ -70,20 +80,23 @@ const Signup = () => {
           </div>
           <form
             onSubmit={handleSubmit(handleSubmission)}
-            className='bg-pageBg max-w-[384px] border-t-[4px] border-primary p-[32px]'
+            className='max-w-[384px] border-t-[4px] border-primary bg-pageBg p-[32px]'
           >
             <div>
-              <h1 className='text-headingXS text-textPrimary font-bold'>
+              <h1 className='text-headingXS font-bold text-textPrimary'>
                 Signup
               </h1>
-              <p className='text-subHeading text-[14px]'>Create an account</p>
+              <p className='text-[14px] text-subHeading'>Create an account</p>
             </div>
 
             {/* <ErrorCard /> */}
 
             <div className='flex flex-col gap-2'>
               <div className='mt-[32px]'>
-                <label htmlFor='fullname' className='text-textSecondary text-sm'>
+                <label
+                  htmlFor='fullname'
+                  className='text-sm text-textSecondary'
+                >
                   Full Name
                 </label>
                 <div className='inner-input-div mt-[4px]'>
@@ -96,7 +109,7 @@ const Signup = () => {
                 </div>
               </div>
               <div className='mt-[6px]'>
-                <label htmlFor='email' className='text-textSecondary text-sm'>
+                <label htmlFor='email' className='text-sm text-textSecondary'>
                   Email Address
                 </label>
                 <div className='inner-input-div mt-[4px]'>
@@ -112,12 +125,13 @@ const Signup = () => {
               <div className='mt-[6px]'>
                 <label
                   htmlFor='password'
-                  className='text-textSecondary text-sm'
+                  className='text-sm text-textSecondary'
                 >
                   Password
                 </label>
-                <p className='text-twelve text-subHeading my-1'>
-                  Password must be 8 characters with symbols, numbers, upper & lower case, no spaces.
+                <p className='my-1 text-twelve text-subHeading'>
+                  Password must be 8 characters with symbols, numbers, upper &
+                  lower case, no spaces.
                 </p>
 
                 <div className='relative'>
@@ -135,12 +149,12 @@ const Signup = () => {
                       className='absolute right-5 top-2.5'
                     >
                       {passwordVisible ? (
-                        <Eye size={20} className='text-subHeading text-xl' />
+                        <Eye size={20} className='text-xl text-subHeading' />
                       ) : (
                         <EyeSlash
                           size={20}
                           weight='bold'
-                          className='text-subHeading text-xl'
+                          className='text-xl text-subHeading'
                         />
                       )}
                     </button>
@@ -151,7 +165,7 @@ const Signup = () => {
               <div className='mt-[6px]'>
                 <label
                   htmlFor='Cpassword'
-                  className='text-textSecondary text-sm'
+                  className='text-sm text-textSecondary'
                 >
                   Confirm Password
                 </label>
@@ -171,12 +185,12 @@ const Signup = () => {
                       className='absolute right-5 top-2.5'
                     >
                       {cPasswordVisible ? (
-                        <Eye size={20} className='text-subHeading text-xl' />
+                        <Eye size={20} className='text-xl text-subHeading' />
                       ) : (
                         <EyeSlash
                           size={20}
                           weight='bold'
-                          className='text-subHeading text-xl'
+                          className='text-xl text-subHeading'
                         />
                       )}
                     </button>
@@ -185,10 +199,7 @@ const Signup = () => {
               </div>
 
               <div className='mt-[6px]'>
-                <label
-                  htmlFor='role'
-                  className='text-textSecondary text-sm'
-                >
+                <label htmlFor='role' className='text-sm text-textSecondary'>
                   Role
                 </label>
 
@@ -215,7 +226,11 @@ const Signup = () => {
 
             <div>
               <Button variant={'primary'} size={'medium'} className='text-sm'>
-                Sign Up
+                {signupMutation.isPending ? (
+                  <Circle className='animate-spin text-sm' />
+                ) : (
+                  'Sign Up'
+                )}
               </Button>
             </div>
           </form>

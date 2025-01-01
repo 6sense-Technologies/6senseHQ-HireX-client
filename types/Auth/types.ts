@@ -8,9 +8,11 @@ export type SingupFormInputs = {
   name: string;
   email: string;
   password: string;
-  Cpassword: string;
+  Cpassword?: string;
   roleNames: string[];
 };
+
+
 
 export type Tokens = {
   access_token: string;
@@ -31,3 +33,8 @@ export type AuthState = {
   tokens: Tokens;
   userInfo: UserInfo | null;
 };
+
+export interface GoogleAuthTypes {
+  provider: string
+  idToken: string
+}

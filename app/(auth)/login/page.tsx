@@ -1,7 +1,7 @@
 'use client';
 import * as React from 'react';
 import { useForm, SubmitHandler } from 'react-hook-form';
-import { Eye, EyeSlash, Warning, X, GoogleLogo } from '@phosphor-icons/react';
+import { Eye, EyeSlash, Circle } from '@phosphor-icons/react';
 import Link from 'next/link';
 import Image from 'next/image';
 import Logo from '../../../public/logos/Main-logo.svg';
@@ -15,15 +15,15 @@ import { Input } from '@/components/ui/input';
 import GoogleButton from './_components/googleButton';
 import OrDivider from './_components/orDivider';
 import ErrorCard from './_components/errorCard';
+import { useMutation } from '@tanstack/react-query';
+import { handleLogin } from '@/api/Auth/authApi';
+import { useDispatch } from 'react-redux';
+import { setAuthData } from '@/redux/slices/authSlice';
 
 const Login = () => {
   const [passwordVisible, setPasswordVisible] = useState(false);
-
   const router = useRouter();
-
-  const clientId = '66227855cfd86a416d9ad70e';
-  const secretId = 'e6e01bb8-cf88-495f-825b-2581210e9c4b';
-  const base64Credentials = btoa(`${clientId}:${secretId}`);
+  const dispatch = useDispatch();
 
   const {
     register,
@@ -39,11 +39,25 @@ const Login = () => {
     setPasswordVisible(!passwordVisible);
   };
 
+  const loginMutation = useMutation({
+    mutationFn: handleLogin,
+    onSuccess: (data) => {
+      const { tokens, userInfo } = data;
+      dispatch(setAuthData({ tokens, userInfo }));
+      localStorage.setItem('accessToken', tokens.access_token);
+      localStorage.setItem('refreshToken', tokens.refresh_token);
+      router.push('/dashboards/dashboard');
+    },
+    onError: (error) => {
+      console.log('Login failed:', error);
+    },
+  });
+
   const handleSubmission: SubmitHandler<LoginFormInputs> = (data) => {
-    console.log(data);
+    loginMutation.mutate(data);
   };
 
-  console.log(errors);
+  console.log('errors of login page', errors);
 
   return (
     <div className='mx-8 flex min-h-screen items-center justify-center bg-white'>
@@ -54,13 +68,13 @@ const Login = () => {
           </div>
           <form
             onSubmit={handleSubmit(handleSubmission)}
-            className='bg-pageBg max-w-[384px] border-t-[4px] border-primary p-[32px]'
+            className='max-w-[384px] border-t-[4px] border-primary bg-pageBg p-[32px]'
           >
             <div>
-              <h1 className='text-headingXS text-textPrimary font-bold'>
+              <h1 className='text-headingXS font-bold text-textPrimary'>
                 Login
               </h1>
-              <p className='text-subHeading text-[14px]'>
+              <p className='text-[14px] text-subHeading'>
                 Continue with pattern50
               </p>
             </div>
@@ -69,7 +83,7 @@ const Login = () => {
 
             <div className='flex flex-col gap-2'>
               <div className='mt-[32px]'>
-                <label htmlFor='email' className='text-textSecondary text-sm'>
+                <label htmlFor='email' className='text-sm text-textSecondary'>
                   Email Address
                 </label>
                 <div className='inner-input-div mt-[4px]'>
@@ -85,7 +99,7 @@ const Login = () => {
               <div className='mt-[16px]'>
                 <label
                   htmlFor='password'
-                  className='text-textSecondary text-sm'
+                  className='text-sm text-textSecondary'
                 >
                   Password
                 </label>
@@ -107,7 +121,11 @@ const Login = () => {
                       {passwordVisible ? (
                         <Eye size={20} className='text-xl text-subHeading' />
                       ) : (
-                        <EyeSlash size={20} weight='bold' className='text-xl text-subHeading' />
+                        <EyeSlash
+                          size={20}
+                          weight='bold'
+                          className='text-xl text-subHeading'
+                        />
                       )}
                     </button>
                   </div>
@@ -125,7 +143,11 @@ const Login = () => {
 
             <div>
               <Button variant={'primary'} size={'medium'} className='text-sm'>
-                Login
+                {loginMutation.isPending ? (
+                  <Circle className='animate-spin text-sm' />
+                ) : (
+                  'Login'
+                )}
               </Button>
             </div>
 
