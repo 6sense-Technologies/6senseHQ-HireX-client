@@ -2,10 +2,14 @@
 
 import { useState,FormEvent } from 'react';
 import { signInWithGoogle } from './actions/signInGoogle'; // Adjust path as needed
+import { Button } from '@/components/ui/button';
+import cn from '@/utils/cn';
 
 export default function Home() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+
+  const [test, setTest] = useState<boolean>(true);
 
   const handleLogin = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -56,6 +60,17 @@ export default function Home() {
         <button type="submit" className="bg-blue-600 p-3 text-white mt-4">
           Sign in with Google
         </button>
+        <Button className='bg-red-500'> Sign in with Google </Button>
+
+        <p className={cn('text-red-500',
+          {
+            'text-green-500': test,
+          }
+         ) 
+
+        }>
+              Working
+        </p>
       </form>
     </>
   );
