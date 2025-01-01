@@ -24,6 +24,7 @@ const Login = () => {
   const [passwordVisible, setPasswordVisible] = useState(false);
   const router = useRouter();
   const dispatch = useDispatch();
+  const [errorFlag, setErrorFlag] = useState(false);
 
   const {
     register,
@@ -48,8 +49,8 @@ const Login = () => {
       localStorage.setItem('refreshToken', tokens.refresh_token);
       router.push('/dashboards/dashboard');
     },
-    onError: (error) => {
-      console.log('Login failed:', error);
+    onError: () => {
+      setErrorFlag(true);
     },
   });
 
@@ -79,7 +80,12 @@ const Login = () => {
               </p>
             </div>
 
-            {/* <ErrorCard /> */}
+            <ErrorCard 
+            
+            setErrorFlag={setErrorFlag}
+            errorFlag={errorFlag}
+
+            /> 
 
             <div className='flex flex-col gap-2'>
               <div className='mt-[32px]'>

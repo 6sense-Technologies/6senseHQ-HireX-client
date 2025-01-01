@@ -24,7 +24,7 @@ const GoogleAuthCallback = () => {
     if (code) {
       googleLoginMutation.mutate({
         provider: 'google',
-        idToken: code,
+        authCode: code,
       });
     }
   }, []);

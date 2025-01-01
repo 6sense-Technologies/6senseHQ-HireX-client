@@ -36,5 +36,6 @@ export type AuthState = {
 
 export interface GoogleAuthTypes {
   provider: string
-  idToken: string
+  authCode: string
 }
+
