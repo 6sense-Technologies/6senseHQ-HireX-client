@@ -22,9 +22,9 @@ const Signup = () => {
 
   const router = useRouter();
 
-  const clientId = '66227855cfd86a416d9ad70e';
-  const secretId = 'e6e01bb8-cf88-495f-825b-2581210e9c4b';
-  const base64Credentials = btoa(`${clientId}:${secretId}`);
+  // const clientId = '66227855cfd86a416d9ad70e';
+  // const secretId = 'e6e01bb8-cf88-495f-825b-2581210e9c4b';
+  // const base64Credentials = btoa(`${clientId}:${secretId}`);
 
   const {
     register,

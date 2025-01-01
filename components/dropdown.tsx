@@ -17,7 +17,6 @@ interface DropdownProps {
   control: any;
   setValue: UseFormSetValue<any>;
   value?: string;
-  onchange?: (value: string[]) => void;
   ClassName?: string;
 }
 
@@ -28,7 +27,6 @@ const Dropdown: React.FC<DropdownProps> = ({
   errors,
   control,
   setValue,
-  onchange,
   ClassName,
 }) => {
   const customStyles = {
@@ -67,9 +65,6 @@ const Dropdown: React.FC<DropdownProps> = ({
                   : [];
                 field.onChange(selectedValue);
                 setValue(name, selectedValue, { shouldValidate: true });
-                if (onchange) {
-                  onchange(selectedValue);
-                }
               }}
               options={options}
               placeholder={placeholder}
