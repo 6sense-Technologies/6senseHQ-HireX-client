@@ -51,7 +51,7 @@ export default function RootLayout({
                     </Breadcrumb>
                   </div>
                 </header>
-                <div className="flex-1 overflow-y-auto">
+                <div className="flex-1">
                   {children}
                 </div>
               </div>

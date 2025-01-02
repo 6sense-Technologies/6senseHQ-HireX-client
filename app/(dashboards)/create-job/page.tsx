@@ -6,7 +6,8 @@ import { SignupSchema } from '@/schema/signupSchema';
 import { zodResolver } from '@hookform/resolvers/zod';
 import React from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
-import { DropDownMenu } from './_components/dropdownmenu';
+import Dropdownmenu from './_components/dropdownmenu';
+import { Button } from '@/components/ui/button';
 
 const CreateJob = () => {
   const {
@@ -34,7 +35,7 @@ const CreateJob = () => {
 
   return (
     <div className='bg-white px-[16px]'>
-      <form>
+      <form className='pb-28'>
         <div className='min-h-screen'>
           {/* Job Information Area*/}
           <div className='max-w-[1168px] rounded-2xl bg-jobBg'>
@@ -137,9 +138,20 @@ const CreateJob = () => {
                   Idea Candidate
               </h1>
             </div>
-            <div className='w-full pl-[47px] pr-[38px] pb-[38px]'>
-              <DropDownMenu />
+            <div className='w-full pt-[16px] pl-[47px] pr-[38px] pb-[38px]'>
+                <Dropdownmenu/>
             </div>
+          </div>
+
+          <div className='flex gap-[16px] justify-end mt-[30px]'>
+            <Button
+            variant='blackwhite'
+            className='w-[80px] h-[40px]'
+            >Cancel</Button>
+            <Button
+            variant='primary'
+            className='w-[80px] h-[40px]'
+            >Create</Button>
           </div>
 
         </div>
