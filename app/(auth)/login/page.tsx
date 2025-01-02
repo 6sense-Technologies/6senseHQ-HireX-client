@@ -47,7 +47,7 @@ const Login = () => {
       dispatch(setAuthData({ tokens, userInfo }));
       localStorage.setItem('accessToken', tokens.access_token);
       localStorage.setItem('refreshToken', tokens.refresh_token);
-      router.push('/dashboards/dashboard');
+      router.push('/dashboard');
     },
     onError: () => {
       setErrorFlag(true);

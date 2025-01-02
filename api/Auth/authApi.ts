@@ -41,6 +41,8 @@ export const handleSignup = async (data: SingupFormInputs) => {
 
   export const handleGoogleLogin = async (data:GoogleAuthTypes) => {
   
+    console.log(Date.now());
+
     const response = await axios.post(
       'https://192.168.0.158:8000/auth/social-login',
       data  
