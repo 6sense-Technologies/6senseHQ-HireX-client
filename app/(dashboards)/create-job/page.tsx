@@ -1,13 +1,15 @@
 'use client';
-import Dropdown from '@/components/dropdown';
-import TextArea from '@/components/textArea';
-import { Input } from '@/components/ui/input';
 import { SignupSchema } from '@/schema/signupSchema';
 import { zodResolver } from '@hookform/resolvers/zod';
 import React from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
-import Dropdownmenu from './_components/dropdownmenu';
 import { Button } from '@/components/ui/button';
+import JobInformation from './_components/jobInformation';
+import JobResponsibilites from './_components/jobResponsibilites';
+import IdealCandidates from './_components/idealCandidates';
+import InterviewStage from './_components/interviewStage';
+import { useQuery } from '@tanstack/react-query';
+import { getDepartments, getJobpostion } from '@/api/Job/JobApi';
 
 const CreateJob = () => {
   const {
@@ -17,17 +19,38 @@ const CreateJob = () => {
     control,
     formState: { errors },
   } = useForm<any>({
-    resolver: zodResolver(SignupSchema),
     defaultValues: {
       roleNames: [],
     },
   });
 
-  const roleOptions = [
-    { value: 'interviewer', label: 'Interviewer' },
-    { value: 'hr', label: 'HR' },
-    { value: 'admin', label: 'Admin' },
-  ];
+  const accessToken = localStorage.getItem('accessToken');
+  console.log(accessToken);
+
+  const { data: jobpositions } = useQuery<any, any, any>({
+    queryKey: ['jobpositions'],
+    queryFn: () => getJobpostion(),
+    enabled: true,
+  });
+
+  const { data: departments } = useQuery<any, any, any>({
+    queryKey: ['departments'],
+    queryFn: () => getDepartments(),
+    enabled: true,
+  });
+
+
+  const jobPositionOptions =
+  jobpositions?.map((jobpositions: {jobPositionName: string }) => ({
+    value: jobpositions.jobPositionName,
+    label: jobpositions.jobPositionName,
+  })) || [];
+
+  const departmentOptions =
+  departments?.map((departments: {jobDepartmentName: string }) => ({
+    value: departments.jobDepartmentName,
+    label: departments.jobDepartmentName,
+  })) || [];
 
   const handleSubmission: SubmitHandler<any> = (data) => {
     console.log(data);
@@ -35,125 +58,38 @@ const CreateJob = () => {
 
   return (
     <div className='bg-white px-[16px]'>
-      <form className='pb-28'>
+      <form className='pb-28'onSubmit={handleSubmit(handleSubmission)}>
         <div className='min-h-screen'>
           {/* Job Information Area*/}
-          <div className='max-w-[1168px] rounded-2xl bg-jobBg'>
-            <div>
-              <h1 className='pl-[48px] pt-[32px] text-headingXXS font-semibold'>
-                Job information
-              </h1>
-            </div>
-
-            <div className='flex gap-[24px] pb-[32px] pl-[48px] pr-[96px] pt-[16px]'>
-              <div className='w-full'>
-                <label
-                  htmlFor='role'
-                  className='text-dropdownLabelColor text-nowrap text-twelve font-medium'
-                >
-                  Job Position
-                </label>
-                <div>
-                  <Dropdown
-                    control={control}
-                    name='jobposition'
-                    errors={errors}
-                    setValue={setValue}
-                    options={roleOptions}
-                    placeholder='Select...'
-                    ClassName='mt-[8px] max-w-[348px] placeholder:text-placholderColor'
-                  />
-                </div>
-              </div>
-              <div className='w-full'>
-                <label
-                  htmlFor='role'
-                  className='text-dropdownLabelColor text-nowrap text-twelve font-medium'
-                >
-                  Department (Optional)
-                </label>
-                <div>
-                  <Dropdown
-                    control={control}
-                    name='department'
-                    errors={errors}
-                    setValue={setValue}
-                    options={roleOptions}
-                    placeholder='Select...'
-                    ClassName='mt-[8px] max-w-[348px] placeholder:text-placholderColor'
-                  />
-                </div>
-              </div>
-
-              <div className='w-full'>
-                <label
-                  htmlFor='vacancy'
-                  className='text-dropdownLabelColor text-nowrap text-twelve font-medium'
-                >
-                  No of Vacancy
-                </label>
-                <div>
-                  <Input
-                    control={control}
-                    placeholder='No of Vacancy'
-                    name='email'
-                    errors={errors}
-                    className='placeholder:text-placholderColor mt-[8px] max-w-[348px] bg-white'
-                  />
-                </div>
-              </div>
-            </div>
-          </div>
+          <JobInformation
+            control={control}
+            errors={errors}
+            setValue={setValue}
+            jobPositionOptions={jobPositionOptions}
+            departmentOptions={departmentOptions}
+          />
 
           {/* Interview Stage Area  */}
-          <div className='max-w-[1168px] rounded-2xl bg-jobBg mt-[32px]'>
-            <div>
-              <h1 className='pl-[48px] pt-[38px] text-headingXXS font-semibold'>
-                  Interview Stages
-              </h1>
-            </div>
-          </div>
+          <InterviewStage
+            control={control}
+            setValue={setValue}
+            errors={errors}
+          />
 
           {/* Job Responsibilites Area */}
-          <div className='max-w-[1168px] rounded-2xl bg-jobBg mt-[32px]'>
-            <div>
-              <h1 className='pl-[48px] pt-[38px] text-headingXXS font-semibold'>
-                  Job Responsibilities
-              </h1>
-            </div>
-            <div className='w-full pl-[47px] pr-[38px] pb-[38px]'>
-              <TextArea
-              name='jobResponsibilities'
-              placeholder='Type Job Responsibilities'
-              className='placeholder:text-placeholderColor bg-transparent px-[12px] pt-[10px] max-w-[1082px] h-[207px] mt-[16px]'
-
-              />
-            </div>
-          </div>
+          <JobResponsibilites />
 
           {/* Ideal Candidate Area */}
-          <div className='max-w-[1168px] rounded-2xl bg-jobBg mt-[32px]'>
-            <div>
-              <h1 className='pl-[48px] pt-[38px] text-headingXXS font-semibold'>
-                  Idea Candidate
-              </h1>
-            </div>
-            <div className='w-full pt-[16px] pl-[47px] pr-[38px] pb-[38px]'>
-                <Dropdownmenu/>
-            </div>
-          </div>
+          <IdealCandidates />
 
-          <div className='flex gap-[16px] justify-end mt-[30px]'>
-            <Button
-            variant='blackwhite'
-            className='w-[80px] h-[40px]'
-            >Cancel</Button>
-            <Button
-            variant='primary'
-            className='w-[80px] h-[40px]'
-            >Create</Button>
+          <div className='mt-[30px] flex justify-end gap-[16px]'>
+            <Button variant='blackwhite' className='h-[40px] w-[80px]'>
+              Cancel
+            </Button>
+            <Button variant='lightBlue' className='h-[40px] w-[80px]'>
+              Create
+            </Button>
           </div>
-
         </div>
       </form>
     </div>

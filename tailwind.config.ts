@@ -46,6 +46,9 @@ export default {
         dropdownMenuBorderColor: '#E2E8F0',
         dropdownSecondaryBg: '#F1F5F9',
         radioColor: '#CBD5E1',
+        lightBlueBg: '#0EA5E9',
+        lightGreenBg: '#DCFCE7',
+        darkGreenColor:'#166534',
         sidebar: {
           DEFAULT: 'hsl(var(--sidebar-background))',
           foreground: 'hsl(var(--sidebar-foreground))',

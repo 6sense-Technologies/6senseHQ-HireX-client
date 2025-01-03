@@ -1,8 +1,8 @@
 import axios from 'axios';
-
+import { ClientId, SecretId } from '../config';
 // Base64 Credentials for the API
-const clientId = '66227855cfd86a416d9ad70e';
-const secretId = 'e6e01bb8-cf88-495f-825b-2581210e9c4b';
+const clientId = ClientId;
+const secretId = SecretId;
 const base64Credentials = btoa(`${clientId}:${secretId}`);
 
 // Function to refresh access token
