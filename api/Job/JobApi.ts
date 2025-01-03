@@ -36,7 +36,8 @@ export const getInterviewStages = async () => {
       'https://192.168.0.158:8000/interviewstage/list',
       {
         headers: {
-          Authorization: `Bearer ${accssToken}`,
+          Accept: '*/*',
+          Authorization: ` Bearer ${accssToken}`,
           'Content-Type': 'application/json',
         },
       }

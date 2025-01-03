@@ -293,7 +293,7 @@ const InterviewStage: React.FC<InterviewStageProps> = ({
                     value={newItemLabel}
                     onChange={(e) => setNewItemLabel(e.target.value)}
                     placeholder='Type Name...'
-                    className='w-full border-b pl-8 text-twelve placeholder:text-twelve placeholder:text-placeholderColor'
+                    className='w-full border-b pl-8 py-[9px] text-twelve placeholder:text-twelve placeholder:text-placeholderColor'
                   />
                 </td>
               </tr>
