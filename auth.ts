@@ -1,7 +1,12 @@
 import axios from 'axios';
-import NextAuth from 'next-auth';
+import NextAuth, { Session } from 'next-auth';
 import GoogleProvider from 'next-auth/providers/google';
-import { AuthGoogleID, AuthGoogleSecret } from './config';
+
+declare module 'next-auth' {
+  interface Session {
+    accessToken?: string;
+  }
+}
 
 export const { handlers, signIn, signOut, auth } = NextAuth({
   session: {
@@ -9,24 +14,41 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
   },
   providers: [
     GoogleProvider({
-      clientId: AuthGoogleID,
-      clientSecret: AuthGoogleSecret,
+      clientId: process.env.AUTH_GOOGLE_ID,
+      clientSecret: process.env.AUTH_GOOGLE_SECRET,
+      authorization: {
+        params: {
+          prompt: 'select_account',
+        },
+      },
     }),
   ],
   callbacks: {
-    async signIn({ account, profile }) {
-      console.log(profile);
-      console.log(account);
-      // const response = await axios.post(
-      //   'http://localhost:8000/auth/social-login',
-      //   {
-      //     // Add your payload here
-      //   },
-      //   {
-      //     // Add your config here
-      //   }
-      // );
-      return true; // or return a string if needed
+    async jwt({ token, account }) {
+      if (account) {
+        const response = await axios.post(
+          'http://localhost:8000/auth/social-login',
+          {
+            idToken: account.id_token,
+            provider: 'google',
+          },
+          {
+            headers: {
+              'Content-Type': 'application/json',
+            },
+          }
+        );
+
+        token.accessToken = response.data?.tokens?.access_token;
+      }
+      return token;
+    },
+    async session({ session, token }) {
+      session.accessToken = token.accessToken as string;
+      return session;
+    },
+    async redirect() {
+      return `/dashboard`;
     },
   },
 });

@@ -13,6 +13,7 @@ import {
   handleCreateJob,
 } from '@/api/Job/JobApi';
 import { useRouter } from 'next/navigation';
+import { JobDepartmentList, JobPositionList } from '@/types/Job/type';
 
 const CreateJob = () => {
   const {
@@ -51,13 +52,21 @@ const CreateJob = () => {
     };
   }, [router]);
 
-  const { data: jobpositions } = useQuery<any, any, any>({
+  const { data: jobpositions } = useQuery<
+    JobPositionList,
+    any,
+    JobPositionList
+  >({
     queryKey: ['jobpositions'],
     queryFn: () => getJobpostion(),
     enabled: true,
   });
 
-  const { data: departments } = useQuery<any, any, any>({
+  const { data: departments } = useQuery<
+    JobDepartmentList,
+    any,
+    JobDepartmentList
+  >({
     queryKey: ['departments'],
     queryFn: () => getDepartments(),
     enabled: true,

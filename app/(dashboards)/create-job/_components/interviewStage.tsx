@@ -17,6 +17,7 @@ import {
   handleCreateInterviewStage,
 } from '@/api/Job/JobApi';
 import cn from '@/utils/cn';
+import { InterViewStageList, InterviewStageProps } from '@/types/Job/type';
 
 type Item = {
   id: number;
@@ -60,12 +61,6 @@ const interviewStageOptions = [
   },
 ];
 
-interface InterviewStageProps {
-  control: any;
-  errors: any;
-  setValue: (name: string, value: any) => void;
-}
-
 const InterviewStage: React.FC<InterviewStageProps> = ({
   control,
   errors,
@@ -81,7 +76,11 @@ const InterviewStage: React.FC<InterviewStageProps> = ({
   const [hoveredItemRight, setHoveredItemRight] = useState<Item | null>(null);
   const [newItemLabel, setNewItemLabel] = useState('');
 
-  const { data: interviewStages } = useQuery<any, any, any>({
+  const { data: interviewStages } = useQuery<
+    InterViewStageList,
+    any,
+    InterViewStageList
+  >({
     queryKey: ['interviewStages'],
     queryFn: () => getInterviewStages(),
     enabled: true,
@@ -216,7 +215,7 @@ const InterviewStage: React.FC<InterviewStageProps> = ({
     setSelectAll(false);
   };
 
-  // Collect data from the right table and format it as required
+  // Collected data from right table and formated the data as required
   useEffect(() => {
     const formattedInterviewStages = itemsRight.map((item) => ({
       interviewStageName: item.label,
@@ -233,8 +232,8 @@ const InterviewStage: React.FC<InterviewStageProps> = ({
         </h1>
       </div>
       <div className='flex w-full items-center gap-[8px] pb-[38px] pl-[47px] pr-[38px] pt-[16px]'>
-        <div className='w-full h-[200px] lg:max-w-[409px] xl:max-w-[605px]  overflow-y-auto'>
-          <table className='w-full lg:max-w-[405px] xl:max-w-[600px]  rounded-md bg-white'>
+        <div className='h-[200px] w-full overflow-y-auto lg:max-w-[409px] xl:max-w-[605px]'>
+          <table className='w-full rounded-md bg-white lg:max-w-[405px] xl:max-w-[600px]'>
             <thead>
               <tr>
                 <th className='flex items-center gap-[30px] border-b py-[9px] pl-[17px]'>
@@ -305,8 +304,8 @@ const InterviewStage: React.FC<InterviewStageProps> = ({
         <span>
           <ArrowRight onClick={handleMoveToRight} className='cursor-pointer' />
         </span>
-        <div className='h-[200px] w-full lg:max-w-[655px] xl:max-w-[800px] overflow-y-auto'>
-          <table className='w-full lg:max-w-[650px] xl:max-w-[800px] rounded-md bg-white'>
+        <div className='h-[200px] w-full overflow-y-auto lg:max-w-[655px] xl:max-w-[800px]'>
+          <table className='w-full rounded-md bg-white lg:max-w-[650px] xl:max-w-[800px]'>
             <thead>
               <tr className='border-b'>
                 <th className='flex max-w-[200px] justify-start py-[9px] pl-[40px]'>

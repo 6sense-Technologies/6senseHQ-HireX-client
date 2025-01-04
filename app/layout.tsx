@@ -4,6 +4,7 @@ import { WebVitals } from './_components/web-vitals';
 import { Inter } from 'next/font/google';
 import Script from 'next/script';
 import Provider from '@/components/provider';
+import { SessionProvider } from 'next-auth/react';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -21,8 +22,10 @@ export default function RootLayout({
     <html>
       <body className={inter.className}>
         <WebVitals />
-        <Provider>{children}</Provider>
-        {/* Script Optimaization Started*/}
+        <SessionProvider>
+          <Provider>{children}</Provider>
+        </SessionProvider>
+        {/* Script Optimization Started */}
         <Script
           src='https://www.googletagmanager.com/gtag/js?id=YOUR_GA_TRACKING_ID'
           strategy='afterInteractive'
@@ -35,8 +38,7 @@ export default function RootLayout({
             gtag('config', 'YOUR_GA_TRACKING_ID');
           `}
         </Script>
-
-        {/* Script Optimaization Ended */}
+        {/* Script Optimization Ended */}
       </body>
     </html>
   );

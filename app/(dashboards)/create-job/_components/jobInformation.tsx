@@ -1,14 +1,7 @@
 import Dropdown from '@/components/dropdown';
 import { Input } from '@/components/ui/input';
+import { JobInformationProps } from '@/types/Job/type';
 import React from 'react';
-
-type JobInformationProps = {
-  control: any;
-  errors: any;
-  setValue: (name: string, value: any) => void;
-  jobPositionOptions: { label: string; value: string }[];
-  departmentOptions: { label: string; value: string }[];
-};
 
 const JobInformation: React.FC<JobInformationProps> = ({
   control,

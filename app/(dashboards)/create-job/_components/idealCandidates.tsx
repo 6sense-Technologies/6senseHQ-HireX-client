@@ -1,10 +1,6 @@
 import React from 'react';
 import Dropdownmenu from './dropdownmenu';
-
-interface IdealCandidatesProps {
-  control: any;
-  errors: any;
-}
+import { IdealCandidatesProps } from '@/types/Job/type';
 
 const IdealCandidates: React.FC<IdealCandidatesProps> = ({
   control,

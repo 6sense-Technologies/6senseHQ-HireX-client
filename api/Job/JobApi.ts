@@ -1,4 +1,9 @@
-import { interviewStageInputTypes } from '@/types/Job/type';
+import {
+  interviewStageInputTypes,
+  InterViewStageList,
+  JobDepartmentList,
+  JobPositionList,
+} from '../../types/Job/type';
 import axios from 'axios';
 
 const accessToken = localStorage.getItem('accessToken');
@@ -12,7 +17,7 @@ export const getJobpostion = async () => {
       'Content-Type': 'application/json',
     },
   });
-  return response.data;
+  return response.data as JobPositionList;
 };
 
 export const getDepartments = async () => {
@@ -25,7 +30,7 @@ export const getDepartments = async () => {
       },
     }
   );
-  return response.data;
+  return response.data as JobDepartmentList;
 };
 
 export const getInterviewStages = async () => {
@@ -39,7 +44,7 @@ export const getInterviewStages = async () => {
       },
     }
   );
-  return response.data;
+  return response.data as InterViewStageList;
 };
 
 export const handleCreateInterviewStage = async (

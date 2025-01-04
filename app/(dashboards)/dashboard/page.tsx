@@ -1,15 +1,32 @@
 'use client';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { useSelector } from 'react-redux';
 import { RootState } from '@/store/store';
 import { Button } from '@/components/ui/button';
+import { useSession } from 'next-auth/react';
 
 const Page = () => {
   const router = useRouter();
+  const { data: session, status } = useSession();
+  const [sessionInitialized, setSessionInitialized] = useState(false);
 
   const userInfo = useSelector((state: RootState) => state.auth.userInfo);
-  const tokens = useSelector((state: RootState) => state.auth.tokens);
+
+  useEffect(() => {
+    const initializeSession = async () => {
+      if (status === 'authenticated' && session?.accessToken) {
+        localStorage.setItem('accessToken', session.accessToken);
+        setSessionInitialized(true);
+      } else if (status === 'unauthenticated') {
+        router.push('/login');
+      }
+    };
+
+    if (status !== 'loading') {
+      initializeSession();
+    }
+  }, [session, status, router]);
 
   useEffect(() => {
     const checkToken = () => {
@@ -19,7 +36,9 @@ const Page = () => {
       }
     };
 
-    checkToken();
+    if (sessionInitialized) {
+      checkToken();
+    }
 
     const handleStorageChange = (event: StorageEvent) => {
       if (event.key === 'accessToken') {
@@ -32,7 +51,7 @@ const Page = () => {
     return () => {
       window.removeEventListener('storage', handleStorageChange);
     };
-  }, [router]);
+  }, [router, sessionInitialized]);
 
   const handleLogout = () => {
     router.push('/login');
@@ -40,7 +59,9 @@ const Page = () => {
     localStorage.removeItem('refreshToken');
   };
 
-  console.log('Checking Redux Working or not ', userInfo);
+  if (status === 'loading' || !sessionInitialized) {
+    return <div>Loading...</div>;
+  }
 
   return (
     <div className='dashboard-area w-full bg-white px-4'>

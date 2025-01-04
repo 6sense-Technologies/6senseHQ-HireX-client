@@ -31,8 +31,3 @@ export type AuthState = {
   tokens: Tokens;
   userInfo: UserInfo | null;
 };
-
-export interface GoogleAuthTypes {
-  provider: string;
-  authCode: string;
-}

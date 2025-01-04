@@ -29,20 +29,3 @@ export const handleSignup = async (data: SingupFormInputs) => {
   console.log(response.data);
   return response.data;
 };
-
-export const handleGoogleLogin = async (data: GoogleAuthTypes) => {
-  console.log(Date.now());
-
-  const response = await axios.post(
-    'http://localhost:8000/auth/social-login',
-    data,
-    {
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    }
-  );
-
-  console.log(response.data);
-  return response.data;
-};
