@@ -226,15 +226,15 @@ const InterviewStage: React.FC<InterviewStageProps> = ({
   }, [itemsRight, setValue]);
 
   return (
-    <div className='mt-[32px] max-w-[1168px] rounded-2xl bg-jobBg'>
+    <div className='mt-[32px] rounded-2xl bg-jobBg'>
       <div>
         <h1 className='pl-[48px] pt-[38px] text-headingXXS font-semibold'>
           Interview Stages
         </h1>
       </div>
       <div className='flex w-full items-center gap-[8px] pb-[38px] pl-[47px] pr-[38px] pt-[16px]'>
-        <div className='full h-[200px] max-w-[409px] overflow-y-auto'>
-          <table className='w-full max-w-[405px] rounded-md bg-white'>
+        <div className='w-full h-[200px] lg:max-w-[409px] xl:max-w-[605px]  overflow-y-auto'>
+          <table className='w-full lg:max-w-[405px] xl:max-w-[600px]  rounded-md bg-white'>
             <thead>
               <tr>
                 <th className='flex items-center gap-[30px] border-b py-[9px] pl-[17px]'>
@@ -305,8 +305,8 @@ const InterviewStage: React.FC<InterviewStageProps> = ({
         <span>
           <ArrowRight onClick={handleMoveToRight} className='cursor-pointer' />
         </span>
-        <div className='h-[200px] w-full max-w-[655px] overflow-y-auto'>
-          <table className='w-full max-w-[650px] rounded-md bg-white'>
+        <div className='h-[200px] w-full lg:max-w-[655px] xl:max-w-[800px] overflow-y-auto'>
+          <table className='w-full lg:max-w-[650px] xl:max-w-[800px] rounded-md bg-white'>
             <thead>
               <tr className='border-b'>
                 <th className='flex max-w-[200px] justify-start py-[9px] pl-[40px]'>

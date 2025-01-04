@@ -11,7 +11,7 @@ const IdealCandidates: React.FC<IdealCandidatesProps> = ({
   errors,
 }) => {
   return (
-    <div className='mt-[32px] max-w-[1168px] rounded-2xl bg-jobBg'>
+    <div className='mt-[32px] rounded-2xl bg-jobBg'>
       <div>
         <h1 className='pl-[48px] pt-[38px] text-headingXXS font-semibold'>
           Ideal Candidate

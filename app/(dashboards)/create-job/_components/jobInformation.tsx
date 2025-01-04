@@ -18,7 +18,7 @@ const JobInformation: React.FC<JobInformationProps> = ({
   departmentOptions,
 }) => {
   return (
-    <div className='max-w-[1168px] rounded-2xl bg-jobBg'>
+    <div className='rounded-2xl bg-jobBg'>
       <div>
         <h1 className='pl-[48px] pt-[32px] text-headingXXS font-semibold'>
           Job information
@@ -41,7 +41,7 @@ const JobInformation: React.FC<JobInformationProps> = ({
               setValue={setValue}
               options={jobPositionOptions}
               placeholder='Select...'
-              ClassName='mt-[8px] max-w-[348px] placeholder:text-placholderColor'
+              ClassName='mt-[8px] lg:max-w-[348px] placeholder:text-placholderColor'
             />
           </div>
         </div>
