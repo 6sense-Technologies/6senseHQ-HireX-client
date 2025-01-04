@@ -1,7 +1,7 @@
 'use client';
 import { SignupSchema } from '@/schema/signupSchema';
 import { zodResolver } from '@hookform/resolvers/zod';
-import React from 'react';
+import React, { useEffect } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { Button } from '@/components/ui/button';
 import JobInformation from './_components/jobInformation';
@@ -10,6 +10,7 @@ import IdealCandidates from './_components/idealCandidates';
 import InterviewStage from './_components/interviewStage';
 import { useQuery } from '@tanstack/react-query';
 import { getDepartments, getJobpostion } from '@/api/Job/JobApi';
+import { useRouter } from 'next/navigation';
 
 const CreateJob = () => {
   const {
@@ -23,6 +24,31 @@ const CreateJob = () => {
       roleNames: [],
     },
   });
+
+  const router = useRouter();
+
+   useEffect(() => {
+      const checkToken = () => {
+        const token = localStorage.getItem("accessToken");
+        if (!token) {
+          router.push("/login");
+        }
+      };
+  
+      checkToken();
+  
+      const handleStorageChange = (event: StorageEvent) => {
+        if (event.key === "accessToken") {
+          checkToken();
+        }
+      };
+  
+      window.addEventListener("storage", handleStorageChange);
+  
+      return () => {
+        window.removeEventListener("storage", handleStorageChange);
+      };
+    }, [router]);
 
   const accessToken = localStorage.getItem('accessToken');
   console.log(accessToken);
