@@ -16,7 +16,7 @@ import {
   getInterviewStages,
   handleCreateInterviewStage,
 } from '@/api/Job/JobApi';
-import { useFormContext } from 'react-hook-form';
+import cn from '@/utils/cn';
 
 type Item = {
   id: number;
@@ -254,13 +254,11 @@ const InterviewStage: React.FC<InterviewStageProps> = ({
               {itemsLeft.map((item) => (
                 <tr
                   key={item.id}
-                  className={`${
-                    item.id === draggedItemLeft?.id && 'bg-blue-100 opacity-30'
-                  } ${
-                    item.id === hoveredItemLeft?.id
-                      ? 'border-2'
-                      : 'border-gray-100'
-                  }`}
+                  className={cn({
+                    'bg-blue-100 opacity-30': item.id === draggedItemLeft?.id,
+                    'border-2': item.id === hoveredItemLeft?.id,
+                    'border-gray-100': item.id !== hoveredItemLeft?.id,
+                  })}
                 >
                   <td className='flex items-center gap-[8px] border-b py-[9px] pl-[17px]'>
                     <input
@@ -328,13 +326,11 @@ const InterviewStage: React.FC<InterviewStageProps> = ({
               {itemsRight.map((item) => (
                 <tr
                   key={item.id}
-                  className={`border-b ${
-                    item.id === draggedItemRight?.id && 'bg-blue-100 opacity-30'
-                  } ${
-                    item.id === hoveredItemRight?.id
-                      ? 'border-2'
-                      : 'border-gray-100'
-                  }`}
+                  className={cn('border-b', {
+                    'bg-blue-100 opacity-30': item.id === draggedItemRight?.id,
+                    'border-2': item.id === hoveredItemRight?.id,
+                    'border-gray-100': item.id !== hoveredItemRight?.id,
+                  })}
                 >
                   <td className='flex items-center justify-between py-[9px] pl-[17px]'>
                     <div className='flex items-center gap-[8px]'>
