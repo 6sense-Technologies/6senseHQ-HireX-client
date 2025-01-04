@@ -9,16 +9,21 @@ import {
   Trash,
   Plus,
 } from '@phosphor-icons/react';
-import React, { useEffect, useState } from 'react';
+import React, { DragEvent, useEffect, useState } from 'react';
 import InterviewStageDropdown from './interviewStageDropdown';
-import { useMutation, useQuery} from '@tanstack/react-query';
-import { getInterviewStages, handleCreateInterviewStage } from '@/api/Job/JobApi';
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
+import {
+  getInterviewStages,
+  handleCreateInterviewStage,
+} from '@/api/Job/JobApi';
+import { useFormContext } from 'react-hook-form';
 
-interface Item {
+type Item = {
   id: number;
-  label: string;
-  checked: boolean;
-}
+  interviewMedium?: string;
+  label?: string;
+  checked?: boolean;
+};
 
 const interviewStageOptions = [
   {
@@ -66,19 +71,7 @@ const InterviewStage: React.FC<InterviewStageProps> = ({
   errors,
   setValue,
 }) => {
-  const { data: interviewStages } = useQuery<any, any, any>({
-    queryKey: ['interviewStages'],
-    queryFn: () => getInterviewStages(),
-    enabled: true,
-  });
-
-  const interviewStageMutation = useMutation({
-    mutationFn: handleCreateInterviewStage,
-    onSuccess: (data) => {
-      console.log(data);
-        },
-  });
-
+  const queryClient = useQueryClient();
   const [itemsLeft, setItemsLeft] = useState<Item[]>([]);
   const [itemsRight, setItemsRight] = useState<Item[]>([]);
   const [selectAll, setSelectAll] = useState(false);
@@ -87,6 +80,19 @@ const InterviewStage: React.FC<InterviewStageProps> = ({
   const [draggedItemRight, setDraggedItemRight] = useState<Item | null>(null);
   const [hoveredItemRight, setHoveredItemRight] = useState<Item | null>(null);
   const [newItemLabel, setNewItemLabel] = useState('');
+
+  const { data: interviewStages } = useQuery<any, any, any>({
+    queryKey: ['interviewStages'],
+    queryFn: () => getInterviewStages(),
+    enabled: true,
+  });
+
+  const interviewStageMutation = useMutation({
+    mutationFn: handleCreateInterviewStage,
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['interviewStages'] });
+    },
+  });
 
   useEffect(() => {
     if (interviewStages) {
@@ -129,8 +135,11 @@ const InterviewStage: React.FC<InterviewStageProps> = ({
       checked: item.checked,
     }));
     setItemsRight([...itemsRight, ...newItemsRight]);
-    setItemsLeft(itemsLeft.map((item) => ({ ...item, checked: false })));
-    setSelectAll(false);
+    setItemsLeft(
+      itemsLeft.map((item) =>
+        item.checked ? { ...item, checked: true } : item
+      )
+    );
   };
 
   // Left Table Drag-and-Drop Functions
@@ -138,18 +147,12 @@ const InterviewStage: React.FC<InterviewStageProps> = ({
     setDraggedItemLeft(item);
   };
 
-  const handleDragOverLeft = (
-    e: React.DragEvent<HTMLSpanElement>,
-    item: Item
-  ) => {
+  const handleDragOverLeft = (e: DragEvent<HTMLSpanElement>, item: Item) => {
     e.preventDefault();
     setHoveredItemLeft(item);
   };
 
-  const handleDropLeft = (
-    e: React.DragEvent<HTMLSpanElement>,
-    dropItem: Item
-  ) => {
+  const handleDropLeft = (e: DragEvent<HTMLSpanElement>, dropItem: Item) => {
     e.preventDefault();
     if (draggedItemLeft && dropItem.id !== draggedItemLeft.id) {
       const newItems = itemsLeft.map((item: Item) => {
@@ -172,18 +175,12 @@ const InterviewStage: React.FC<InterviewStageProps> = ({
     setDraggedItemRight(item);
   };
 
-  const handleDragOverRight = (
-    e: React.DragEvent<HTMLSpanElement>,
-    item: Item
-  ) => {
+  const handleDragOverRight = (e: DragEvent<HTMLSpanElement>, item: Item) => {
     e.preventDefault();
     setHoveredItemRight(item);
   };
 
-  const handleDropRight = (
-    e: React.DragEvent<HTMLSpanElement>,
-    dropItem: Item
-  ) => {
+  const handleDropRight = (e: DragEvent<HTMLSpanElement>, dropItem: Item) => {
     e.preventDefault();
     if (draggedItemRight && dropItem.id !== draggedItemRight.id) {
       const newItems = itemsRight.map((item: Item) => {
@@ -216,10 +213,17 @@ const InterviewStage: React.FC<InterviewStageProps> = ({
       item.id === id ? { ...item, checked: false } : item
     );
     setItemsLeft(newItemsLeft);
-
-    // Reset the value in the form state
-    setValue(`roleNames[${id}]`, []);
+    setSelectAll(false);
   };
+
+  // Collect data from the right table and format it as required
+  useEffect(() => {
+    const formattedInterviewStages = itemsRight.map((item) => ({
+      interviewStageName: item.label,
+      interviewMedium: item.interviewMedium,
+    }));
+    setValue('interviewStages', formattedInterviewStages);
+  }, [itemsRight, setValue]);
 
   return (
     <div className='mt-[32px] max-w-[1168px] rounded-2xl bg-jobBg'>
@@ -254,7 +258,7 @@ const InterviewStage: React.FC<InterviewStageProps> = ({
                     item.id === draggedItemLeft?.id && 'bg-blue-100 opacity-30'
                   } ${
                     item.id === hoveredItemLeft?.id
-                      ? 'border-2 border-dashed border-blue-500'
+                      ? 'border-2'
                       : 'border-gray-100'
                   }`}
                 >
@@ -293,7 +297,7 @@ const InterviewStage: React.FC<InterviewStageProps> = ({
                     value={newItemLabel}
                     onChange={(e) => setNewItemLabel(e.target.value)}
                     placeholder='Type Name...'
-                    className='w-full border-b pl-8 py-[9px] text-twelve placeholder:text-twelve placeholder:text-placeholderColor'
+                    className='w-full border-b py-[9px] pl-8 text-twelve placeholder:text-twelve placeholder:text-placeholderColor'
                   />
                 </td>
               </tr>
@@ -328,7 +332,7 @@ const InterviewStage: React.FC<InterviewStageProps> = ({
                     item.id === draggedItemRight?.id && 'bg-blue-100 opacity-30'
                   } ${
                     item.id === hoveredItemRight?.id
-                      ? 'border-2 border-dashed border-blue-500'
+                      ? 'border-2'
                       : 'border-gray-100'
                   }`}
                 >
@@ -351,12 +355,13 @@ const InterviewStage: React.FC<InterviewStageProps> = ({
                   </td>
                   <td className='py-1'>
                     <InterviewStageDropdown
-                      name={`roleNames[${item.id}]`}
+                      name={`interviewMedium[${item.id}]`}
                       control={control}
-                      setValue={(name, value) => {
+                      value={item.interviewMedium}
+                      onChange={(value) => {
                         const newItemsRight = itemsRight.map((rightItem) =>
                           rightItem.id === item.id
-                            ? { ...rightItem, interviewMedium: value[0] }
+                            ? { ...rightItem, interviewMedium: value }
                             : rightItem
                         );
                         setItemsRight(newItemsRight);
@@ -368,7 +373,10 @@ const InterviewStage: React.FC<InterviewStageProps> = ({
                     />
                   </td>
                   <td>
-                    <span className='cursor-pointer' onClick={() => removeItem(item.id)}>
+                    <span
+                      className='cursor-pointer'
+                      onClick={() => removeItem(item.id)}
+                    >
                       <Trash size={20} />
                     </span>
                   </td>

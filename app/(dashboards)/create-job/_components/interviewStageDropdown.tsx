@@ -1,6 +1,6 @@
 'use client';
 import * as React from 'react';
-import { Controller, UseFormSetValue } from 'react-hook-form';
+import { Controller } from 'react-hook-form';
 import Select from 'react-select';
 import { Warning } from '@phosphor-icons/react';
 
@@ -15,7 +15,7 @@ interface InterviewStageDropdownProps {
   errors?: any;
   name: string;
   control: any;
-  setValue: UseFormSetValue<any>;
+  onChange: (value: string) => void;
   value?: string;
   ClassName?: string;
 }
@@ -26,7 +26,8 @@ const InterviewStageDropdown: React.FC<InterviewStageDropdownProps> = ({
   name,
   errors,
   control,
-  setValue,
+  onChange,
+  value,
   ClassName,
 }) => {
   const customStyles = {
@@ -42,20 +43,20 @@ const InterviewStageDropdown: React.FC<InterviewStageDropdownProps> = ({
       }
       return {
         ...provided,
-        borderColor: errors[name] ? 'red' : "",
+        borderColor: errors[name] ? 'red' : '',
         borderRadius: '200px',
         width: '120px',
         backgroundColor: backgroundColor,
         boxShadow: 'none', // Remove box shadow
         '&:hover': {
-          borderColor: "",
+          borderColor: '',
         },
         '&:focus': {
-          borderColor: "", // Remove border color on focus
+          borderColor: '', // Remove border color on focus
           boxShadow: 'none', // Remove box shadow on focus
         },
         '&:active': {
-          borderColor: "", // Remove border color on active
+          borderColor: '', // Remove border color on active
           boxShadow: 'none', // Remove box shadow on active
         },
       };
@@ -98,19 +99,13 @@ const InterviewStageDropdown: React.FC<InterviewStageDropdownProps> = ({
             <Select
               {...field}
               instanceId={name}
-              value={
-                Array.isArray(field.value)
-                  ? options?.find(
-                      (option) => option.value === field.value[0]
-                    ) || null
-                  : null
-              }
+              value={options?.find((option) => option.value === value) || null}
               onChange={(selectedOption) => {
                 const selectedValue = selectedOption
-                  ? [selectedOption.value]
-                  : [];
+                  ? selectedOption.value
+                  : '';
                 field.onChange(selectedValue);
-                setValue(name, selectedValue, { shouldValidate: true });
+                onChange(selectedValue);
               }}
               options={options}
               placeholder={placeholder}

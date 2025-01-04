@@ -1,6 +1,4 @@
 'use client';
-import { SignupSchema } from '@/schema/signupSchema';
-import { zodResolver } from '@hookform/resolvers/zod';
 import React, { useEffect } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { Button } from '@/components/ui/button';
@@ -8,50 +6,50 @@ import JobInformation from './_components/jobInformation';
 import JobResponsibilites from './_components/jobResponsibilites';
 import IdealCandidates from './_components/idealCandidates';
 import InterviewStage from './_components/interviewStage';
-import { useQuery } from '@tanstack/react-query';
-import { getDepartments, getJobpostion } from '@/api/Job/JobApi';
+import { useMutation, useQuery } from '@tanstack/react-query';
+import {
+  getDepartments,
+  getJobpostion,
+  handleCreateJob,
+} from '@/api/Job/JobApi';
 import { useRouter } from 'next/navigation';
 
 const CreateJob = () => {
   const {
-    register,
     handleSubmit,
     setValue,
     control,
     formState: { errors },
   } = useForm<any>({
     defaultValues: {
-      roleNames: [],
+      interviewStages: [],
     },
   });
 
   const router = useRouter();
 
-   useEffect(() => {
-      const checkToken = () => {
-        const token = localStorage.getItem("accessToken");
-        if (!token) {
-          router.push("/login");
-        }
-      };
-  
-      checkToken();
-  
-      const handleStorageChange = (event: StorageEvent) => {
-        if (event.key === "accessToken") {
-          checkToken();
-        }
-      };
-  
-      window.addEventListener("storage", handleStorageChange);
-  
-      return () => {
-        window.removeEventListener("storage", handleStorageChange);
-      };
-    }, [router]);
+  useEffect(() => {
+    const checkToken = () => {
+      const token = localStorage.getItem('accessToken');
+      if (!token) {
+        router.push('/login');
+      }
+    };
 
-  const accessToken = localStorage.getItem('accessToken');
-  console.log(accessToken);
+    checkToken();
+
+    const handleStorageChange = (event: StorageEvent) => {
+      if (event.key === 'accessToken') {
+        checkToken();
+      }
+    };
+
+    window.addEventListener('storage', handleStorageChange);
+
+    return () => {
+      window.removeEventListener('storage', handleStorageChange);
+    };
+  }, [router]);
 
   const { data: jobpositions } = useQuery<any, any, any>({
     queryKey: ['jobpositions'],
@@ -65,26 +63,34 @@ const CreateJob = () => {
     enabled: true,
   });
 
-
   const jobPositionOptions =
-  jobpositions?.map((jobpositions: {jobPositionName: string }) => ({
-    value: jobpositions.jobPositionName,
-    label: jobpositions.jobPositionName,
-  })) || [];
+    jobpositions?.map((jobpositions: { jobPositionName: string }) => ({
+      value: jobpositions.jobPositionName,
+      label: jobpositions.jobPositionName,
+    })) || [];
 
   const departmentOptions =
-  departments?.map((departments: {jobDepartmentName: string }) => ({
-    value: departments.jobDepartmentName,
-    label: departments.jobDepartmentName,
-  })) || [];
+    departments?.map((departments: { jobDepartmentName: string }) => ({
+      value: departments.jobDepartmentName,
+      label: departments.jobDepartmentName,
+    })) || [];
+
+  const createJobMutation = useMutation({
+    mutationFn: handleCreateJob,
+    onSuccess: () => {
+      router.push('/dashboard');
+    },
+  });
 
   const handleSubmission: SubmitHandler<any> = (data) => {
-    console.log(data);
+    const { interviewMedium, ...filteredData } = data;
+
+    createJobMutation.mutate(filteredData);
   };
 
   return (
     <div className='bg-white px-[16px]'>
-      <form className='pb-28'onSubmit={handleSubmit(handleSubmission)}>
+      <form className='pb-28' onSubmit={handleSubmit(handleSubmission)}>
         <div className='min-h-screen'>
           {/* Job Information Area*/}
           <JobInformation
@@ -103,10 +109,10 @@ const CreateJob = () => {
           />
 
           {/* Job Responsibilites Area */}
-          <JobResponsibilites />
+          <JobResponsibilites control={control} errors={errors} />
 
           {/* Ideal Candidate Area */}
-          <IdealCandidates />
+          <IdealCandidates control={control} errors={errors} />
 
           <div className='mt-[30px] flex justify-end gap-[16px]'>
             <Button variant='blackwhite' className='h-[40px] w-[80px]'>

@@ -7,7 +7,6 @@ type ErrorCardType = {
 };
 
 const ErrorCard = ({ errorFlag, setErrorFlag }: ErrorCardType) => {
-
   const handleCrossClick = () => {
     setErrorFlag(false);
   };
@@ -21,8 +20,8 @@ const ErrorCard = ({ errorFlag, setErrorFlag }: ErrorCardType) => {
               <Warning weight='fill' className='text-errorColor' />
             </span>
             <p className='text-xs text-errorColor'>
-              There is an issue with the credentials you have entered. Please try
-              again.
+              There is an issue with the credentials you have entered. Please
+              try again.
             </p>
             <span onClick={handleCrossClick} className='cursor-pointer'>
               <X className='pt-[4px] text-errorColor' />

@@ -17,12 +17,13 @@ const TextArea: FC<TextAreaProps> = ({
   name,
   errors,
   className,
+  ...rest
 }) => {
   return (
     <div>
       <div className='relative w-full'>
         <textarea
-        name={name}
+          name={name}
           placeholder={placeholder}
           className={cn(
             'w-full max-w-[400px] resize-none rounded-md border pl-3 pt-1',
@@ -31,6 +32,7 @@ const TextArea: FC<TextAreaProps> = ({
               : 'border-gray-300 focus:border-blue-500 focus:outline-none focus:ring-0',
             className
           )}
+          {...rest}
         ></textarea>
         <p className='absolute text-xs text-gray-400'>
           {errors ? (

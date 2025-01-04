@@ -22,8 +22,11 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
               value={field?.value || ''}
               type={type}
               className={cn(
-                'placeholder:text-subHeading flex h-9 w-full rounded-md border border-input bg-transparent pl-3 py-1 pr-10 text-sm shadow-sm transition-colors file:border-0 file:bg-transparent file:text-sm file:font-medium focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50',
-                { "border-errorColor focus-visible:ring-errorColor/50": (errors[name]?.message) },
+                'border-input focus-visible:ring-ring flex h-9 w-full rounded-md border bg-transparent py-1 pl-3 pr-10 text-sm shadow-sm transition-colors file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-subHeading focus-visible:outline-none focus-visible:ring-1 disabled:cursor-not-allowed disabled:opacity-50',
+                {
+                  'border-errorColor focus-visible:ring-errorColor/50':
+                    errors[name]?.message,
+                },
                 className
               )}
               ref={ref}

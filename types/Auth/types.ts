@@ -12,8 +12,6 @@ export type SingupFormInputs = {
   roleNames: string[];
 };
 
-
-
 export type Tokens = {
   access_token: string;
   refresh_token: string;
@@ -35,7 +33,6 @@ export type AuthState = {
 };
 
 export interface GoogleAuthTypes {
-  provider: string
-  authCode: string
+  provider: string;
+  authCode: string;
 }
-

@@ -1,19 +1,27 @@
-import React from 'react'
-import Dropdownmenu from './dropdownmenu'
+import React from 'react';
+import Dropdownmenu from './dropdownmenu';
 
-const IdealCandidates = () => {
-  return (
-    <div className='max-w-[1168px] rounded-2xl bg-jobBg mt-[32px]'>
-    <div>
-      <h1 className='pl-[48px] pt-[38px] text-headingXXS font-semibold'>
-          Idea Candidate
-      </h1>
-    </div>
-    <div className='w-full pt-[16px] pl-[47px] pr-[38px] pb-[38px]'>
-        <Dropdownmenu/>
-    </div>
-  </div>
-  )
+interface IdealCandidatesProps {
+  control: any;
+  errors: any;
 }
 
-export default IdealCandidates
+const IdealCandidates: React.FC<IdealCandidatesProps> = ({
+  control,
+  errors,
+}) => {
+  return (
+    <div className='mt-[32px] max-w-[1168px] rounded-2xl bg-jobBg'>
+      <div>
+        <h1 className='pl-[48px] pt-[38px] text-headingXXS font-semibold'>
+          Ideal Candidate
+        </h1>
+      </div>
+      <div className='w-full pb-[38px] pl-[47px] pr-[38px] pt-[16px]'>
+        <Dropdownmenu control={control} name='jobKeywords' />
+      </div>
+    </div>
+  );
+};
+
+export default IdealCandidates;

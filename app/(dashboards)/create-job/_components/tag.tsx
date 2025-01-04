@@ -1,12 +1,8 @@
+import { TagProps } from '@/types/Job/type';
 import { X } from '@phosphor-icons/react';
-import React from 'react';
+import React, { FC } from 'react';
 
-type TagProps = {
-  selectedSkills: string[];
-  onRemoveSkill: (skill: string) => void;
-};
-
-const Tag: React.FC<TagProps> = ({ selectedSkills, onRemoveSkill }) => {
+const Tag: FC<TagProps> = ({ selectedSkills, onRemoveSkill }) => {
   return (
     <div>
       <div>

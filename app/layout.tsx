@@ -21,9 +21,7 @@ export default function RootLayout({
     <html>
       <body className={inter.className}>
         <WebVitals />
-        <Provider>
-        {children}
-        </Provider>
+        <Provider>{children}</Provider>
         {/* Script Optimaization Started*/}
         <Script
           src='https://www.googletagmanager.com/gtag/js?id=YOUR_GA_TRACKING_ID'
