@@ -162,6 +162,7 @@ const Dropdownmenu: React.FC<DropdownMenuProps> = ({ control, name }) => {
                   placeholder="Status"
                   value={searchQuery}
                   onChange={handleSearchChange}
+                  onKeyDown={handleKeyDown}
                   className="w-full border-b pl-8 placeholder:text-placeholderColor"
                 />
               </div>
