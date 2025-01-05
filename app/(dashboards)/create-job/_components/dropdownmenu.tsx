@@ -88,6 +88,12 @@ const Dropdownmenu: React.FC<DropdownMenuProps> = ({ control, name }) => {
     setIsOpen(false);
   };
 
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === 'Enter') {
+      e.preventDefault();
+    }
+  };
+
   return (
     <Controller
       name={name}
@@ -132,6 +138,7 @@ const Dropdownmenu: React.FC<DropdownMenuProps> = ({ control, name }) => {
                   onChange={handleNewSkillChange}
                   placeholder="New skill"
                   className="rounded border px-2 py-1"
+                  onKeyDown={handleKeyDown}
                 />
                 <Check
                   className="absolute left-[205px] cursor-pointer"

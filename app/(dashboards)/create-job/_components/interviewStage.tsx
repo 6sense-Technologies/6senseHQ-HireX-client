@@ -19,8 +19,6 @@ import {
 import cn from '@/utils/cn';
 import { InterviewStageItem, InterViewStageList, InterviewStageProps } from '@/types/Job/type';
 
-
-
 const interviewStageOptions = [
   {
     value: 'Online-Video',
@@ -199,6 +197,13 @@ const InterviewStage: React.FC<InterviewStageProps> = ({
     }
   };
 
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === 'Enter') {
+      e.preventDefault();
+      handleAddNewItem();
+    }
+  };
+
   const removeItem = (id: number) => {
     const newItemsRight = itemsRight.filter((item) => item.id !== id);
     setItemsRight(newItemsRight);
@@ -288,6 +293,7 @@ const InterviewStage: React.FC<InterviewStageProps> = ({
                     name='interviewStageName'
                     value={newItemLabel}
                     onChange={(e) => setNewItemLabel(e.target.value)}
+                    onKeyDown={handleKeyDown}
                     placeholder='Type Name...'
                     className='w-full border-b py-[9px] pl-8 text-twelve placeholder:text-twelve placeholder:text-placeholderColor'
                   />
