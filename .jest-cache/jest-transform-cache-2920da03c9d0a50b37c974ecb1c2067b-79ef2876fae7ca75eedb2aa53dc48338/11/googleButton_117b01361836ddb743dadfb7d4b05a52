@@ -1,0 +1,44 @@
+fc23f602b2b206b446ff6dc91fcfbed6
+"use strict";
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+Object.defineProperty(exports, "default", {
+    enumerable: true,
+    get: function() {
+        return _default;
+    }
+});
+const _jsxruntime = require("react/jsx-runtime");
+const _signInGoogle = require("@/app/actions/signInGoogle");
+const _button = require("@/components/ui/button");
+const _react = require("@phosphor-icons/react");
+const _react1 = /*#__PURE__*/ _interop_require_default(require("react"));
+function _interop_require_default(obj) {
+    return obj && obj.__esModule ? obj : {
+        default: obj
+    };
+}
+const GoogleButton = ()=>{
+    const handleGoogleSignIn = async (event)=>{
+        event.preventDefault();
+        await (0, _signInGoogle.signInWithGoogle)();
+    };
+    return /*#__PURE__*/ (0, _jsxruntime.jsx)("div", {
+        children: /*#__PURE__*/ (0, _jsxruntime.jsxs)(_button.Button, {
+            variant: 'google',
+            size: 'medium',
+            className: "text-sm",
+            onClick: handleGoogleSignIn,
+            children: [
+                /*#__PURE__*/ (0, _jsxruntime.jsx)(_react.GoogleLogo, {
+                    size: 32
+                }),
+                "Continue with Google"
+            ]
+        })
+    });
+};
+const _default = GoogleButton;
+
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIkM6XFxVc2Vyc1xca2hhbmFcXE9uZURyaXZlXFxDb21wdXRlciBGaWxlc1xcRGVza3RvcFxcNnNlbnNlSFEtSGlyZVgtY2xpZW50XFxhcHBcXChhdXRoKVxcbG9naW5cXF9jb21wb25lbnRzXFxnb29nbGVCdXR0b24udHN4Il0sInNvdXJjZXNDb250ZW50IjpbImltcG9ydCB7IHNpZ25JbldpdGhHb29nbGUgfSBmcm9tICdAL2FwcC9hY3Rpb25zL3NpZ25Jbkdvb2dsZSc7XG5pbXBvcnQgeyBCdXR0b24gfSBmcm9tICdAL2NvbXBvbmVudHMvdWkvYnV0dG9uJztcbmltcG9ydCB7IEdvb2dsZUxvZ28gfSBmcm9tICdAcGhvc3Bob3ItaWNvbnMvcmVhY3QnO1xuaW1wb3J0IFJlYWN0LCB7IE1vdXNlRXZlbnQgfSBmcm9tICdyZWFjdCc7XG5cbmNvbnN0IEdvb2dsZUJ1dHRvbiA9ICgpID0+IHtcbiAgY29uc3QgaGFuZGxlR29vZ2xlU2lnbkluID0gYXN5bmMgKGV2ZW50OiBNb3VzZUV2ZW50PEhUTUxCdXR0b25FbGVtZW50PikgPT4ge1xuICAgIGV2ZW50LnByZXZlbnREZWZhdWx0KCk7XG4gICAgYXdhaXQgc2lnbkluV2l0aEdvb2dsZSgpO1xuICB9O1xuXG4gIHJldHVybiAoXG4gICAgPGRpdj5cbiAgICAgIDxCdXR0b25cbiAgICAgICAgdmFyaWFudD17J2dvb2dsZSd9XG4gICAgICAgIHNpemU9eydtZWRpdW0nfVxuICAgICAgICBjbGFzc05hbWU9J3RleHQtc20nXG4gICAgICAgIG9uQ2xpY2s9e2hhbmRsZUdvb2dsZVNpZ25Jbn1cbiAgICAgID5cbiAgICAgICAgPEdvb2dsZUxvZ28gc2l6ZT17MzJ9IC8+XG4gICAgICAgIENvbnRpbnVlIHdpdGggR29vZ2xlXG4gICAgICA8L0J1dHRvbj5cbiAgICA8L2Rpdj5cbiAgKTtcbn07XG5cbmV4cG9ydCBkZWZhdWx0IEdvb2dsZUJ1dHRvbjtcbiJdLCJuYW1lcyI6WyJHb29nbGVCdXR0b24iLCJoYW5kbGVHb29nbGVTaWduSW4iLCJldmVudCIsInByZXZlbnREZWZhdWx0Iiwic2lnbkluV2l0aEdvb2dsZSIsImRpdiIsIkJ1dHRvbiIsInZhcmlhbnQiLCJzaXplIiwiY2xhc3NOYW1lIiwib25DbGljayIsIkdvb2dsZUxvZ28iXSwibWFwcGluZ3MiOiI7Ozs7K0JBMEJBOzs7ZUFBQTs7Ozs4QkExQmlDO3dCQUNWO3VCQUNJOytEQUNPOzs7Ozs7QUFFbEMsTUFBTUEsZUFBZTtJQUNuQixNQUFNQyxxQkFBcUIsT0FBT0M7UUFDaENBLE1BQU1DLGNBQWM7UUFDcEIsTUFBTUMsSUFBQUEsOEJBQWdCO0lBQ3hCO0lBRUEscUJBQ0UscUJBQUNDO2tCQUNDLGNBQUEsc0JBQUNDLGNBQU07WUFDTEMsU0FBUztZQUNUQyxNQUFNO1lBQ05DLFdBQVU7WUFDVkMsU0FBU1Q7OzhCQUVULHFCQUFDVSxpQkFBVTtvQkFBQ0gsTUFBTTs7Z0JBQU07Ozs7QUFLaEM7TUFFQSxXQUFlUiJ9

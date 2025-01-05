@@ -1,0 +1,26 @@
+3d34cd4be9ac1ca17d7f81d1831cc797
+"use strict";
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+Object.defineProperty(exports, "LoginSchema", {
+    enumerable: true,
+    get: function() {
+        return LoginSchema;
+    }
+});
+const _zod = require("zod");
+const LoginSchema = _zod.z.object({
+    email: _zod.z.string({
+        required_error: 'Email address is required.'
+    }).min(1, {
+        message: 'Email address is required.'
+    }).email('Please enter a valid email address.'),
+    password: _zod.z.string({
+        required_error: 'Password is required.'
+    }).min(1, {
+        message: 'Password is required.'
+    }).min(8, 'Password must be at least 8 characters long.')
+});
+
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIkM6XFxVc2Vyc1xca2hhbmFcXE9uZURyaXZlXFxDb21wdXRlciBGaWxlc1xcRGVza3RvcFxcNnNlbnNlSFEtSGlyZVgtY2xpZW50XFxzY2hlbWFcXGxvZ2luU2NoZW1hLnRzIl0sInNvdXJjZXNDb250ZW50IjpbImltcG9ydCB7IHogfSBmcm9tICd6b2QnO1xuXG5leHBvcnQgY29uc3QgTG9naW5TY2hlbWEgPSB6Lm9iamVjdCh7XG4gIGVtYWlsOiB6XG4gICAgLnN0cmluZyh7IHJlcXVpcmVkX2Vycm9yOiAnRW1haWwgYWRkcmVzcyBpcyByZXF1aXJlZC4nIH0pXG4gICAgLm1pbigxLCB7IG1lc3NhZ2U6ICdFbWFpbCBhZGRyZXNzIGlzIHJlcXVpcmVkLicgfSlcbiAgICAuZW1haWwoJ1BsZWFzZSBlbnRlciBhIHZhbGlkIGVtYWlsIGFkZHJlc3MuJyksXG4gIHBhc3N3b3JkOiB6XG4gICAgLnN0cmluZyh7IHJlcXVpcmVkX2Vycm9yOiAnUGFzc3dvcmQgaXMgcmVxdWlyZWQuJyB9KVxuICAgIC5taW4oMSwgeyBtZXNzYWdlOiAnUGFzc3dvcmQgaXMgcmVxdWlyZWQuJyB9KVxuICAgIC5taW4oOCwgJ1Bhc3N3b3JkIG11c3QgYmUgYXQgbGVhc3QgOCBjaGFyYWN0ZXJzIGxvbmcuJyksXG59KTtcbiJdLCJuYW1lcyI6WyJMb2dpblNjaGVtYSIsInoiLCJvYmplY3QiLCJlbWFpbCIsInN0cmluZyIsInJlcXVpcmVkX2Vycm9yIiwibWluIiwibWVzc2FnZSIsInBhc3N3b3JkIl0sIm1hcHBpbmdzIjoiOzs7OytCQUVhQTs7O2VBQUFBOzs7cUJBRks7QUFFWCxNQUFNQSxjQUFjQyxNQUFDLENBQUNDLE1BQU0sQ0FBQztJQUNsQ0MsT0FBT0YsTUFBQyxDQUNMRyxNQUFNLENBQUM7UUFBRUMsZ0JBQWdCO0lBQTZCLEdBQ3REQyxHQUFHLENBQUMsR0FBRztRQUFFQyxTQUFTO0lBQTZCLEdBQy9DSixLQUFLLENBQUM7SUFDVEssVUFBVVAsTUFBQyxDQUNSRyxNQUFNLENBQUM7UUFBRUMsZ0JBQWdCO0lBQXdCLEdBQ2pEQyxHQUFHLENBQUMsR0FBRztRQUFFQyxTQUFTO0lBQXdCLEdBQzFDRCxHQUFHLENBQUMsR0FBRztBQUNaIn0=

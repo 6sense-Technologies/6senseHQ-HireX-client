@@ -1,7 +1,7 @@
-import Dropdown from '@/components/dropdown';
 import { Input } from '@/components/ui/input';
 import { JobInformationProps } from '@/types/Job/type';
 import React from 'react';
+import JobDropdown from './jobdropdown';
 
 const JobInformation: React.FC<JobInformationProps> = ({
   control,
@@ -27,7 +27,7 @@ const JobInformation: React.FC<JobInformationProps> = ({
             Job Position
           </label>
           <div>
-            <Dropdown
+            <JobDropdown
               control={control}
               name='jobPositionName'
               errors={errors}
@@ -46,7 +46,7 @@ const JobInformation: React.FC<JobInformationProps> = ({
             Department (Optional)
           </label>
           <div>
-            <Dropdown
+            <JobDropdown
               control={control}
               name='jobDepartmentName'
               errors={errors}

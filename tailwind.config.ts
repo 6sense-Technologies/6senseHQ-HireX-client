@@ -49,6 +49,7 @@ export default {
         lightBlueBg: '#0EA5E9',
         lightGreenBg: '#DCFCE7',
         darkGreenColor: '#166534',
+        lightGrayColor:'#9CA3AF',
         sidebar: {
           DEFAULT: 'hsl(var(--sidebar-background))',
           foreground: 'hsl(var(--sidebar-foreground))',

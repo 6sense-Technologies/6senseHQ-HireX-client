@@ -124,7 +124,11 @@ const CreateJob = () => {
           <IdealCandidates control={control} errors={errors} />
 
           <div className='mt-[30px] flex justify-end gap-[16px]'>
-            <Button variant='blackwhite' className='h-[40px] w-[80px]'>
+            <Button
+              variant='blackwhite'
+              className='h-[40px] w-[80px]'
+              onClick={() => router.push('/dashboard')}
+            >
               Cancel
             </Button>
             <Button variant='lightBlue' className='h-[40px] w-[80px]'>

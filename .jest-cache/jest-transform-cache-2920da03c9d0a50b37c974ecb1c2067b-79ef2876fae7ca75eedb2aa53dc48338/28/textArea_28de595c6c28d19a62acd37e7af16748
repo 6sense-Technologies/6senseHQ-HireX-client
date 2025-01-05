@@ -1,0 +1,50 @@
+cd1654f875656f60dfd04173613cb1f1
+'use client';
+"use strict";
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+Object.defineProperty(exports, "default", {
+    enumerable: true,
+    get: function() {
+        return _default;
+    }
+});
+const _jsxruntime = require("react/jsx-runtime");
+const _react = require("@phosphor-icons/react");
+const _cn = /*#__PURE__*/ _interop_require_default(require("../utils/cn"));
+function _interop_require_default(obj) {
+    return obj && obj.__esModule ? obj : {
+        default: obj
+    };
+}
+const TextArea = ({ placeholder, note, name, errors, className, ...rest })=>{
+    return /*#__PURE__*/ (0, _jsxruntime.jsx)("div", {
+        children: /*#__PURE__*/ (0, _jsxruntime.jsxs)("div", {
+            className: "relative w-full",
+            children: [
+                /*#__PURE__*/ (0, _jsxruntime.jsx)("textarea", {
+                    name: name,
+                    placeholder: placeholder,
+                    className: (0, _cn.default)('w-full max-w-[400px] resize-none rounded-md border pl-3 pt-1', errors ? 'border-red-500' : 'border-gray-300 focus:border-blue-500 focus:outline-none focus:ring-0', className),
+                    ...rest
+                }),
+                /*#__PURE__*/ (0, _jsxruntime.jsx)("p", {
+                    className: "absolute text-xs text-gray-400",
+                    children: errors ? /*#__PURE__*/ (0, _jsxruntime.jsxs)("span", {
+                        className: "flex text-red-500",
+                        children: [
+                            /*#__PURE__*/ (0, _jsxruntime.jsx)(_react.Warning, {
+                                className: "mr-1"
+                            }),
+                            errors
+                        ]
+                    }) : note
+                })
+            ]
+        })
+    });
+};
+const _default = TextArea;
+
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIkM6XFxVc2Vyc1xca2hhbmFcXE9uZURyaXZlXFxDb21wdXRlciBGaWxlc1xcRGVza3RvcFxcNnNlbnNlSFEtSGlyZVgtY2xpZW50XFxjb21wb25lbnRzXFx0ZXh0QXJlYS50c3giXSwic291cmNlc0NvbnRlbnQiOlsiJ3VzZSBjbGllbnQnO1xuaW1wb3J0IHsgRkMgfSBmcm9tICdyZWFjdCc7XG5pbXBvcnQgeyBXYXJuaW5nIH0gZnJvbSAnQHBob3NwaG9yLWljb25zL3JlYWN0JztcbmltcG9ydCBjbiBmcm9tICcuLi91dGlscy9jbic7XG5cbnR5cGUgVGV4dEFyZWFQcm9wcyA9IHtcbiAgcGxhY2Vob2xkZXI6IHN0cmluZztcbiAgbm90ZT86IHN0cmluZztcbiAgbmFtZTogc3RyaW5nO1xuICBlcnJvcnM/OiBzdHJpbmc7XG4gIGNsYXNzTmFtZT86IHN0cmluZztcbn07XG5cbmNvbnN0IFRleHRBcmVhOiBGQzxUZXh0QXJlYVByb3BzPiA9ICh7XG4gIHBsYWNlaG9sZGVyLFxuICBub3RlLFxuICBuYW1lLFxuICBlcnJvcnMsXG4gIGNsYXNzTmFtZSxcbiAgLi4ucmVzdFxufSkgPT4ge1xuICByZXR1cm4gKFxuICAgIDxkaXY+XG4gICAgICA8ZGl2IGNsYXNzTmFtZT0ncmVsYXRpdmUgdy1mdWxsJz5cbiAgICAgICAgPHRleHRhcmVhXG4gICAgICAgICAgbmFtZT17bmFtZX1cbiAgICAgICAgICBwbGFjZWhvbGRlcj17cGxhY2Vob2xkZXJ9XG4gICAgICAgICAgY2xhc3NOYW1lPXtjbihcbiAgICAgICAgICAgICd3LWZ1bGwgbWF4LXctWzQwMHB4XSByZXNpemUtbm9uZSByb3VuZGVkLW1kIGJvcmRlciBwbC0zIHB0LTEnLFxuICAgICAgICAgICAgZXJyb3JzXG4gICAgICAgICAgICAgID8gJ2JvcmRlci1yZWQtNTAwJ1xuICAgICAgICAgICAgICA6ICdib3JkZXItZ3JheS0zMDAgZm9jdXM6Ym9yZGVyLWJsdWUtNTAwIGZvY3VzOm91dGxpbmUtbm9uZSBmb2N1czpyaW5nLTAnLFxuICAgICAgICAgICAgY2xhc3NOYW1lXG4gICAgICAgICAgKX1cbiAgICAgICAgICB7Li4ucmVzdH1cbiAgICAgICAgPjwvdGV4dGFyZWE+XG4gICAgICAgIDxwIGNsYXNzTmFtZT0nYWJzb2x1dGUgdGV4dC14cyB0ZXh0LWdyYXktNDAwJz5cbiAgICAgICAgICB7ZXJyb3JzID8gKFxuICAgICAgICAgICAgPHNwYW4gY2xhc3NOYW1lPSdmbGV4IHRleHQtcmVkLTUwMCc+XG4gICAgICAgICAgICAgIDxXYXJuaW5nIGNsYXNzTmFtZT0nbXItMScgLz5cbiAgICAgICAgICAgICAge2Vycm9yc31cbiAgICAgICAgICAgIDwvc3Bhbj5cbiAgICAgICAgICApIDogKFxuICAgICAgICAgICAgbm90ZVxuICAgICAgICAgICl9XG4gICAgICAgIDwvcD5cbiAgICAgIDwvZGl2PlxuICAgIDwvZGl2PlxuICApO1xufTtcblxuZXhwb3J0IGRlZmF1bHQgVGV4dEFyZWE7XG4iXSwibmFtZXMiOlsiVGV4dEFyZWEiLCJwbGFjZWhvbGRlciIsIm5vdGUiLCJuYW1lIiwiZXJyb3JzIiwiY2xhc3NOYW1lIiwicmVzdCIsImRpdiIsInRleHRhcmVhIiwiY24iLCJwIiwic3BhbiIsIldhcm5pbmciXSwibWFwcGluZ3MiOiJBQUFBOzs7OzsrQkFtREE7OztlQUFBOzs7O3VCQWpEd0I7MkRBQ1Q7Ozs7OztBQVVmLE1BQU1BLFdBQThCLENBQUMsRUFDbkNDLFdBQVcsRUFDWEMsSUFBSSxFQUNKQyxJQUFJLEVBQ0pDLE1BQU0sRUFDTkMsU0FBUyxFQUNULEdBQUdDLE1BQ0o7SUFDQyxxQkFDRSxxQkFBQ0M7a0JBQ0MsY0FBQSxzQkFBQ0E7WUFBSUYsV0FBVTs7OEJBQ2IscUJBQUNHO29CQUNDTCxNQUFNQTtvQkFDTkYsYUFBYUE7b0JBQ2JJLFdBQVdJLElBQUFBLFdBQUUsRUFDWCxnRUFDQUwsU0FDSSxtQkFDQSx5RUFDSkM7b0JBRUQsR0FBR0MsSUFBSTs7OEJBRVYscUJBQUNJO29CQUFFTCxXQUFVOzhCQUNWRCx1QkFDQyxzQkFBQ087d0JBQUtOLFdBQVU7OzBDQUNkLHFCQUFDTyxjQUFPO2dDQUFDUCxXQUFVOzs0QkFDbEJEOzt5QkFHSEY7Ozs7O0FBTVo7TUFFQSxXQUFlRiJ9

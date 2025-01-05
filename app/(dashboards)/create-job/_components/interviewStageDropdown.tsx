@@ -111,6 +111,7 @@ const InterviewStageDropdown: React.FC<InterviewStageDropdownProps> = ({
               placeholder={placeholder}
               className={`text-nowrap text-twelve ${ClassName}`}
               styles={customStyles}
+              isSearchable={false}
             />
             {/* {fieldState.invalid && errors && (
               <span className='absolute mt-2 flex justify-start text-xs text-red-500'>

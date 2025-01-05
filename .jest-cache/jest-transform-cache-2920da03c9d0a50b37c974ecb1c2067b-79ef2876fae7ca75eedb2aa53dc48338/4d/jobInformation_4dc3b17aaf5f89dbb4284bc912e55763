@@ -1,0 +1,102 @@
+19f72603b514a21df50e4c7be29c06c1
+"use strict";
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+Object.defineProperty(exports, "default", {
+    enumerable: true,
+    get: function() {
+        return _default;
+    }
+});
+const _jsxruntime = require("react/jsx-runtime");
+const _input = require("../../../../components/ui/input");
+const _react = /*#__PURE__*/ _interop_require_default(require("react"));
+const _jobdropdown = /*#__PURE__*/ _interop_require_default(require("./jobdropdown"));
+function _interop_require_default(obj) {
+    return obj && obj.__esModule ? obj : {
+        default: obj
+    };
+}
+const JobInformation = ({ control, errors, setValue, jobPositionOptions, departmentOptions })=>{
+    return /*#__PURE__*/ (0, _jsxruntime.jsxs)("div", {
+        className: "rounded-2xl bg-jobBg",
+        children: [
+            /*#__PURE__*/ (0, _jsxruntime.jsx)("div", {
+                children: /*#__PURE__*/ (0, _jsxruntime.jsx)("h1", {
+                    className: "pl-[48px] pt-[32px] text-headingXXS font-semibold",
+                    children: "Job information"
+                })
+            }),
+            /*#__PURE__*/ (0, _jsxruntime.jsxs)("div", {
+                className: "flex gap-[24px] pb-[32px] pl-[48px] pr-[96px] pt-[16px]",
+                children: [
+                    /*#__PURE__*/ (0, _jsxruntime.jsxs)("div", {
+                        className: "w-full",
+                        children: [
+                            /*#__PURE__*/ (0, _jsxruntime.jsx)("label", {
+                                htmlFor: "jobPositionName",
+                                className: "text-nowrap text-twelve font-medium text-dropdownLabelColor",
+                                children: "Job Position"
+                            }),
+                            /*#__PURE__*/ (0, _jsxruntime.jsx)("div", {
+                                children: /*#__PURE__*/ (0, _jsxruntime.jsx)(_jobdropdown.default, {
+                                    control: control,
+                                    name: "jobPositionName",
+                                    errors: errors,
+                                    setValue: setValue,
+                                    options: jobPositionOptions,
+                                    placeholder: "Select...",
+                                    ClassName: "mt-[8px] lg:max-w-[348px] placeholder:text-placholderColor"
+                                })
+                            })
+                        ]
+                    }),
+                    /*#__PURE__*/ (0, _jsxruntime.jsxs)("div", {
+                        className: "w-full",
+                        children: [
+                            /*#__PURE__*/ (0, _jsxruntime.jsx)("label", {
+                                htmlFor: "jobDepartmentName",
+                                className: "text-nowrap text-twelve font-medium text-dropdownLabelColor",
+                                children: "Department (Optional)"
+                            }),
+                            /*#__PURE__*/ (0, _jsxruntime.jsx)("div", {
+                                children: /*#__PURE__*/ (0, _jsxruntime.jsx)(_jobdropdown.default, {
+                                    control: control,
+                                    name: "jobDepartmentName",
+                                    errors: errors,
+                                    setValue: setValue,
+                                    options: departmentOptions,
+                                    placeholder: "Select...",
+                                    ClassName: "mt-[8px] max-w-[348px] placeholder:text-placholderColor"
+                                })
+                            })
+                        ]
+                    }),
+                    /*#__PURE__*/ (0, _jsxruntime.jsxs)("div", {
+                        className: "w-full",
+                        children: [
+                            /*#__PURE__*/ (0, _jsxruntime.jsx)("label", {
+                                htmlFor: "vacancy",
+                                className: "text-nowrap text-twelve font-medium text-dropdownLabelColor",
+                                children: "No of Vacancy"
+                            }),
+                            /*#__PURE__*/ (0, _jsxruntime.jsx)("div", {
+                                children: /*#__PURE__*/ (0, _jsxruntime.jsx)(_input.Input, {
+                                    control: control,
+                                    placeholder: "No of Vacancy",
+                                    name: "vacancy",
+                                    errors: errors,
+                                    className: "placeholder:text-placholderColor mt-[8px] max-w-[348px] bg-white"
+                                })
+                            })
+                        ]
+                    })
+                ]
+            })
+        ]
+    });
+};
+const _default = JobInformation;
+
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIkM6XFxVc2Vyc1xca2hhbmFcXE9uZURyaXZlXFxDb21wdXRlciBGaWxlc1xcRGVza3RvcFxcNnNlbnNlSFEtSGlyZVgtY2xpZW50XFxhcHBcXChkYXNoYm9hcmRzKVxcY3JlYXRlLWpvYlxcX2NvbXBvbmVudHNcXGpvYkluZm9ybWF0aW9uLnRzeCJdLCJzb3VyY2VzQ29udGVudCI6WyJpbXBvcnQgeyBJbnB1dCB9IGZyb20gJ0AvY29tcG9uZW50cy91aS9pbnB1dCc7XG5pbXBvcnQgeyBKb2JJbmZvcm1hdGlvblByb3BzIH0gZnJvbSAnQC90eXBlcy9Kb2IvdHlwZSc7XG5pbXBvcnQgUmVhY3QgZnJvbSAncmVhY3QnO1xuaW1wb3J0IEpvYkRyb3Bkb3duIGZyb20gJy4vam9iZHJvcGRvd24nO1xuXG5jb25zdCBKb2JJbmZvcm1hdGlvbjogUmVhY3QuRkM8Sm9iSW5mb3JtYXRpb25Qcm9wcz4gPSAoe1xuICBjb250cm9sLFxuICBlcnJvcnMsXG4gIHNldFZhbHVlLFxuICBqb2JQb3NpdGlvbk9wdGlvbnMsXG4gIGRlcGFydG1lbnRPcHRpb25zLFxufSkgPT4ge1xuICByZXR1cm4gKFxuICAgIDxkaXYgY2xhc3NOYW1lPSdyb3VuZGVkLTJ4bCBiZy1qb2JCZyc+XG4gICAgICA8ZGl2PlxuICAgICAgICA8aDEgY2xhc3NOYW1lPSdwbC1bNDhweF0gcHQtWzMycHhdIHRleHQtaGVhZGluZ1hYUyBmb250LXNlbWlib2xkJz5cbiAgICAgICAgICBKb2IgaW5mb3JtYXRpb25cbiAgICAgICAgPC9oMT5cbiAgICAgIDwvZGl2PlxuXG4gICAgICA8ZGl2IGNsYXNzTmFtZT0nZmxleCBnYXAtWzI0cHhdIHBiLVszMnB4XSBwbC1bNDhweF0gcHItWzk2cHhdIHB0LVsxNnB4XSc+XG4gICAgICAgIDxkaXYgY2xhc3NOYW1lPSd3LWZ1bGwnPlxuICAgICAgICAgIDxsYWJlbFxuICAgICAgICAgICAgaHRtbEZvcj0nam9iUG9zaXRpb25OYW1lJ1xuICAgICAgICAgICAgY2xhc3NOYW1lPSd0ZXh0LW5vd3JhcCB0ZXh0LXR3ZWx2ZSBmb250LW1lZGl1bSB0ZXh0LWRyb3Bkb3duTGFiZWxDb2xvcidcbiAgICAgICAgICA+XG4gICAgICAgICAgICBKb2IgUG9zaXRpb25cbiAgICAgICAgICA8L2xhYmVsPlxuICAgICAgICAgIDxkaXY+XG4gICAgICAgICAgICA8Sm9iRHJvcGRvd25cbiAgICAgICAgICAgICAgY29udHJvbD17Y29udHJvbH1cbiAgICAgICAgICAgICAgbmFtZT0nam9iUG9zaXRpb25OYW1lJ1xuICAgICAgICAgICAgICBlcnJvcnM9e2Vycm9yc31cbiAgICAgICAgICAgICAgc2V0VmFsdWU9e3NldFZhbHVlfVxuICAgICAgICAgICAgICBvcHRpb25zPXtqb2JQb3NpdGlvbk9wdGlvbnN9XG4gICAgICAgICAgICAgIHBsYWNlaG9sZGVyPSdTZWxlY3QuLi4nXG4gICAgICAgICAgICAgIENsYXNzTmFtZT0nbXQtWzhweF0gbGc6bWF4LXctWzM0OHB4XSBwbGFjZWhvbGRlcjp0ZXh0LXBsYWNob2xkZXJDb2xvcidcbiAgICAgICAgICAgIC8+XG4gICAgICAgICAgPC9kaXY+XG4gICAgICAgIDwvZGl2PlxuICAgICAgICA8ZGl2IGNsYXNzTmFtZT0ndy1mdWxsJz5cbiAgICAgICAgICA8bGFiZWxcbiAgICAgICAgICAgIGh0bWxGb3I9J2pvYkRlcGFydG1lbnROYW1lJ1xuICAgICAgICAgICAgY2xhc3NOYW1lPSd0ZXh0LW5vd3JhcCB0ZXh0LXR3ZWx2ZSBmb250LW1lZGl1bSB0ZXh0LWRyb3Bkb3duTGFiZWxDb2xvcidcbiAgICAgICAgICA+XG4gICAgICAgICAgICBEZXBhcnRtZW50IChPcHRpb25hbClcbiAgICAgICAgICA8L2xhYmVsPlxuICAgICAgICAgIDxkaXY+XG4gICAgICAgICAgICA8Sm9iRHJvcGRvd25cbiAgICAgICAgICAgICAgY29udHJvbD17Y29udHJvbH1cbiAgICAgICAgICAgICAgbmFtZT0nam9iRGVwYXJ0bWVudE5hbWUnXG4gICAgICAgICAgICAgIGVycm9ycz17ZXJyb3JzfVxuICAgICAgICAgICAgICBzZXRWYWx1ZT17c2V0VmFsdWV9XG4gICAgICAgICAgICAgIG9wdGlvbnM9e2RlcGFydG1lbnRPcHRpb25zfVxuICAgICAgICAgICAgICBwbGFjZWhvbGRlcj0nU2VsZWN0Li4uJ1xuICAgICAgICAgICAgICBDbGFzc05hbWU9J210LVs4cHhdIG1heC13LVszNDhweF0gcGxhY2Vob2xkZXI6dGV4dC1wbGFjaG9sZGVyQ29sb3InXG4gICAgICAgICAgICAvPlxuICAgICAgICAgIDwvZGl2PlxuICAgICAgICA8L2Rpdj5cblxuICAgICAgICA8ZGl2IGNsYXNzTmFtZT0ndy1mdWxsJz5cbiAgICAgICAgICA8bGFiZWxcbiAgICAgICAgICAgIGh0bWxGb3I9J3ZhY2FuY3knXG4gICAgICAgICAgICBjbGFzc05hbWU9J3RleHQtbm93cmFwIHRleHQtdHdlbHZlIGZvbnQtbWVkaXVtIHRleHQtZHJvcGRvd25MYWJlbENvbG9yJ1xuICAgICAgICAgID5cbiAgICAgICAgICAgIE5vIG9mIFZhY2FuY3lcbiAgICAgICAgICA8L2xhYmVsPlxuICAgICAgICAgIDxkaXY+XG4gICAgICAgICAgICA8SW5wdXRcbiAgICAgICAgICAgICAgY29udHJvbD17Y29udHJvbH1cbiAgICAgICAgICAgICAgcGxhY2Vob2xkZXI9J05vIG9mIFZhY2FuY3knXG4gICAgICAgICAgICAgIG5hbWU9J3ZhY2FuY3knXG4gICAgICAgICAgICAgIGVycm9ycz17ZXJyb3JzfVxuICAgICAgICAgICAgICBjbGFzc05hbWU9J3BsYWNlaG9sZGVyOnRleHQtcGxhY2hvbGRlckNvbG9yIG10LVs4cHhdIG1heC13LVszNDhweF0gYmctd2hpdGUnXG4gICAgICAgICAgICAvPlxuICAgICAgICAgIDwvZGl2PlxuICAgICAgICA8L2Rpdj5cbiAgICAgIDwvZGl2PlxuICAgIDwvZGl2PlxuICApO1xufTtcblxuZXhwb3J0IGRlZmF1bHQgSm9iSW5mb3JtYXRpb247XG4iXSwibmFtZXMiOlsiSm9iSW5mb3JtYXRpb24iLCJjb250cm9sIiwiZXJyb3JzIiwic2V0VmFsdWUiLCJqb2JQb3NpdGlvbk9wdGlvbnMiLCJkZXBhcnRtZW50T3B0aW9ucyIsImRpdiIsImNsYXNzTmFtZSIsImgxIiwibGFiZWwiLCJodG1sRm9yIiwiSm9iRHJvcGRvd24iLCJuYW1lIiwib3B0aW9ucyIsInBsYWNlaG9sZGVyIiwiQ2xhc3NOYW1lIiwiSW5wdXQiXSwibWFwcGluZ3MiOiI7Ozs7K0JBa0ZBOzs7ZUFBQTs7Ozt1QkFsRnNCOzhEQUVKO29FQUNNOzs7Ozs7QUFFeEIsTUFBTUEsaUJBQWdELENBQUMsRUFDckRDLE9BQU8sRUFDUEMsTUFBTSxFQUNOQyxRQUFRLEVBQ1JDLGtCQUFrQixFQUNsQkMsaUJBQWlCLEVBQ2xCO0lBQ0MscUJBQ0Usc0JBQUNDO1FBQUlDLFdBQVU7OzBCQUNiLHFCQUFDRDswQkFDQyxjQUFBLHFCQUFDRTtvQkFBR0QsV0FBVTs4QkFBb0Q7OzswQkFLcEUsc0JBQUNEO2dCQUFJQyxXQUFVOztrQ0FDYixzQkFBQ0Q7d0JBQUlDLFdBQVU7OzBDQUNiLHFCQUFDRTtnQ0FDQ0MsU0FBUTtnQ0FDUkgsV0FBVTswQ0FDWDs7MENBR0QscUJBQUNEOzBDQUNDLGNBQUEscUJBQUNLLG9CQUFXO29DQUNWVixTQUFTQTtvQ0FDVFcsTUFBSztvQ0FDTFYsUUFBUUE7b0NBQ1JDLFVBQVVBO29DQUNWVSxTQUFTVDtvQ0FDVFUsYUFBWTtvQ0FDWkMsV0FBVTs7Ozs7a0NBSWhCLHNCQUFDVDt3QkFBSUMsV0FBVTs7MENBQ2IscUJBQUNFO2dDQUNDQyxTQUFRO2dDQUNSSCxXQUFVOzBDQUNYOzswQ0FHRCxxQkFBQ0Q7MENBQ0MsY0FBQSxxQkFBQ0ssb0JBQVc7b0NBQ1ZWLFNBQVNBO29DQUNUVyxNQUFLO29DQUNMVixRQUFRQTtvQ0FDUkMsVUFBVUE7b0NBQ1ZVLFNBQVNSO29DQUNUUyxhQUFZO29DQUNaQyxXQUFVOzs7OztrQ0FLaEIsc0JBQUNUO3dCQUFJQyxXQUFVOzswQ0FDYixxQkFBQ0U7Z0NBQ0NDLFNBQVE7Z0NBQ1JILFdBQVU7MENBQ1g7OzBDQUdELHFCQUFDRDswQ0FDQyxjQUFBLHFCQUFDVSxZQUFLO29DQUNKZixTQUFTQTtvQ0FDVGEsYUFBWTtvQ0FDWkYsTUFBSztvQ0FDTFYsUUFBUUE7b0NBQ1JLLFdBQVU7Ozs7Ozs7OztBQU94QjtNQUVBLFdBQWVQIn0=

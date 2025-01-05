@@ -1,3 +1,5 @@
+import { DragEvent } from "react";
+
 export type interviewStageInputTypes = {
   interviewStageName: string;
 };
@@ -79,3 +81,12 @@ export type IdealCandidatesProps = {
   control: any;
   errors: any;
 };
+
+export type InterviewStageItem = {
+  id: number;
+  interviewMedium?: string;
+  label?: string;
+  checked?: boolean;
+};
+
+

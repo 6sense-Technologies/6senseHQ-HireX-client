@@ -1,10 +1,6 @@
 'use client';
 import axios from 'axios';
-import {
-  GoogleAuthTypes,
-  LoginFormInputs,
-  SingupFormInputs,
-} from '@/types/Auth/types';
+import { LoginFormInputs, SingupFormInputs } from '@/types/Auth/types';
 import { setAuthData } from '@/redux/slices/authSlice';
 import { useDispatch } from 'react-redux';
 

@@ -1,0 +1,1 @@
+{"version":3,"sources":["C:\\Users\\khana\\OneDrive\\Computer Files\\Desktop\\6senseHQ-HireX-client\\constants\\globalConstants.ts"],"sourcesContent":["export const passwordRegex =\n  /^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]{8,}$/;\n"],"names":["passwordRegex"],"mappings":";;;;+BAAaA;;;eAAAA;;;AAAN,MAAMA,gBACX"}

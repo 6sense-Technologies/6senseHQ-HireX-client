@@ -1,0 +1,49 @@
+806254d37276d326bd4f769d1b7b57cf
+"use strict";
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+Object.defineProperty(exports, "default", {
+    enumerable: true,
+    get: function() {
+        return _default;
+    }
+});
+const _jsxruntime = require("react/jsx-runtime");
+const _textArea = /*#__PURE__*/ _interop_require_default(require("../../../../components/textArea"));
+const _react = /*#__PURE__*/ _interop_require_default(require("react"));
+const _reacthookform = require("react-hook-form");
+function _interop_require_default(obj) {
+    return obj && obj.__esModule ? obj : {
+        default: obj
+    };
+}
+const JobResponsibilites = ({ control, errors })=>{
+    return /*#__PURE__*/ (0, _jsxruntime.jsxs)("div", {
+        className: "mt-[32px] rounded-2xl bg-jobBg",
+        children: [
+            /*#__PURE__*/ (0, _jsxruntime.jsx)("div", {
+                children: /*#__PURE__*/ (0, _jsxruntime.jsx)("h1", {
+                    className: "pl-[48px] pt-[38px] text-headingXXS font-semibold",
+                    children: "Job Responsibilities"
+                })
+            }),
+            /*#__PURE__*/ (0, _jsxruntime.jsx)("div", {
+                className: "w-full pb-[38px] pl-[47px] pr-[38px]",
+                children: /*#__PURE__*/ (0, _jsxruntime.jsx)(_reacthookform.Controller, {
+                    name: "jobResponsibility",
+                    control: control,
+                    render: ({ field })=>/*#__PURE__*/ (0, _jsxruntime.jsx)(_textArea.default, {
+                            ...field,
+                            errors: errors.jobResponsibilities?.message,
+                            placeholder: "Type Job Responsibilities",
+                            className: "mt-[16px] h-[207px] bg-transparent px-[12px] pt-[10px] placeholder:text-placeholderColor lg:max-w-[1082px] xl:max-w-[1632px] resize"
+                        })
+                })
+            })
+        ]
+    });
+};
+const _default = JobResponsibilites;
+
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIkM6XFxVc2Vyc1xca2hhbmFcXE9uZURyaXZlXFxDb21wdXRlciBGaWxlc1xcRGVza3RvcFxcNnNlbnNlSFEtSGlyZVgtY2xpZW50XFxhcHBcXChkYXNoYm9hcmRzKVxcY3JlYXRlLWpvYlxcX2NvbXBvbmVudHNcXGpvYlJlc3BvbnNpYmlsaXRlcy50c3giXSwic291cmNlc0NvbnRlbnQiOlsiaW1wb3J0IFRleHRBcmVhIGZyb20gJ0AvY29tcG9uZW50cy90ZXh0QXJlYSc7XG5pbXBvcnQgeyBKb2JSZXNwb25zaWJpbGl0aWVzUHJvcHMgfSBmcm9tICdAL3R5cGVzL0pvYi90eXBlJztcbmltcG9ydCBSZWFjdCBmcm9tICdyZWFjdCc7XG5pbXBvcnQgeyBDb250cm9sbGVyIH0gZnJvbSAncmVhY3QtaG9vay1mb3JtJztcblxuY29uc3QgSm9iUmVzcG9uc2liaWxpdGVzOiBSZWFjdC5GQzxKb2JSZXNwb25zaWJpbGl0aWVzUHJvcHM+ID0gKHtcbiAgY29udHJvbCxcbiAgZXJyb3JzLFxufSkgPT4ge1xuICByZXR1cm4gKFxuICAgIDxkaXYgY2xhc3NOYW1lPSdtdC1bMzJweF0gcm91bmRlZC0yeGwgYmctam9iQmcnPlxuICAgICAgPGRpdj5cbiAgICAgICAgPGgxIGNsYXNzTmFtZT0ncGwtWzQ4cHhdIHB0LVszOHB4XSB0ZXh0LWhlYWRpbmdYWFMgZm9udC1zZW1pYm9sZCc+XG4gICAgICAgICAgSm9iIFJlc3BvbnNpYmlsaXRpZXNcbiAgICAgICAgPC9oMT5cbiAgICAgIDwvZGl2PlxuICAgICAgPGRpdiBjbGFzc05hbWU9J3ctZnVsbCBwYi1bMzhweF0gcGwtWzQ3cHhdIHByLVszOHB4XSc+XG4gICAgICAgIDxDb250cm9sbGVyXG4gICAgICAgICAgbmFtZT0nam9iUmVzcG9uc2liaWxpdHknXG4gICAgICAgICAgY29udHJvbD17Y29udHJvbH1cbiAgICAgICAgICByZW5kZXI9eyh7IGZpZWxkIH0pID0+IChcbiAgICAgICAgICAgIDxUZXh0QXJlYVxuICAgICAgICAgICAgICB7Li4uZmllbGR9XG4gICAgICAgICAgICAgIGVycm9ycz17ZXJyb3JzLmpvYlJlc3BvbnNpYmlsaXRpZXM/Lm1lc3NhZ2V9XG4gICAgICAgICAgICAgIHBsYWNlaG9sZGVyPSdUeXBlIEpvYiBSZXNwb25zaWJpbGl0aWVzJ1xuICAgICAgICAgICAgICBjbGFzc05hbWU9J210LVsxNnB4XSBoLVsyMDdweF0gYmctdHJhbnNwYXJlbnQgcHgtWzEycHhdIHB0LVsxMHB4XSBwbGFjZWhvbGRlcjp0ZXh0LXBsYWNlaG9sZGVyQ29sb3IgbGc6bWF4LXctWzEwODJweF0geGw6bWF4LXctWzE2MzJweF0gcmVzaXplJ1xuICAgICAgICAgICAgLz5cbiAgICAgICAgICApfVxuICAgICAgICAvPlxuICAgICAgPC9kaXY+XG4gICAgPC9kaXY+XG4gICk7XG59O1xuXG5leHBvcnQgZGVmYXVsdCBKb2JSZXNwb25zaWJpbGl0ZXM7Il0sIm5hbWVzIjpbIkpvYlJlc3BvbnNpYmlsaXRlcyIsImNvbnRyb2wiLCJlcnJvcnMiLCJkaXYiLCJjbGFzc05hbWUiLCJoMSIsIkNvbnRyb2xsZXIiLCJuYW1lIiwicmVuZGVyIiwiZmllbGQiLCJUZXh0QXJlYSIsImpvYlJlc3BvbnNpYmlsaXRpZXMiLCJtZXNzYWdlIiwicGxhY2Vob2xkZXIiXSwibWFwcGluZ3MiOiI7Ozs7K0JBa0NBOzs7ZUFBQTs7OztpRUFsQ3FCOzhEQUVIOytCQUNTOzs7Ozs7QUFFM0IsTUFBTUEscUJBQXlELENBQUMsRUFDOURDLE9BQU8sRUFDUEMsTUFBTSxFQUNQO0lBQ0MscUJBQ0Usc0JBQUNDO1FBQUlDLFdBQVU7OzBCQUNiLHFCQUFDRDswQkFDQyxjQUFBLHFCQUFDRTtvQkFBR0QsV0FBVTs4QkFBb0Q7OzswQkFJcEUscUJBQUNEO2dCQUFJQyxXQUFVOzBCQUNiLGNBQUEscUJBQUNFLHlCQUFVO29CQUNUQyxNQUFLO29CQUNMTixTQUFTQTtvQkFDVE8sUUFBUSxDQUFDLEVBQUVDLEtBQUssRUFBRSxpQkFDaEIscUJBQUNDLGlCQUFROzRCQUNOLEdBQUdELEtBQUs7NEJBQ1RQLFFBQVFBLE9BQU9TLG1CQUFtQixFQUFFQzs0QkFDcENDLGFBQVk7NEJBQ1pULFdBQVU7Ozs7OztBQU94QjtNQUVBLFdBQWVKIn0=

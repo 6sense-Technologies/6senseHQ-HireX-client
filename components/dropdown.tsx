@@ -53,14 +53,21 @@ const Dropdown: React.FC<DropdownProps> = ({
               {...field}
               instanceId={name}
               value={
-                options?.find((option) => option.value === field.value) || null
+                Array.isArray(field.value)
+                  ? field.value.map((val: string) =>
+                      options?.find((option) => option.value === val)
+                    )
+                  : options?.find((option) => option.value === field.value) ||
+                    null
               }
               onChange={(selectedOption) => {
-                const selectedValue = selectedOption
-                  ? selectedOption.value
-                  : '';
+                const selectedValue = Array.isArray(selectedOption)
+                  ? selectedOption.map((option: OptionType) => option.value)
+                  : selectedOption
+                    ? selectedOption.value
+                    : '';
                 field.onChange(selectedValue);
-                setValue(name, selectedValue, { shouldValidate: true });
+                setValue(name, [selectedValue], { shouldValidate: true });
               }}
               options={options}
               placeholder={placeholder}

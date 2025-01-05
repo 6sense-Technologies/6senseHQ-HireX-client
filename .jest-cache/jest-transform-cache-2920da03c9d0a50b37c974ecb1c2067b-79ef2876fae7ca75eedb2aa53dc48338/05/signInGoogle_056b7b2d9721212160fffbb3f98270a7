@@ -1,0 +1,18 @@
+164abbff9fe1deae019ebeba5ac18236
+'use server';
+"use strict";
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+Object.defineProperty(exports, "signInWithGoogle", {
+    enumerable: true,
+    get: function() {
+        return signInWithGoogle;
+    }
+});
+const _auth = require("@/auth");
+async function signInWithGoogle() {
+    await (0, _auth.signIn)('google');
+}
+
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIkM6XFxVc2Vyc1xca2hhbmFcXE9uZURyaXZlXFxDb21wdXRlciBGaWxlc1xcRGVza3RvcFxcNnNlbnNlSFEtSGlyZVgtY2xpZW50XFxhcHBcXGFjdGlvbnNcXHNpZ25Jbkdvb2dsZS50cyJdLCJzb3VyY2VzQ29udGVudCI6WyIndXNlIHNlcnZlcic7XG5cbmltcG9ydCB7IHNpZ25JbiB9IGZyb20gJ0AvYXV0aCc7XG5cbmV4cG9ydCBhc3luYyBmdW5jdGlvbiBzaWduSW5XaXRoR29vZ2xlKCkge1xuICBhd2FpdCBzaWduSW4oJ2dvb2dsZScpO1xufVxuIl0sIm5hbWVzIjpbInNpZ25JbldpdGhHb29nbGUiLCJzaWduSW4iXSwibWFwcGluZ3MiOiJBQUFBOzs7OzsrQkFJc0JBOzs7ZUFBQUE7OztzQkFGQztBQUVoQixlQUFlQTtJQUNwQixNQUFNQyxJQUFBQSxZQUFNLEVBQUM7QUFDZiJ9

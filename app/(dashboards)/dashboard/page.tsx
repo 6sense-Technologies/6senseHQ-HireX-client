@@ -13,6 +13,8 @@ const Page = () => {
 
   const userInfo = useSelector((state: RootState) => state.auth.userInfo);
 
+  console.log(userInfo);
+
   useEffect(() => {
     const initializeSession = async () => {
       if (status === 'authenticated' && session?.accessToken) {

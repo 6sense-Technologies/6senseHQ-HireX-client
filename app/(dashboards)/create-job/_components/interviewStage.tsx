@@ -17,14 +17,9 @@ import {
   handleCreateInterviewStage,
 } from '@/api/Job/JobApi';
 import cn from '@/utils/cn';
-import { InterViewStageList, InterviewStageProps } from '@/types/Job/type';
+import { InterviewStageItem, InterViewStageList, InterviewStageProps } from '@/types/Job/type';
 
-type Item = {
-  id: number;
-  interviewMedium?: string;
-  label?: string;
-  checked?: boolean;
-};
+
 
 const interviewStageOptions = [
   {
@@ -67,13 +62,13 @@ const InterviewStage: React.FC<InterviewStageProps> = ({
   setValue,
 }) => {
   const queryClient = useQueryClient();
-  const [itemsLeft, setItemsLeft] = useState<Item[]>([]);
-  const [itemsRight, setItemsRight] = useState<Item[]>([]);
+  const [itemsLeft, setItemsLeft] = useState<InterviewStageItem[]>([]);
+  const [itemsRight, setItemsRight] = useState<InterviewStageItem[]>([]);
   const [selectAll, setSelectAll] = useState(false);
-  const [draggedItemLeft, setDraggedItemLeft] = useState<Item | null>(null);
-  const [hoveredItemLeft, setHoveredItemLeft] = useState<Item | null>(null);
-  const [draggedItemRight, setDraggedItemRight] = useState<Item | null>(null);
-  const [hoveredItemRight, setHoveredItemRight] = useState<Item | null>(null);
+  const [draggedItemLeft, setDraggedItemLeft] = useState<InterviewStageItem | null>(null);
+  const [hoveredItemLeft, setHoveredItemLeft] = useState<InterviewStageItem | null>(null);
+  const [draggedItemRight, setDraggedItemRight] = useState<InterviewStageItem | null>(null);
+  const [hoveredItemRight, setHoveredItemRight] = useState<InterviewStageItem | null>(null);
   const [newItemLabel, setNewItemLabel] = useState('');
 
   const { data: interviewStages } = useQuery<
@@ -98,7 +93,7 @@ const InterviewStage: React.FC<InterviewStageProps> = ({
       const formattedStages = interviewStages.map((stage: any) => ({
         id: stage.interviewStageId,
         label: stage.interviewStageName,
-        checked: false,
+        checked: itemsLeft.find(item => item.id === stage.interviewStageId)?.checked || false,
       }));
       setItemsLeft(formattedStages);
     }
@@ -111,12 +106,12 @@ const InterviewStage: React.FC<InterviewStageProps> = ({
   };
 
   const handleCheckboxChange = (id: number) => {
-    const newItems: Item[] = itemsLeft.map((item: Item) =>
+    const newItems: InterviewStageItem[] = itemsLeft.map((item: InterviewStageItem) =>
       item.id === id ? { ...item, checked: !item.checked } : item
     );
     setItemsLeft(newItems);
 
-    if (newItems.some((item: Item) => !item.checked)) {
+    if (newItems.some((item: InterviewStageItem) => !item.checked)) {
       setSelectAll(false);
     }
   };
@@ -142,19 +137,19 @@ const InterviewStage: React.FC<InterviewStageProps> = ({
   };
 
   // Left Table Drag-and-Drop Functions
-  const handleDragStartLeft = (item: Item) => {
+  const handleDragStartLeft = (item: InterviewStageItem) => {
     setDraggedItemLeft(item);
   };
 
-  const handleDragOverLeft = (e: DragEvent<HTMLSpanElement>, item: Item) => {
+  const handleDragOverLeft = (e: DragEvent<HTMLSpanElement>, item: InterviewStageItem) => {
     e.preventDefault();
     setHoveredItemLeft(item);
   };
 
-  const handleDropLeft = (e: DragEvent<HTMLSpanElement>, dropItem: Item) => {
+  const handleDropLeft = (e: DragEvent<HTMLSpanElement>, dropItem: InterviewStageItem) => {
     e.preventDefault();
     if (draggedItemLeft && dropItem.id !== draggedItemLeft.id) {
-      const newItems = itemsLeft.map((item: Item) => {
+      const newItems = itemsLeft.map((item: InterviewStageItem) => {
         if (item.id === dropItem.id) {
           return draggedItemLeft;
         }
@@ -170,19 +165,19 @@ const InterviewStage: React.FC<InterviewStageProps> = ({
   };
 
   // Right Table Drag-and-Drop Functions
-  const handleDragStartRight = (item: Item) => {
+  const handleDragStartRight = (item: InterviewStageItem) => {
     setDraggedItemRight(item);
   };
 
-  const handleDragOverRight = (e: DragEvent<HTMLSpanElement>, item: Item) => {
+  const handleDragOverRight = (e: DragEvent<HTMLSpanElement>, item: InterviewStageItem) => {
     e.preventDefault();
     setHoveredItemRight(item);
   };
 
-  const handleDropRight = (e: DragEvent<HTMLSpanElement>, dropItem: Item) => {
+  const handleDropRight = (e: DragEvent<HTMLSpanElement>, dropItem: InterviewStageItem) => {
     e.preventDefault();
     if (draggedItemRight && dropItem.id !== draggedItemRight.id) {
-      const newItems = itemsRight.map((item: Item) => {
+      const newItems = itemsRight.map((item: InterviewStageItem) => {
         if (item.id === dropItem.id) {
           return draggedItemRight;
         }
@@ -274,7 +269,7 @@ const InterviewStage: React.FC<InterviewStageProps> = ({
                       onDragLeave={() => setHoveredItemLeft(null)}
                       className='cursor-pointer'
                     >
-                      <DotsSixVertical />
+                      <DotsSixVertical className='text-lightGrayColor' />
                     </span>
                     <p className='text-twelve font-medium text-dropdownLabelColor'>
                       {item.label}
@@ -302,10 +297,10 @@ const InterviewStage: React.FC<InterviewStageProps> = ({
           </table>
         </div>
         <span>
-          <ArrowRight onClick={handleMoveToRight} className='cursor-pointer' />
+          <ArrowRight onClick={handleMoveToRight} className='cursor-pointer border' />
         </span>
-        <div className='h-[200px] w-full overflow-y-auto lg:max-w-[655px] xl:max-w-[800px]'>
-          <table className='w-full rounded-md bg-white lg:max-w-[650px] xl:max-w-[800px]'>
+        <div className='h-[200px] w-full overflow-y-auto lg:max-w-[655px] xl:max-w-[900px]'>
+          <table className='w-full rounded-md bg-white lg:max-w-[650px] xl:max-w-[900px]'>
             <thead>
               <tr className='border-b'>
                 <th className='flex max-w-[200px] justify-start py-[9px] pl-[40px]'>
@@ -341,7 +336,7 @@ const InterviewStage: React.FC<InterviewStageProps> = ({
                         onDragLeave={() => setHoveredItemRight(null)}
                         className='cursor-pointer'
                       >
-                        <DotsSixVertical />
+                        <DotsSixVertical className='text-lightGrayColor'/>
                       </span>
                       <p className='text-twelve font-medium text-dropdownLabelColor'>
                         {item.label}

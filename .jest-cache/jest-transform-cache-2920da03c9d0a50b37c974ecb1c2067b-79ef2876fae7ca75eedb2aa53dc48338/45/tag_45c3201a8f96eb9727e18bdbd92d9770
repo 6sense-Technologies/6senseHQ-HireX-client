@@ -1,0 +1,45 @@
+851bc2296a95aa1ccf93d069aa0ffec6
+"use strict";
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+Object.defineProperty(exports, "default", {
+    enumerable: true,
+    get: function() {
+        return _default;
+    }
+});
+const _jsxruntime = require("react/jsx-runtime");
+const _react = require("@phosphor-icons/react");
+const _react1 = /*#__PURE__*/ _interop_require_default(require("react"));
+function _interop_require_default(obj) {
+    return obj && obj.__esModule ? obj : {
+        default: obj
+    };
+}
+const Tag = ({ selectedSkills, onRemoveSkill })=>{
+    return /*#__PURE__*/ (0, _jsxruntime.jsx)("div", {
+        children: /*#__PURE__*/ (0, _jsxruntime.jsx)("div", {
+            children: /*#__PURE__*/ (0, _jsxruntime.jsx)("div", {
+                className: "mt-[16px] flex flex-wrap gap-[8px]",
+                children: selectedSkills.map((skill)=>/*#__PURE__*/ (0, _jsxruntime.jsxs)("div", {
+                        className: "flex items-center justify-between rounded-[4px] bg-dropdownSecondaryBg px-[8px] py-[4px]",
+                        children: [
+                            /*#__PURE__*/ (0, _jsxruntime.jsx)("p", {
+                                className: "text-tagText text-twelve",
+                                children: skill
+                            }),
+                            /*#__PURE__*/ (0, _jsxruntime.jsx)("span", {
+                                onClick: ()=>onRemoveSkill(skill),
+                                className: "cursor-pointer",
+                                children: /*#__PURE__*/ (0, _jsxruntime.jsx)(_react.X, {})
+                            })
+                        ]
+                    }, skill))
+            })
+        })
+    });
+};
+const _default = Tag;
+
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIkM6XFxVc2Vyc1xca2hhbmFcXE9uZURyaXZlXFxDb21wdXRlciBGaWxlc1xcRGVza3RvcFxcNnNlbnNlSFEtSGlyZVgtY2xpZW50XFxhcHBcXChkYXNoYm9hcmRzKVxcY3JlYXRlLWpvYlxcX2NvbXBvbmVudHNcXHRhZy50c3giXSwic291cmNlc0NvbnRlbnQiOlsiaW1wb3J0IHsgVGFnUHJvcHMgfSBmcm9tICdAL3R5cGVzL0pvYi90eXBlJztcbmltcG9ydCB7IFggfSBmcm9tICdAcGhvc3Bob3ItaWNvbnMvcmVhY3QnO1xuaW1wb3J0IFJlYWN0LCB7IEZDIH0gZnJvbSAncmVhY3QnO1xuXG5jb25zdCBUYWc6IEZDPFRhZ1Byb3BzPiA9ICh7IHNlbGVjdGVkU2tpbGxzLCBvblJlbW92ZVNraWxsIH0pID0+IHtcbiAgcmV0dXJuIChcbiAgICA8ZGl2PlxuICAgICAgPGRpdj5cbiAgICAgICAgPGRpdiBjbGFzc05hbWU9J210LVsxNnB4XSBmbGV4IGZsZXgtd3JhcCBnYXAtWzhweF0nPlxuICAgICAgICAgIHtzZWxlY3RlZFNraWxscy5tYXAoKHNraWxsKSA9PiAoXG4gICAgICAgICAgICA8ZGl2XG4gICAgICAgICAgICAgIGtleT17c2tpbGx9XG4gICAgICAgICAgICAgIGNsYXNzTmFtZT0nZmxleCBpdGVtcy1jZW50ZXIganVzdGlmeS1iZXR3ZWVuIHJvdW5kZWQtWzRweF0gYmctZHJvcGRvd25TZWNvbmRhcnlCZyBweC1bOHB4XSBweS1bNHB4XSdcbiAgICAgICAgICAgID5cbiAgICAgICAgICAgICAgPHAgY2xhc3NOYW1lPSd0ZXh0LXRhZ1RleHQgdGV4dC10d2VsdmUnPntza2lsbH08L3A+XG4gICAgICAgICAgICAgIDxzcGFuXG4gICAgICAgICAgICAgICAgb25DbGljaz17KCkgPT4gb25SZW1vdmVTa2lsbChza2lsbCl9XG4gICAgICAgICAgICAgICAgY2xhc3NOYW1lPSdjdXJzb3ItcG9pbnRlcidcbiAgICAgICAgICAgICAgPlxuICAgICAgICAgICAgICAgIDxYIC8+XG4gICAgICAgICAgICAgIDwvc3Bhbj5cbiAgICAgICAgICAgIDwvZGl2PlxuICAgICAgICAgICkpfVxuICAgICAgICA8L2Rpdj5cbiAgICAgIDwvZGl2PlxuICAgIDwvZGl2PlxuICApO1xufTtcblxuZXhwb3J0IGRlZmF1bHQgVGFnO1xuIl0sIm5hbWVzIjpbIlRhZyIsInNlbGVjdGVkU2tpbGxzIiwib25SZW1vdmVTa2lsbCIsImRpdiIsImNsYXNzTmFtZSIsIm1hcCIsInNraWxsIiwicCIsInNwYW4iLCJvbkNsaWNrIiwiWCJdLCJtYXBwaW5ncyI6Ijs7OzsrQkE2QkE7OztlQUFBOzs7O3VCQTVCa0I7K0RBQ1E7Ozs7OztBQUUxQixNQUFNQSxNQUFvQixDQUFDLEVBQUVDLGNBQWMsRUFBRUMsYUFBYSxFQUFFO0lBQzFELHFCQUNFLHFCQUFDQztrQkFDQyxjQUFBLHFCQUFDQTtzQkFDQyxjQUFBLHFCQUFDQTtnQkFBSUMsV0FBVTswQkFDWkgsZUFBZUksR0FBRyxDQUFDLENBQUNDLHNCQUNuQixzQkFBQ0g7d0JBRUNDLFdBQVU7OzBDQUVWLHFCQUFDRztnQ0FBRUgsV0FBVTswQ0FBNEJFOzswQ0FDekMscUJBQUNFO2dDQUNDQyxTQUFTLElBQU1QLGNBQWNJO2dDQUM3QkYsV0FBVTswQ0FFVixjQUFBLHFCQUFDTSxRQUFDOzs7dUJBUkNKOzs7O0FBZ0JuQjtNQUVBLFdBQWVOIn0=

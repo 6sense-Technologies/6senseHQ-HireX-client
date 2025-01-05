@@ -27,3 +27,8 @@
   background-color: #ababae; /* Hovered thumb color */
   cursor: default !important;
 }
+
+.resize {
+  resize: both; /* Allows resizing both horizontally and vertically */
+  overflow: auto; /* Ensures scrollbars appear when needed */
+}

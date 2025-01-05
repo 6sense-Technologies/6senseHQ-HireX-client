@@ -1,0 +1,74 @@
+bf6cd62612cf386dc9b5874c6c05a540
+"use strict";
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+function _export(target, all) {
+    for(var name in all)Object.defineProperty(target, name, {
+        enumerable: true,
+        get: all[name]
+    });
+}
+_export(exports, {
+    auth: function() {
+        return auth;
+    },
+    handlers: function() {
+        return handlers;
+    },
+    signIn: function() {
+        return signIn;
+    },
+    signOut: function() {
+        return signOut;
+    }
+});
+const _axios = /*#__PURE__*/ _interop_require_default(require("axios"));
+const _nextauth = /*#__PURE__*/ _interop_require_default(require("next-auth"));
+const _google = /*#__PURE__*/ _interop_require_default(require("next-auth/providers/google"));
+function _interop_require_default(obj) {
+    return obj && obj.__esModule ? obj : {
+        default: obj
+    };
+}
+const { handlers, signIn, signOut, auth } = (0, _nextauth.default)({
+    session: {
+        strategy: 'jwt'
+    },
+    providers: [
+        (0, _google.default)({
+            clientId: process.env.AUTH_GOOGLE_ID,
+            clientSecret: process.env.AUTH_GOOGLE_SECRET,
+            authorization: {
+                params: {
+                    prompt: 'select_account'
+                }
+            }
+        })
+    ],
+    callbacks: {
+        async jwt ({ token, account }) {
+            if (account) {
+                const response = await _axios.default.post('http://localhost:8000/auth/social-login', {
+                    idToken: account.id_token,
+                    provider: 'google'
+                }, {
+                    headers: {
+                        'Content-Type': 'application/json'
+                    }
+                });
+                token.accessToken = response.data?.tokens?.access_token;
+            }
+            return token;
+        },
+        async session ({ session, token }) {
+            session.accessToken = token.accessToken;
+            return session;
+        },
+        async redirect () {
+            return `/dashboard`;
+        }
+    }
+});
+
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIkM6XFxVc2Vyc1xca2hhbmFcXE9uZURyaXZlXFxDb21wdXRlciBGaWxlc1xcRGVza3RvcFxcNnNlbnNlSFEtSGlyZVgtY2xpZW50XFxhdXRoLnRzIl0sInNvdXJjZXNDb250ZW50IjpbImltcG9ydCBheGlvcyBmcm9tICdheGlvcyc7XG5pbXBvcnQgTmV4dEF1dGgsIHsgU2Vzc2lvbiB9IGZyb20gJ25leHQtYXV0aCc7XG5pbXBvcnQgR29vZ2xlUHJvdmlkZXIgZnJvbSAnbmV4dC1hdXRoL3Byb3ZpZGVycy9nb29nbGUnO1xuXG5kZWNsYXJlIG1vZHVsZSAnbmV4dC1hdXRoJyB7XG4gIGludGVyZmFjZSBTZXNzaW9uIHtcbiAgICBhY2Nlc3NUb2tlbj86IHN0cmluZztcbiAgfVxufVxuXG5leHBvcnQgY29uc3QgeyBoYW5kbGVycywgc2lnbkluLCBzaWduT3V0LCBhdXRoIH0gPSBOZXh0QXV0aCh7XG4gIHNlc3Npb246IHtcbiAgICBzdHJhdGVneTogJ2p3dCcsXG4gIH0sXG4gIHByb3ZpZGVyczogW1xuICAgIEdvb2dsZVByb3ZpZGVyKHtcbiAgICAgIGNsaWVudElkOiBwcm9jZXNzLmVudi5BVVRIX0dPT0dMRV9JRCxcbiAgICAgIGNsaWVudFNlY3JldDogcHJvY2Vzcy5lbnYuQVVUSF9HT09HTEVfU0VDUkVULFxuICAgICAgYXV0aG9yaXphdGlvbjoge1xuICAgICAgICBwYXJhbXM6IHtcbiAgICAgICAgICBwcm9tcHQ6ICdzZWxlY3RfYWNjb3VudCcsXG4gICAgICAgIH0sXG4gICAgICB9LFxuICAgIH0pLFxuICBdLFxuICBjYWxsYmFja3M6IHtcbiAgICBhc3luYyBqd3QoeyB0b2tlbiwgYWNjb3VudCB9KSB7XG4gICAgICBpZiAoYWNjb3VudCkge1xuICAgICAgICBjb25zdCByZXNwb25zZSA9IGF3YWl0IGF4aW9zLnBvc3QoXG4gICAgICAgICAgJ2h0dHA6Ly9sb2NhbGhvc3Q6ODAwMC9hdXRoL3NvY2lhbC1sb2dpbicsXG4gICAgICAgICAge1xuICAgICAgICAgICAgaWRUb2tlbjogYWNjb3VudC5pZF90b2tlbixcbiAgICAgICAgICAgIHByb3ZpZGVyOiAnZ29vZ2xlJyxcbiAgICAgICAgICB9LFxuICAgICAgICAgIHtcbiAgICAgICAgICAgIGhlYWRlcnM6IHtcbiAgICAgICAgICAgICAgJ0NvbnRlbnQtVHlwZSc6ICdhcHBsaWNhdGlvbi9qc29uJyxcbiAgICAgICAgICAgIH0sXG4gICAgICAgICAgfVxuICAgICAgICApO1xuXG4gICAgICAgIHRva2VuLmFjY2Vzc1Rva2VuID0gcmVzcG9uc2UuZGF0YT8udG9rZW5zPy5hY2Nlc3NfdG9rZW47XG4gICAgICB9XG4gICAgICByZXR1cm4gdG9rZW47XG4gICAgfSxcbiAgICBhc3luYyBzZXNzaW9uKHsgc2Vzc2lvbiwgdG9rZW4gfSkge1xuICAgICAgc2Vzc2lvbi5hY2Nlc3NUb2tlbiA9IHRva2VuLmFjY2Vzc1Rva2VuIGFzIHN0cmluZztcbiAgICAgIHJldHVybiBzZXNzaW9uO1xuICAgIH0sXG4gICAgYXN5bmMgcmVkaXJlY3QoKSB7XG4gICAgICByZXR1cm4gYC9kYXNoYm9hcmRgO1xuICAgIH0sXG4gIH0sXG59KTtcbiJdLCJuYW1lcyI6WyJhdXRoIiwiaGFuZGxlcnMiLCJzaWduSW4iLCJzaWduT3V0IiwiTmV4dEF1dGgiLCJzZXNzaW9uIiwic3RyYXRlZ3kiLCJwcm92aWRlcnMiLCJHb29nbGVQcm92aWRlciIsImNsaWVudElkIiwicHJvY2VzcyIsImVudiIsIkFVVEhfR09PR0xFX0lEIiwiY2xpZW50U2VjcmV0IiwiQVVUSF9HT09HTEVfU0VDUkVUIiwiYXV0aG9yaXphdGlvbiIsInBhcmFtcyIsInByb21wdCIsImNhbGxiYWNrcyIsImp3dCIsInRva2VuIiwiYWNjb3VudCIsInJlc3BvbnNlIiwiYXhpb3MiLCJwb3N0IiwiaWRUb2tlbiIsImlkX3Rva2VuIiwicHJvdmlkZXIiLCJoZWFkZXJzIiwiYWNjZXNzVG9rZW4iLCJkYXRhIiwidG9rZW5zIiwiYWNjZXNzX3Rva2VuIiwicmVkaXJlY3QiXSwibWFwcGluZ3MiOiI7Ozs7Ozs7Ozs7O0lBVTBDQSxJQUFJO2VBQUpBOztJQUEzQkMsUUFBUTtlQUFSQTs7SUFBVUMsTUFBTTtlQUFOQTs7SUFBUUMsT0FBTztlQUFQQTs7OzhEQVZmO2lFQUNnQjsrREFDUDs7Ozs7O0FBUXBCLE1BQU0sRUFBRUYsUUFBUSxFQUFFQyxNQUFNLEVBQUVDLE9BQU8sRUFBRUgsSUFBSSxFQUFFLEdBQUdJLElBQUFBLGlCQUFRLEVBQUM7SUFDMURDLFNBQVM7UUFDUEMsVUFBVTtJQUNaO0lBQ0FDLFdBQVc7UUFDVEMsSUFBQUEsZUFBYyxFQUFDO1lBQ2JDLFVBQVVDLFFBQVFDLEdBQUcsQ0FBQ0MsY0FBYztZQUNwQ0MsY0FBY0gsUUFBUUMsR0FBRyxDQUFDRyxrQkFBa0I7WUFDNUNDLGVBQWU7Z0JBQ2JDLFFBQVE7b0JBQ05DLFFBQVE7Z0JBQ1Y7WUFDRjtRQUNGO0tBQ0Q7SUFDREMsV0FBVztRQUNULE1BQU1DLEtBQUksRUFBRUMsS0FBSyxFQUFFQyxPQUFPLEVBQUU7WUFDMUIsSUFBSUEsU0FBUztnQkFDWCxNQUFNQyxXQUFXLE1BQU1DLGNBQUssQ0FBQ0MsSUFBSSxDQUMvQiwyQ0FDQTtvQkFDRUMsU0FBU0osUUFBUUssUUFBUTtvQkFDekJDLFVBQVU7Z0JBQ1osR0FDQTtvQkFDRUMsU0FBUzt3QkFDUCxnQkFBZ0I7b0JBQ2xCO2dCQUNGO2dCQUdGUixNQUFNUyxXQUFXLEdBQUdQLFNBQVNRLElBQUksRUFBRUMsUUFBUUM7WUFDN0M7WUFDQSxPQUFPWjtRQUNUO1FBQ0EsTUFBTWYsU0FBUSxFQUFFQSxPQUFPLEVBQUVlLEtBQUssRUFBRTtZQUM5QmYsUUFBUXdCLFdBQVcsR0FBR1QsTUFBTVMsV0FBVztZQUN2QyxPQUFPeEI7UUFDVDtRQUNBLE1BQU00QjtZQUNKLE9BQU8sQ0FBQyxVQUFVLENBQUM7UUFDckI7SUFDRjtBQUNGIn0=

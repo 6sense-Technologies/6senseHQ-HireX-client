@@ -1,9 +1,9 @@
 import TextArea from '@/components/textArea';
-import { JobResponsibilitesProps } from '@/types/Job/type';
+import { JobResponsibilitiesProps } from '@/types/Job/type';
 import React from 'react';
 import { Controller } from 'react-hook-form';
 
-const JobResponsibilites: React.FC<JobResponsibilitesProps> = ({
+const JobResponsibilites: React.FC<JobResponsibilitiesProps> = ({
   control,
   errors,
 }) => {
@@ -23,7 +23,7 @@ const JobResponsibilites: React.FC<JobResponsibilitesProps> = ({
               {...field}
               errors={errors.jobResponsibilities?.message}
               placeholder='Type Job Responsibilities'
-              className='mt-[16px] h-[207px] bg-transparent px-[12px] pt-[10px] placeholder:text-placeholderColor lg:max-w-[1082px] xl:max-w-[1432px]'
+              className='mt-[16px] h-[207px] bg-transparent px-[12px] pt-[10px] placeholder:text-placeholderColor lg:max-w-[1082px] xl:max-w-[1632px] resize'
             />
           )}
         />
