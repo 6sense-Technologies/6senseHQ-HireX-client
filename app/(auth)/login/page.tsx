@@ -19,6 +19,7 @@ import { useMutation } from '@tanstack/react-query';
 import { handleLogin } from '@/api/Auth/authApi';
 import { useDispatch } from 'react-redux';
 import { setAuthData } from '@/redux/slices/authSlice';
+import Loader from '@/components/loader';
 
 const Login = () => {
   const [passwordVisible, setPasswordVisible] = useState(false);
@@ -58,7 +59,16 @@ const Login = () => {
     loginMutation.mutate(data);
   };
 
+  const accessToken = localStorage.getItem('accessToken');
+
+  if(accessToken)
+  {
+    router.push('/dashboard');
+    return <Loader/>
+  }
+
   console.log('errors of login page', errors);
+
 
   return (
     <div className='mx-8 flex min-h-screen items-center justify-center bg-white'>

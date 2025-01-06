@@ -28,7 +28,6 @@ describe('Signup Page', () => {
     expect(title).toBeInTheDocument();
   });
 
-
   it('renders the full name label', () => {
     const fullNameLabel = screen.getByText('Full Name');
     expect(fullNameLabel).toBeInTheDocument();
@@ -44,7 +43,6 @@ describe('Signup Page', () => {
     expect(passwordLabel).toBeInTheDocument();
   });
 
-
   it('renders the full name placeholder', () => {
     const fullNamePlaceholder = screen.getByPlaceholderText('Full Name');
     expect(fullNamePlaceholder).toBeInTheDocument();
@@ -59,7 +57,4 @@ describe('Signup Page', () => {
     const passwordPlaceholder = screen.getByPlaceholderText('Password');
     expect(passwordPlaceholder).toBeInTheDocument();
   });
-
-
-
 });

@@ -29,28 +29,28 @@ const CreateJob = () => {
 
   const router = useRouter();
 
-  useEffect(() => {
-    const checkToken = () => {
-      const token = localStorage.getItem('accessToken');
-      if (!token) {
-        router.push('/login');
-      }
-    };
+  // useEffect(() => {
+  //   const checkToken = () => {
+  //     const token = localStorage.getItem('accessToken');
+  //     if (!token) {
+  //       router.push('/login');
+  //     }
+  //   };
 
-    checkToken();
+  //   checkToken();
 
-    const handleStorageChange = (event: StorageEvent) => {
-      if (event.key === 'accessToken') {
-        checkToken();
-      }
-    };
+  //   const handleStorageChange = (event: StorageEvent) => {
+  //     if (event.key === 'accessToken') {
+  //       checkToken();
+  //     }
+  //   };
 
-    window.addEventListener('storage', handleStorageChange);
+  //   window.addEventListener('storage', handleStorageChange);
 
-    return () => {
-      window.removeEventListener('storage', handleStorageChange);
-    };
-  }, [router]);
+  //   return () => {
+  //     window.removeEventListener('storage', handleStorageChange);
+  //   };
+  // }, [router]);
 
   const { data: jobpositions } = useQuery<
     JobPositionList,

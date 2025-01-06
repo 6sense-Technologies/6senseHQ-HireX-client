@@ -48,7 +48,6 @@ describe('Login Page', () => {
     expect(passwordPlaceholder).toBeInTheDocument();
   });
 
-
   it('renders the login button', () => {
     const loginButton = screen.getByRole('button', { name: /login/i });
     expect(loginButton).toBeInTheDocument();

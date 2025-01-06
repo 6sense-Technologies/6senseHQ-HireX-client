@@ -11,18 +11,21 @@ const accessToken = localStorage.getItem('accessToken');
 console.log('AccessToken', accessToken);
 
 export const getJobpostion = async () => {
-  const response = await axios.get('http://localhost:8000/job-position/list', {
-    headers: {
-      Authorization: `Bearer ${accessToken}`,
-      'Content-Type': 'application/json',
-    },
-  });
+  const response = await axios.get(
+    'http://192.168.0.158:8000/job-position/list',
+    {
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+        'Content-Type': 'application/json',
+      },
+    }
+  );
   return response.data as JobPositionList;
 };
 
 export const getDepartments = async () => {
   const response = await axios.get(
-    'http://localhost:8000/job-department/list',
+    'http://192.168.0.158:8000/job-department/list',
     {
       headers: {
         Authorization: `Bearer ${accessToken}`,
@@ -35,7 +38,7 @@ export const getDepartments = async () => {
 
 export const getInterviewStages = async () => {
   const response = await axios.get(
-    'http://localhost:8000/interviewstage/list',
+    'http://192.168.0.158:8000/interviewstage/list',
     {
       headers: {
         Accept: '*/*',
@@ -51,7 +54,7 @@ export const handleCreateInterviewStage = async (
   data: interviewStageInputTypes
 ) => {
   const response = await axios.post(
-    'http://localhost:8000/interviewstage/create',
+    'http://192.168.0.158:8000/interviewstage/create',
     data,
     {
       headers: {
@@ -64,11 +67,15 @@ export const handleCreateInterviewStage = async (
 };
 
 export const handleCreateJob = async (data: any) => {
-  const response = await axios.post('http://localhost:8000/job/create', data, {
-    headers: {
-      Authorization: `Bearer ${accessToken}`,
-      'Content-Type': 'application/json',
-    },
-  });
+  const response = await axios.post(
+    'http://192.168.0.158:8000/job/create',
+    data,
+    {
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+        'Content-Type': 'application/json',
+      },
+    }
+  );
   return response.data;
 };

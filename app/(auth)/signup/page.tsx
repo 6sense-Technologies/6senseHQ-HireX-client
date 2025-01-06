@@ -4,7 +4,7 @@ import { useForm, SubmitHandler } from 'react-hook-form';
 import { Circle, Eye, EyeSlash, X } from '@phosphor-icons/react';
 import Link from 'next/link';
 import Image from 'next/image';
-import Logo from '../../../public/logos/Main-logo.svg';
+import Logo from '../../../public/logos/HireXLogo.png';
 import { Button } from '@/components/ui/button';
 import { useRouter } from 'next/navigation';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -72,7 +72,7 @@ const Signup = () => {
       <div className='w-full max-w-[384px] py-10'>
         <div className='mx-auto'>
           <div className='logo-area mb-2 flex justify-center'>
-            <Image src={Logo} alt='Pattern50 Logo' />
+            <Image src={Logo} alt='HireX Logo' />
           </div>
           <form
             onSubmit={handleSubmit(handleSubmission)}

@@ -1,4 +1,4 @@
-import { DragEvent } from "react";
+import { DragEvent } from 'react';
 
 export type interviewStageInputTypes = {
   interviewStageName: string;
@@ -88,5 +88,3 @@ export type InterviewStageItem = {
   label?: string;
   checked?: boolean;
 };
-
-

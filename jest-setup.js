@@ -1,8 +1,8 @@
-import '@testing-library/jest-dom'
+import '@testing-library/jest-dom';
 
 // Mock process.env
-process.env.AUTH_GOOGLE_ID = 'mock-google-id'
-process.env.AUTH_GOOGLE_SECRET = 'mock-google-secret'
+process.env.AUTH_GOOGLE_ID = 'mock-google-id';
+process.env.AUTH_GOOGLE_SECRET = 'mock-google-secret';
 
 // Mock next/navigation
 jest.mock('next/navigation', () => ({
@@ -11,24 +11,26 @@ jest.mock('next/navigation', () => ({
       push: jest.fn(),
       replace: jest.fn(),
       prefetch: jest.fn(),
-      pathname: '/'
-    }
+      pathname: '/',
+    };
   },
   useSearchParams: () => new URLSearchParams(),
-  usePathname: () => '/'
-}))
+  usePathname: () => '/',
+}));
 
 // Mock axios
 jest.mock('axios', () => ({
-  post: jest.fn(() => Promise.resolve({ 
-    data: { 
-      tokens: { 
-        access_token: 'mock-access-token' 
-      } 
-    } 
-  })),
-  get: jest.fn(() => Promise.resolve({ data: {} }))
-}))
+  post: jest.fn(() =>
+    Promise.resolve({
+      data: {
+        tokens: {
+          access_token: 'mock-access-token',
+        },
+      },
+    })
+  ),
+  get: jest.fn(() => Promise.resolve({ data: {} })),
+}));
 
 // Mock next-auth
 const mockGoogleProvider = jest.fn(() => ({
@@ -37,50 +39,54 @@ const mockGoogleProvider = jest.fn(() => ({
   type: 'oauth',
   authorization: {
     params: {
-      prompt: 'select_account'
-    }
-  }
-}))
+      prompt: 'select_account',
+    },
+  },
+}));
 
-jest.mock('next-auth/providers/google', () => mockGoogleProvider)
+jest.mock('next-auth/providers/google', () => mockGoogleProvider);
 
 // Mock NextAuth
 const mockNextAuth = {
-  auth: jest.fn(() => Promise.resolve({
-    user: null,
-    token: null
-  })),
+  auth: jest.fn(() =>
+    Promise.resolve({
+      user: null,
+      token: null,
+    })
+  ),
   signIn: jest.fn(() => Promise.resolve({ ok: true, error: null })),
   signOut: jest.fn(() => Promise.resolve({ ok: true })),
   handlers: {
     GET: jest.fn(),
-    POST: jest.fn()
-  }
-}
+    POST: jest.fn(),
+  },
+};
 
 jest.mock('next-auth', () => ({
   ...mockNextAuth,
-  default: () => mockNextAuth
-}))
+  default: () => mockNextAuth,
+}));
 
 jest.mock('next-auth/react', () => ({
   useSession: jest.fn(() => ({
     data: {
       user: {
         name: 'Test User',
-        email: 'test@example.com'
+        email: 'test@example.com',
       },
-      accessToken: 'mock-access-token'
+      accessToken: 'mock-access-token',
     },
-    status: 'authenticated'
+    status: 'authenticated',
   })),
   signIn: jest.fn(() => Promise.resolve({ ok: true })),
   signOut: jest.fn(() => Promise.resolve({ ok: true })),
-  getProviders: jest.fn(() => Promise.resolve({
-    google: {
-      id: 'google',
-      name: 'Google',
-      type: 'oauth'
-    }
-  }))
-}))
+  getProviders: jest.fn(() =>
+    Promise.resolve({
+      google: {
+        id: 'google',
+        name: 'Google',
+        type: 'oauth',
+      },
+    })
+  ),
+}));

@@ -27,7 +27,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
     async jwt({ token, account }) {
       if (account) {
         const response = await axios.post(
-          'http://localhost:8000/auth/social-login',
+          'http://192.168.0.158:8000/auth/social-login',
           {
             idToken: account.id_token,
             provider: 'google',

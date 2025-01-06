@@ -17,7 +17,11 @@ import {
   handleCreateInterviewStage,
 } from '@/api/Job/JobApi';
 import cn from '@/utils/cn';
-import { InterviewStageItem, InterViewStageList, InterviewStageProps } from '@/types/Job/type';
+import {
+  InterviewStageItem,
+  InterViewStageList,
+  InterviewStageProps,
+} from '@/types/Job/type';
 
 const interviewStageOptions = [
   {
@@ -63,10 +67,14 @@ const InterviewStage: React.FC<InterviewStageProps> = ({
   const [itemsLeft, setItemsLeft] = useState<InterviewStageItem[]>([]);
   const [itemsRight, setItemsRight] = useState<InterviewStageItem[]>([]);
   const [selectAll, setSelectAll] = useState(false);
-  const [draggedItemLeft, setDraggedItemLeft] = useState<InterviewStageItem | null>(null);
-  const [hoveredItemLeft, setHoveredItemLeft] = useState<InterviewStageItem | null>(null);
-  const [draggedItemRight, setDraggedItemRight] = useState<InterviewStageItem | null>(null);
-  const [hoveredItemRight, setHoveredItemRight] = useState<InterviewStageItem | null>(null);
+  const [draggedItemLeft, setDraggedItemLeft] =
+    useState<InterviewStageItem | null>(null);
+  const [hoveredItemLeft, setHoveredItemLeft] =
+    useState<InterviewStageItem | null>(null);
+  const [draggedItemRight, setDraggedItemRight] =
+    useState<InterviewStageItem | null>(null);
+  const [hoveredItemRight, setHoveredItemRight] =
+    useState<InterviewStageItem | null>(null);
   const [newItemLabel, setNewItemLabel] = useState('');
 
   const { data: interviewStages } = useQuery<
@@ -91,7 +99,9 @@ const InterviewStage: React.FC<InterviewStageProps> = ({
       const formattedStages = interviewStages.map((stage: any) => ({
         id: stage.interviewStageId,
         label: stage.interviewStageName,
-        checked: itemsLeft.find(item => item.id === stage.interviewStageId)?.checked || false,
+        checked:
+          itemsLeft.find((item) => item.id === stage.interviewStageId)
+            ?.checked || false,
       }));
       setItemsLeft(formattedStages);
     }
@@ -104,8 +114,9 @@ const InterviewStage: React.FC<InterviewStageProps> = ({
   };
 
   const handleCheckboxChange = (id: number) => {
-    const newItems: InterviewStageItem[] = itemsLeft.map((item: InterviewStageItem) =>
-      item.id === id ? { ...item, checked: !item.checked } : item
+    const newItems: InterviewStageItem[] = itemsLeft.map(
+      (item: InterviewStageItem) =>
+        item.id === id ? { ...item, checked: !item.checked } : item
     );
     setItemsLeft(newItems);
 
@@ -139,12 +150,18 @@ const InterviewStage: React.FC<InterviewStageProps> = ({
     setDraggedItemLeft(item);
   };
 
-  const handleDragOverLeft = (e: DragEvent<HTMLSpanElement>, item: InterviewStageItem) => {
+  const handleDragOverLeft = (
+    e: DragEvent<HTMLSpanElement>,
+    item: InterviewStageItem
+  ) => {
     e.preventDefault();
     setHoveredItemLeft(item);
   };
 
-  const handleDropLeft = (e: DragEvent<HTMLSpanElement>, dropItem: InterviewStageItem) => {
+  const handleDropLeft = (
+    e: DragEvent<HTMLSpanElement>,
+    dropItem: InterviewStageItem
+  ) => {
     e.preventDefault();
     if (draggedItemLeft && dropItem.id !== draggedItemLeft.id) {
       const newItems = itemsLeft.map((item: InterviewStageItem) => {
@@ -167,12 +184,18 @@ const InterviewStage: React.FC<InterviewStageProps> = ({
     setDraggedItemRight(item);
   };
 
-  const handleDragOverRight = (e: DragEvent<HTMLSpanElement>, item: InterviewStageItem) => {
+  const handleDragOverRight = (
+    e: DragEvent<HTMLSpanElement>,
+    item: InterviewStageItem
+  ) => {
     e.preventDefault();
     setHoveredItemRight(item);
   };
 
-  const handleDropRight = (e: DragEvent<HTMLSpanElement>, dropItem: InterviewStageItem) => {
+  const handleDropRight = (
+    e: DragEvent<HTMLSpanElement>,
+    dropItem: InterviewStageItem
+  ) => {
     e.preventDefault();
     if (draggedItemRight && dropItem.id !== draggedItemRight.id) {
       const newItems = itemsRight.map((item: InterviewStageItem) => {
@@ -303,7 +326,10 @@ const InterviewStage: React.FC<InterviewStageProps> = ({
           </table>
         </div>
         <span>
-          <ArrowRight onClick={handleMoveToRight} className='cursor-pointer border' />
+          <ArrowRight
+            onClick={handleMoveToRight}
+            className='cursor-pointer border'
+          />
         </span>
         <div className='h-[200px] w-full overflow-y-auto lg:max-w-[655px] xl:max-w-[900px]'>
           <table className='w-full rounded-md bg-white lg:max-w-[650px] xl:max-w-[900px]'>
@@ -342,7 +368,7 @@ const InterviewStage: React.FC<InterviewStageProps> = ({
                         onDragLeave={() => setHoveredItemRight(null)}
                         className='cursor-pointer'
                       >
-                        <DotsSixVertical className='text-lightGrayColor'/>
+                        <DotsSixVertical className='text-lightGrayColor' />
                       </span>
                       <p className='text-twelve font-medium text-dropdownLabelColor'>
                         {item.label}

@@ -99,28 +99,28 @@ const Dropdownmenu: React.FC<DropdownMenuProps> = ({ control, name }) => {
       name={name}
       control={control}
       render={({ field }) => (
-        <div className="relative">
-          <div className="flex max-w-[156px] items-center justify-center rounded-md border border-dashed bg-white px-[14px] py-1">
+        <div className='relative'>
+          <div className='flex max-w-[156px] items-center justify-center rounded-md border border-dashed bg-white px-[14px] py-1'>
             <Button
-              type="button"
-              variant="withoutBorder"
-              size="dropdownsize"
-              className="text-twelve"
+              type='button'
+              variant='withoutBorder'
+              size='dropdownsize'
+              className='text-twelve'
               onClick={toggleDropdown}
             >
               <span>
-                <PlusCircle className="h-[160px]" />
+                <PlusCircle className='h-[160px]' />
               </span>
               Add
             </Button>
-            <span className="px-[8px] text-dropdownMenuBorderColor"> |</span>
+            <span className='px-[8px] text-dropdownMenuBorderColor'> |</span>
 
-            <p className="text-nowrap rounded-[4px] bg-dropdownSecondaryBg px-[4px] py-[2px] text-twelve">
+            <p className='text-nowrap rounded-[4px] bg-dropdownSecondaryBg px-[4px] py-[2px] text-twelve'>
               {(field.value || []).length} selected
             </p>
           </div>
 
-          <div className="relative z-0 flex">
+          <div className='relative z-0 flex'>
             <Tag
               selectedSkills={field.value || []}
               onRemoveSkill={(skill) =>
@@ -131,17 +131,17 @@ const Dropdownmenu: React.FC<DropdownMenuProps> = ({ control, name }) => {
             />
 
             {showNewSkillInput && (
-              <div className="relative mt-2 flex items-center">
+              <div className='relative mt-2 flex items-center'>
                 <input
-                  type="text"
+                  type='text'
                   value={newSkill}
                   onChange={handleNewSkillChange}
-                  placeholder="New skill"
-                  className="rounded border px-2 py-1"
+                  placeholder='New skill'
+                  className='rounded border px-2 py-1'
                   onKeyDown={handleKeyDown}
                 />
                 <Check
-                  className="absolute left-[205px] cursor-pointer"
+                  className='absolute left-[205px] cursor-pointer'
                   onClick={() => handleAddNewSkill(field)}
                 />
               </div>
@@ -151,25 +151,25 @@ const Dropdownmenu: React.FC<DropdownMenuProps> = ({ control, name }) => {
           {isOpen && (
             <div
               ref={dropdownRef}
-              className="absolute top-9 z-10 mt-2 h-[200px] max-w-[156px] overflow-y-auto overflow-x-hidden rounded-md border bg-white p-2 shadow-lg"
+              className='absolute top-9 z-10 mt-2 h-[200px] max-w-[156px] overflow-y-auto overflow-x-hidden rounded-md border bg-white p-2 shadow-lg'
             >
-              <div className="relative mb-2">
-                <MagnifyingGlass className="absolute left-1 top-1 text-placeholderColor" />
+              <div className='relative mb-2'>
+                <MagnifyingGlass className='absolute left-1 top-1 text-placeholderColor' />
                 <input
-                  type="text"
-                  name=""
-                  id=""
-                  placeholder="Status"
+                  type='text'
+                  name=''
+                  id=''
+                  placeholder='Status'
                   value={searchQuery}
                   onChange={handleSearchChange}
                   onKeyDown={handleKeyDown}
-                  className="w-full border-b pl-8 placeholder:text-placeholderColor"
+                  className='w-full border-b pl-8 placeholder:text-placeholderColor'
                 />
               </div>
               {filteredSkills.map((skill) => (
-                <div key={skill} className="flex items-center gap-2 p-2">
+                <div key={skill} className='flex items-center gap-2 p-2'>
                   <input
-                    type="checkbox"
+                    type='checkbox'
                     checked={(field.value || []).includes(skill)}
                     onChange={() =>
                       field.onChange(
@@ -180,15 +180,12 @@ const Dropdownmenu: React.FC<DropdownMenuProps> = ({ control, name }) => {
                           : [...(field.value || []), skill]
                       )
                     }
-                    className="h-4 w-4 cursor-pointer"
+                    className='h-4 w-4 cursor-pointer'
                   />
                   <span>{skill}</span>
                 </div>
               ))}
-              <div
-                className="mt-2 cursor-pointer p-2"
-                onClick={handleAddmore}
-              >
+              <div className='mt-2 cursor-pointer p-2' onClick={handleAddmore}>
                 <span>Add More</span>
               </div>
             </div>

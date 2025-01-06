@@ -4,8 +4,6 @@ import cn from '@/utils/cn';
 import InterviewStageDropdown from './interviewStageDropdown';
 import { RightTableProps } from '@/types/Job/type';
 
-
-
 const RightTable: React.FC<RightTableProps> = ({
   itemsRight,
   draggedItemRight,

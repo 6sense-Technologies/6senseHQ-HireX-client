@@ -1,7 +1,7 @@
 import { test, expect } from '@playwright/test';
 
 test('test', async ({ page }) => {
-  await page.goto('http://localhost:3000/login');
+  await page.goto('https://192.168.0.158:8000//login');
   await page.getByPlaceholder('Email Address').click();
   await page.getByPlaceholder('Email Address').fill('khanatik1176@gmail.com');
   await page.getByPlaceholder('Password').click();
@@ -10,9 +10,9 @@ test('test', async ({ page }) => {
 
   // Wait for navigation to complete and check if login was successful
   await page.waitForNavigation();
-  await expect(page).toHaveURL('http://localhost:3000/dashboard'); // Adjust the URL to match the post-login URL
+  await expect(page).toHaveURL('https://192.168.0.158:8000//dashboard'); // Adjust the URL to match the post-login URL
 
-  await page.goto('http://localhost:3000/create-job');
+  await page.goto('https://192.168.0.158:8000//create-job');
   await page.waitForSelector('.css-19bb58m');
   await page.locator('.css-19bb58m').first().click();
   await page.getByRole('option', { name: 'Software Engineer' }).click();
