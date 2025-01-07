@@ -15,26 +15,16 @@ import { useRouter } from 'next/navigation';
 import Loader from './loader';
 import { useSession } from 'next-auth/react';
 
-
 type TSidebarprop = {
   children: React.ReactNode;
 };
 
 const Sidebar: FC<TSidebarprop> = ({ children }) => {
+
+  const session = useSession();
   const router = useRouter();
 
-  const { data: session, status } = useSession();
-
-  const accessToken = localStorage.getItem('accessToken');
-
-  if (!accessToken) {
-    router.push('/login');
-    return <Loader />;
-  }
-
-  console.log(session);
-
-
+  if(session.status ==='authenticated'){ 
   return (
     <SidebarProvider>
       <div className='flex h-screen w-full'>
@@ -64,6 +54,17 @@ const Sidebar: FC<TSidebarprop> = ({ children }) => {
       </div>
     </SidebarProvider>
   );
+}
+else if(session.status =='unauthenticated')
+{
+  router.push('/login')
+  return <Loader/>
+}
+else 
+{
+  return <Loader/>
+}
+
 };
 
 export default Sidebar;

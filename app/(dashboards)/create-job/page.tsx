@@ -14,6 +14,8 @@ import {
 } from '@/api/Job/JobApi';
 import { useRouter } from 'next/navigation';
 import { JobDepartmentList, JobPositionList } from '@/types/Job/type';
+import { useSession } from 'next-auth/react';
+import Loader from '@/components/loader';
 
 const CreateJob = () => {
   const {
@@ -28,29 +30,7 @@ const CreateJob = () => {
   });
 
   const router = useRouter();
-
-  // useEffect(() => {
-  //   const checkToken = () => {
-  //     const token = localStorage.getItem('accessToken');
-  //     if (!token) {
-  //       router.push('/login');
-  //     }
-  //   };
-
-  //   checkToken();
-
-  //   const handleStorageChange = (event: StorageEvent) => {
-  //     if (event.key === 'accessToken') {
-  //       checkToken();
-  //     }
-  //   };
-
-  //   window.addEventListener('storage', handleStorageChange);
-
-  //   return () => {
-  //     window.removeEventListener('storage', handleStorageChange);
-  //   };
-  // }, [router]);
+  // const session = useSession();
 
   const { data: jobpositions } = useQuery<
     JobPositionList,
@@ -139,6 +119,8 @@ const CreateJob = () => {
       </form>
     </div>
   );
+
+
 };
 
 export default CreateJob;

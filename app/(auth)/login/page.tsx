@@ -16,10 +16,10 @@ import GoogleButton from './_components/googleButton';
 import OrDivider from './_components/orDivider';
 import ErrorCard from './_components/errorCard';
 import { useMutation } from '@tanstack/react-query';
-import { handleLogin } from '@/api/Auth/authApi';
 import { useDispatch } from 'react-redux';
 import { setAuthData } from '@/redux/slices/authSlice';
 import Loader from '@/components/loader';
+import { signIn, useSession } from 'next-auth/react';
 
 const Login = () => {
   const [passwordVisible, setPasswordVisible] = useState(false);
@@ -41,13 +41,22 @@ const Login = () => {
     setPasswordVisible(!passwordVisible);
   };
 
+  const session = useSession();
+
   const loginMutation = useMutation({
-    mutationFn: handleLogin,
+    mutationFn: async (data: LoginFormInputs) => {
+      const result = await signIn('credentials', {
+        redirect: false, // Prevent automatic redirection
+        email: data.email,
+        password: data.password,
+      });
+      if (result?.error) {
+        throw new Error(result.error);
+      }
+      return result;
+    },
     onSuccess: (data) => {
-      const { tokens, userInfo } = data;
-      dispatch(setAuthData({ tokens, userInfo }));
-      localStorage.setItem('accessToken', tokens.access_token);
-      localStorage.setItem('refreshToken', tokens.refresh_token);
+      // Handle successful login
       router.push('/dashboard');
     },
     onError: () => {
@@ -59,118 +68,114 @@ const Login = () => {
     loginMutation.mutate(data);
   };
 
-  const accessToken = localStorage.getItem('accessToken');
-
-  if(accessToken)
-  {
-    router.push('/dashboard');
-    return <Loader/>
-  }
-
-
-  console.log('errors of login page', errors);
-
-
-  return (
-    <div className='mx-8 flex min-h-screen items-center justify-center bg-white'>
-      <div className='w-full max-w-[384px] py-10'>
-        <div className='mx-auto'>
-          <div className='logo-area mb-2 flex justify-center'>
-            <Image src={Logo} alt='HireX Logo' />
-          </div>
-          <form
-            onSubmit={handleSubmit(handleSubmission)}
-            className='max-w-[384px] border-t-[4px] border-primary bg-pageBg p-[32px]'
-          >
-            <div>
-              <h1 className='text-headingXS font-bold text-textPrimary'>
-                Login
-              </h1>
-              <p className='text-[14px] text-subHeading'>
-                Continue with HireX
-              </p>
+  
+  if (session.status === 'unauthenticated') {
+    return (
+      <div className='mx-8 flex min-h-screen items-center justify-center bg-white'>
+        <div className='w-full max-w-[384px] py-10'>
+          <div className='mx-auto'>
+            <div className='logo-area mb-2 flex justify-center'>
+              <Image src={Logo} alt='HireX Logo' />
             </div>
-
-            <ErrorCard setErrorFlag={setErrorFlag} errorFlag={errorFlag} />
-
-            <div className='flex flex-col gap-2'>
-              <div className='mt-[32px]'>
-                <label htmlFor='email' className='text-sm text-textSecondary'>
-                  Email Address
-                </label>
-                <div className='inner-input-div mt-[4px]'>
-                  <Input
-                    control={control}
-                    placeholder='Email Address'
-                    name='email'
-                    errors={errors}
-                  />
-                </div>
+            <form
+              onSubmit={handleSubmit(handleSubmission)}
+              className='max-w-[384px] border-t-[4px] border-primary bg-pageBg p-[32px]'
+            >
+              <div>
+                <h1 className='text-headingXS font-bold text-textPrimary'>
+                  Login
+                </h1>
+                <p className='text-[14px] text-subHeading'>
+                  Continue with HireX
+                </p>
               </div>
 
-              <div className='mt-[16px]'>
-                <label
-                  htmlFor='password'
-                  className='text-sm text-textSecondary'
-                >
-                  Password
-                </label>
+              <ErrorCard setErrorFlag={setErrorFlag} errorFlag={errorFlag} />
 
-                <div className='relative'>
-                  <div className='mt-[4px]'>
+              <div className='flex flex-col gap-2'>
+                <div className='mt-[32px]'>
+                  <label htmlFor='email' className='text-sm text-textSecondary'>
+                    Email Address
+                  </label>
+                  <div className='inner-input-div mt-[4px]'>
                     <Input
                       control={control}
-                      type={passwordVisible ? 'text' : 'password'}
-                      name='password'
-                      placeholder='Password'
+                      placeholder='Email Address'
+                      name='email'
                       errors={errors}
                     />
-                    <button
-                      type='button'
-                      onClick={handlePasswordVisibility}
-                      className='absolute right-5 top-2.5'
-                    >
-                      {passwordVisible ? (
-                        <Eye size={20} className='text-xl text-subHeading' />
-                      ) : (
-                        <EyeSlash
-                          size={20}
-                          weight='bold'
-                          className='text-xl text-subHeading'
-                        />
-                      )}
-                    </button>
                   </div>
                 </div>
+
+                <div className='mt-[16px]'>
+                  <label
+                    htmlFor='password'
+                    className='text-sm text-textSecondary'
+                  >
+                    Password
+                  </label>
+
+                  <div className='relative'>
+                    <div className='mt-[4px]'>
+                      <Input
+                        control={control}
+                        type={passwordVisible ? 'text' : 'password'}
+                        name='password'
+                        placeholder='Password'
+                        errors={errors}
+                      />
+                      <button
+                        type='button'
+                        onClick={handlePasswordVisibility}
+                        className='absolute right-5 top-2.5'
+                      >
+                        {passwordVisible ? (
+                          <Eye size={20} className='text-xl text-subHeading' />
+                        ) : (
+                          <EyeSlash
+                            size={20}
+                            weight='bold'
+                            className='text-xl text-subHeading'
+                          />
+                        )}
+                      </button>
+                    </div>
+                  </div>
+                </div>
+                <div className='mb-[32px] mt-[16px] flex justify-end'>
+                  <Link
+                    href='/forgotpassword'
+                    className='text-forgotpassword px-2 text-sm text-textSecondary'
+                  >
+                    Forgot password?
+                  </Link>
+                </div>
               </div>
-              <div className='mb-[32px] mt-[16px] flex justify-end'>
-                <Link
-                  href='/forgotpassword'
-                  className='text-forgotpassword px-2 text-sm text-textSecondary'
-                >
-                  Forgot password?
-                </Link>
+
+              <div>
+                <Button variant={'primary'} size={'medium'} className='text-sm'>
+                  {loginMutation.isPending ? (
+                    <Circle className='animate-spin text-sm' />
+                  ) : (
+                    'Login'
+                  )}
+                </Button>
               </div>
-            </div>
 
-            <div>
-              <Button variant={'primary'} size={'medium'} className='text-sm'>
-                {loginMutation.isPending ? (
-                  <Circle className='animate-spin text-sm' />
-                ) : (
-                  'Login'
-                )}
-              </Button>
-            </div>
+              <OrDivider />
 
-            <OrDivider />
-
-            <GoogleButton />
-          </form>
+              <GoogleButton />
+            </form>
+          </div>
         </div>
       </div>
-    </div>
-  );
+    );
+  }
+  else
+  {
+    router.push('/dashboard');
+    return <Loader />;
+  }
 };
 
 export default Login;
