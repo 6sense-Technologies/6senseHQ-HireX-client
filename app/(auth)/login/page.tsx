@@ -68,7 +68,6 @@ const Login = () => {
     loginMutation.mutate(data);
   };
 
-  
   if (session.status === 'unauthenticated') {
     return (
       <div className='mx-8 flex min-h-screen items-center justify-center bg-white'>
@@ -170,9 +169,7 @@ const Login = () => {
         </div>
       </div>
     );
-  }
-  else
-  {
+  } else {
     router.push('/dashboard');
     return <Loader />;
   }

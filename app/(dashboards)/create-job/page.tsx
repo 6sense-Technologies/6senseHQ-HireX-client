@@ -30,7 +30,7 @@ const CreateJob = () => {
   });
 
   const router = useRouter();
-  // const session = useSession();
+  const session = useSession();
 
   const { data: jobpositions } = useQuery<
     JobPositionList,
@@ -119,8 +119,6 @@ const CreateJob = () => {
       </form>
     </div>
   );
-
-
 };
 
 export default CreateJob;

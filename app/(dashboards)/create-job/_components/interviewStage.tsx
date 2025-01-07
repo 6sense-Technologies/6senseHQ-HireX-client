@@ -1,6 +1,5 @@
 'use client';
 import {
-  DotsSixVertical,
   ArrowRight,
   Phone,
   PuzzlePiece,
@@ -8,6 +7,7 @@ import {
   VideoCamera,
   Trash,
   Plus,
+  DotsSixVertical,
 } from '@phosphor-icons/react';
 import React, { DragEvent, useEffect, useState } from 'react';
 import InterviewStageDropdown from './interviewStageDropdown';
@@ -67,10 +67,6 @@ const InterviewStage: React.FC<InterviewStageProps> = ({
   const [itemsLeft, setItemsLeft] = useState<InterviewStageItem[]>([]);
   const [itemsRight, setItemsRight] = useState<InterviewStageItem[]>([]);
   const [selectAll, setSelectAll] = useState(false);
-  const [draggedItemLeft, setDraggedItemLeft] =
-    useState<InterviewStageItem | null>(null);
-  const [hoveredItemLeft, setHoveredItemLeft] =
-    useState<InterviewStageItem | null>(null);
   const [draggedItemRight, setDraggedItemRight] =
     useState<InterviewStageItem | null>(null);
   const [hoveredItemRight, setHoveredItemRight] =
@@ -145,40 +141,6 @@ const InterviewStage: React.FC<InterviewStageProps> = ({
     );
   };
 
-  // Left Table Drag-and-Drop Functions
-  const handleDragStartLeft = (item: InterviewStageItem) => {
-    setDraggedItemLeft(item);
-  };
-
-  const handleDragOverLeft = (
-    e: DragEvent<HTMLSpanElement>,
-    item: InterviewStageItem
-  ) => {
-    e.preventDefault();
-    setHoveredItemLeft(item);
-  };
-
-  const handleDropLeft = (
-    e: DragEvent<HTMLSpanElement>,
-    dropItem: InterviewStageItem
-  ) => {
-    e.preventDefault();
-    if (draggedItemLeft && dropItem.id !== draggedItemLeft.id) {
-      const newItems = itemsLeft.map((item: InterviewStageItem) => {
-        if (item.id === dropItem.id) {
-          return draggedItemLeft;
-        }
-        if (item.id === draggedItemLeft.id) {
-          return dropItem;
-        }
-        return item;
-      });
-      setItemsLeft(newItems);
-    }
-    setDraggedItemLeft(null);
-    setHoveredItemLeft(null);
-  };
-
   // Right Table Drag-and-Drop Functions
   const handleDragStartRight = (item: InterviewStageItem) => {
     setDraggedItemRight(item);
@@ -198,17 +160,25 @@ const InterviewStage: React.FC<InterviewStageProps> = ({
   ) => {
     e.preventDefault();
     if (draggedItemRight && dropItem.id !== draggedItemRight.id) {
-      const newItems = itemsRight.map((item: InterviewStageItem) => {
-        if (item.id === dropItem.id) {
-          return draggedItemRight;
-        }
-        if (item.id === draggedItemRight.id) {
-          return dropItem;
-        }
-        return item;
-      });
-      setItemsRight(newItems);
+      const currentIndex = itemsRight.findIndex(
+        (item) => item.id === draggedItemRight.id
+      );
+      const dropIndex = itemsRight.findIndex((item) => item.id === dropItem.id);
+
+      const updatedItems = [...itemsRight];
+      updatedItems.splice(currentIndex, 1);
+
+      if (currentIndex < dropIndex) {
+        // Dragging item from top to bottom
+        updatedItems.splice(dropIndex, 0, draggedItemRight);
+      } else {
+        // Dragging item from bottom to top
+        updatedItems.splice(dropIndex, 0, draggedItemRight);
+      }
+
+      setItemsRight(updatedItems);
     }
+
     setDraggedItemRight(null);
     setHoveredItemRight(null);
   };
@@ -238,7 +208,7 @@ const InterviewStage: React.FC<InterviewStageProps> = ({
     setSelectAll(false);
   };
 
-  // Collected data from right table and formated the data as required
+  // Collected data from right table and formatted the data as required
   useEffect(() => {
     const formattedInterviewStages = itemsRight.map((item) => ({
       interviewStageName: item.label,
@@ -274,31 +244,14 @@ const InterviewStage: React.FC<InterviewStageProps> = ({
             </thead>
             <tbody>
               {itemsLeft.map((item) => (
-                <tr
-                  key={item.id}
-                  className={cn({
-                    'bg-blue-100 opacity-30': item.id === draggedItemLeft?.id,
-                    'border-2': item.id === hoveredItemLeft?.id,
-                    'border-gray-100': item.id !== hoveredItemLeft?.id,
-                  })}
-                >
-                  <td className='flex items-center gap-[8px] border-b py-[9px] pl-[17px]'>
+                <tr key={item.id}>
+                  <td className='flex items-center gap-[30px] border-b py-[9px] pl-[17px]'>
                     <input
                       type='checkbox'
                       checked={item.checked}
                       onChange={() => handleCheckboxChange(item.id)}
                       className='h-3'
                     />
-                    <span
-                      draggable
-                      onDragStart={() => handleDragStartLeft(item)}
-                      onDragOver={(e) => handleDragOverLeft(e, item)}
-                      onDrop={(e) => handleDropLeft(e, item)}
-                      onDragLeave={() => setHoveredItemLeft(null)}
-                      className='cursor-pointer'
-                    >
-                      <DotsSixVertical className='text-lightGrayColor' />
-                    </span>
                     <p className='text-twelve font-medium text-dropdownLabelColor'>
                       {item.label}
                     </p>

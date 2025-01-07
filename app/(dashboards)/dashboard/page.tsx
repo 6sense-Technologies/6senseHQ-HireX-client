@@ -14,9 +14,11 @@ const Page = () => {
     router.push('/login');
   };
 
-  // if (session.status === 'authenticated') {
-  //   localStorage.setItem('accessToken', session?.data?.accessToken as string);
-  // }
+  useEffect(() => {
+    if (session.status === 'authenticated' && session?.data?.accessToken) {
+      localStorage.setItem('accessToken', session?.data?.accessToken);
+    }
+  }, [session.status, session?.data?.accessToken]);
 
   if (session.status === 'authenticated') {
     return (

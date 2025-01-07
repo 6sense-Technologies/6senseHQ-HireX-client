@@ -47,17 +47,17 @@ const InterviewStageDropdown: React.FC<InterviewStageDropdownProps> = ({
         borderRadius: '200px',
         width: '120px',
         backgroundColor: backgroundColor,
-        boxShadow: 'none', // Remove box shadow
+        boxShadow: 'none',
         '&:hover': {
           borderColor: '',
         },
         '&:focus': {
-          borderColor: '', // Remove border color on focus
-          boxShadow: 'none', // Remove box shadow on focus
+          borderColor: '',
+          boxShadow: 'none',
         },
         '&:active': {
-          borderColor: '', // Remove border color on active
-          boxShadow: 'none', // Remove box shadow on active
+          borderColor: '',
+          boxShadow: 'none',
         },
       };
     },
@@ -112,6 +112,7 @@ const InterviewStageDropdown: React.FC<InterviewStageDropdownProps> = ({
               className={`text-nowrap text-twelve ${ClassName}`}
               styles={customStyles}
               isSearchable={false}
+              menuIsOpen={true}
             />
             {/* {fieldState.invalid && errors && (
               <span className='absolute mt-2 flex justify-start text-xs text-red-500'>
