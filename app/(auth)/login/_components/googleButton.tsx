@@ -7,6 +7,7 @@ const GoogleButton = () => {
   const handleGoogleSignIn = async (event: MouseEvent<HTMLButtonElement>) => {
     event.preventDefault();
     await signInWithGoogle();
+    localStorage.setItem('isGoogleSignIn', 'true');
   };
 
   return (

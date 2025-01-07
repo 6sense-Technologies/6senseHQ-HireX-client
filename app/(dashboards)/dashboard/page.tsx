@@ -8,7 +8,7 @@ import { useSession, signOut } from 'next-auth/react';
 
 const Page = () => {
   const router = useRouter();
-  const { data: session, status } = useSession();
+  const {data: session, status} = useSession();
   
   const userInfo = useSelector((state: RootState) => state.auth.userInfo);
 
@@ -16,12 +16,14 @@ const Page = () => {
   const sessiondata = session?.accessToken;
   console.log(sessiondata);
 
+  console.log('status', status);
+
 
   const accessToken = localStorage.getItem('accessToken');
 
   useEffect(() => {
     const initializeSession = async () => {
-      if (status === 'authenticated' && session?.accessToken) {
+      if (status === 'authenticated' && session && typeof session.accessToken === 'string') {
         localStorage.setItem('accessToken', session.accessToken);
       } 
       if (accessToken) {
@@ -36,6 +38,7 @@ const Page = () => {
       initializeSession();
     }
   }, [session, status, router, accessToken]);
+
 
 
   const handleLogout = async () => {

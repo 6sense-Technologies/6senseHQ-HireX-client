@@ -45,10 +45,11 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
     },
     async session({ session, token }) {
       session.accessToken = token.accessToken as string;
+      console.log(session);
       return session;
     },
     async redirect() {
-      return `/dashboard`;
+      return `/redirect`;
     },
   },
 });
