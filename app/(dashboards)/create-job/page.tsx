@@ -13,11 +13,16 @@ import {
   handleCreateJob,
 } from '@/api/Job/JobApi';
 import { useRouter } from 'next/navigation';
-import { JobDepartmentList, JobFormInputs, JobPositionList } from '@/types/Job/type';
+import {
+  JobDepartmentList,
+  JobFormInputs,
+  JobPositionList,
+} from '@/types/Job/type';
 import { useSession } from 'next-auth/react';
 import Loader from '@/components/loader';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { CreateJobSchema } from '@/Zodschema/jobSchema';
+import { Circle } from '@phosphor-icons/react';
 
 const CreateJob = () => {
   const {
@@ -33,7 +38,7 @@ const CreateJob = () => {
     },
   });
 
-    console.log("🚀 ~ CreateJob ~ getValues:", getValues())
+  console.log('🚀 ~ CreateJob ~ getValues:', getValues());
 
   const router = useRouter();
   const session = useSession();
@@ -121,8 +126,16 @@ const CreateJob = () => {
             >
               Cancel
             </Button>
-            <Button variant='lightBlue' className='h-[40px] w-[80px]' onClick={() => setIsButtonClicked(true)}>
-              Create
+            <Button
+              variant='lightBlue'
+              className='h-[40px] w-[80px]'
+              onClick={() => setIsButtonClicked(true)}
+            >
+              {createJobMutation.isPending ? (
+                <Circle className='animate-spin text-sm' />
+              ) : (
+                'Create'
+              )}
             </Button>
           </div>
         </div>

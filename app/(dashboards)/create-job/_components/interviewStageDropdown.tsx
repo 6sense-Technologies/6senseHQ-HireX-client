@@ -83,7 +83,6 @@ const InterviewStageDropdown: React.FC<InterviewStageDropdownProps> = ({
     indicatorsContainer: () => ({
       color: 'black',
       height: '24px',
-      
     }),
     menu: (provided: any) => ({
       ...provided,
@@ -94,7 +93,7 @@ const InterviewStageDropdown: React.FC<InterviewStageDropdownProps> = ({
     }),
     menuPortal: (provided: any) => ({
       ...provided,
-      zIndex: 9999, 
+      zIndex: 9999,
     }),
   };
 
@@ -121,7 +120,7 @@ const InterviewStageDropdown: React.FC<InterviewStageDropdownProps> = ({
               className={`text-nowrap text-twelve ${ClassName}`}
               styles={customStyles}
               isSearchable={false}
-              menuPortalTarget={document.body} 
+              menuPortalTarget={document.body}
               classNamePrefix={'select'}
             />
           </div>

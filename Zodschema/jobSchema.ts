@@ -1,8 +1,7 @@
 import { z } from 'zod';
 
 export const InterviewStageSchema = z.object({
-  interviewStageName: z
-  .string(),
+  interviewStageName: z.string(),
   interviewMedium: z
     .string()
     .min(1, { message: 'Interview medium is required.' }),
@@ -10,10 +9,10 @@ export const InterviewStageSchema = z.object({
 
 export const CreateJobSchema = z.object({
   jobPositionName: z
-    .string({ required_error: 'Job Position is required.' })
-    .min(1, { message: 'Job Position is required.' }),
+    .string({ required_error: 'Job position is required.' })
+    .min(1, { message: 'Job position is required.' }),
   vacancy: z
-    .string({ required_error: 'Vacancy is required.' })
+    .string({ required_error: 'No of vacancy is required.' })
     .min(1, { message: 'No of vacancy is required.' })
     .transform((val) => parseInt(val, 10))
     .refine((val) => !isNaN(val) && val > 0, {
@@ -21,10 +20,10 @@ export const CreateJobSchema = z.object({
     }),
   jobDepartmentName: z.string().optional(),
   jobResponsibility: z
-    .string({ required_error: 'Job responsibilities are required.' })
-    .min(1, { message: 'Job responsibilities are required.' }),
+    .string({ required_error: 'Job responsibilities is required.' })
+    .min(1, { message: 'Job responsibilities is required.' }),
   interviewStages: z
     .array(InterviewStageSchema)
-    .min(1, { message: 'Interview stages & medium are required.' }),
-    jobKeywords:z.array(z.string()).optional(),
+    .min(1, { message: 'Interview stages & medium is required.' }),
+  jobKeywords: z.array(z.string()).optional(),
 });

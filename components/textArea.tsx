@@ -36,7 +36,7 @@ const TextArea: FC<TextAreaProps> = ({
         ></textarea>
         <p className='absolute text-xs text-gray-400'>
           {errors?.[name] ? (
-            <span className='flex text-red-500 text-sm font-medium '>
+            <span className='flex text-sm font-medium text-red-500'>
               {errors?.[name]?.message}
             </span>
           ) : (

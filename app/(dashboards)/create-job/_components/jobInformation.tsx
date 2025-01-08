@@ -69,9 +69,7 @@ const JobInformation: React.FC<JobInformationProps> = ({
             htmlFor='vacancy'
             className={cn(
               'text-nowrap text-twelve font-medium',
-              errors?.vacancy
-                ? 'text-red-500'
-                : 'text-dropdownLabelColor'
+              errors?.vacancy ? 'text-red-500' : 'text-dropdownLabelColor'
             )}
           >
             No of Vacancy

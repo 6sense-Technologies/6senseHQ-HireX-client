@@ -310,12 +310,12 @@ const InterviewStage: React.FC<InterviewStageProps> = ({
                   {isButtonClicked && errors.interviewStages ? (
                     <>
                       <th className='flex max-w-[200px] justify-start py-[9px] pl-[40px]'>
-                        <p className='text-deepRedcolor text-twelve font-medium'>
-                          Interview Selected
+                        <p className='text-twelve font-medium text-deepRedcolor'>
+                          Selected Interview Stages
                         </p>
                       </th>
                       <th className='text-start'>
-                        <p className='text-deepRedcolor py-[9px] text-twelve font-medium'>
+                        <p className='py-[9px] text-twelve font-medium text-deepRedcolor'>
                           Interview Medium
                         </p>
                       </th>
@@ -423,12 +423,12 @@ const InterviewStage: React.FC<InterviewStageProps> = ({
       <div className='absolute bottom-[10px] left-[545px]'>
         <p className='bottom-3 right-[320px] text-xs text-gray-400'>
           <span className='flex text-sm font-medium text-red-500'>
-          {isButtonClicked && errors?.interviewStages?.message ? (
-              errors?.interviewStages?.message
-            ) :isButtonClicked && isInterviewMediumError ? (
-              'Interview Medium is required.'
-            ) : null}
-            </span>
+            {isButtonClicked && errors?.interviewStages?.message
+              ? errors?.interviewStages?.message
+              : isButtonClicked && isInterviewMediumError
+                ? 'Interview Medium is required.'
+                : null}
+          </span>
         </p>
       </div>
     </div>

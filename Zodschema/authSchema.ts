@@ -12,8 +12,6 @@ export const LoginSchema = z.object({
     .min(8, 'Password must be at least 8 characters long.'),
 });
 
-
-
 export const SignupSchema = z
   .object({
     name: z

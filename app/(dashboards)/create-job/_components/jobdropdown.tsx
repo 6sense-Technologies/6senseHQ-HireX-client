@@ -2,7 +2,6 @@
 import * as React from 'react';
 import { Controller, UseFormSetValue } from 'react-hook-form';
 import Select from 'react-select';
-import { Warning } from '@phosphor-icons/react';
 
 type OptionType = {
   value: string;
@@ -33,6 +32,7 @@ const JobDropdown: React.FC<DropdownProps> = ({
     control: (provided: any, state: any) => ({
       ...provided,
       borderColor: errors[name] ? 'red' : provided.borderColor,
+      boxShadow: state.isFocused && errors[name] ? '' : provided.boxShadow,
       '&:hover': {
         borderColor: errors[name] ? 'red' : provided.borderColor,
       },
@@ -76,7 +76,7 @@ const JobDropdown: React.FC<DropdownProps> = ({
               isSearchable={false}
             />
             {fieldState.invalid && errors && (
-              <span className='absolute mt-2 flex justify-start text-sm text-red-500 font-medium'>
+              <span className='absolute mt-2 flex justify-start text-sm font-medium text-red-500'>
                 {errors[name]?.message}
               </span>
             )}

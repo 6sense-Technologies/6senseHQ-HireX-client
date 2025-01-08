@@ -153,7 +153,7 @@ const Dropdownmenu: React.FC<DropdownMenuProps> = ({ control, name }) => {
               ref={dropdownRef}
               className='absolute top-9 z-10 mt-2 h-[200px] max-w-[156px] overflow-hidden rounded-md border bg-white shadow-lg'
             >
-              <div className='relative mb-2 pt-2 pl-2 pr-2'>
+              <div className='relative mb-2 pl-2 pr-2 pt-2'>
                 <MagnifyingGlass className='absolute left-1 top-1 text-placeholderColor' />
                 <input
                   type='text'
@@ -166,7 +166,10 @@ const Dropdownmenu: React.FC<DropdownMenuProps> = ({ control, name }) => {
               </div>
               <div className='h-[200px] overflow-y-auto'>
                 {filteredSkills.map((skill) => (
-                  <div key={skill} className='flex items-center gap-2 pb-2 pl-2 pr-2'>
+                  <div
+                    key={skill}
+                    className='flex items-center gap-2 pb-2 pl-2 pr-2'
+                  >
                     <input
                       type='checkbox'
                       checked={(field.value || []).includes(skill)}
@@ -189,7 +192,9 @@ const Dropdownmenu: React.FC<DropdownMenuProps> = ({ control, name }) => {
                 className='sticky bottom-0 w-full cursor-pointer border-t bg-white p-2'
                 onClick={handleAddmore}
               >
-                <span className='flex justify-center items-center'>Add More</span>
+                <span className='flex items-center justify-center'>
+                  Add More
+                </span>
               </div>
             </div>
           )}
