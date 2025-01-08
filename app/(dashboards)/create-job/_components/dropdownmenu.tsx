@@ -151,14 +151,12 @@ const Dropdownmenu: React.FC<DropdownMenuProps> = ({ control, name }) => {
           {isOpen && (
             <div
               ref={dropdownRef}
-              className='absolute top-9 z-10 mt-2 h-[200px] max-w-[156px] overflow-y-auto overflow-x-hidden rounded-md border bg-white p-2 shadow-lg'
+              className='absolute top-9 z-10 mt-2 h-[200px] max-w-[156px] overflow-hidden rounded-md border bg-white shadow-lg'
             >
-              <div className='relative mb-2'>
+              <div className='relative mb-2 pt-2 pl-2 pr-2'>
                 <MagnifyingGlass className='absolute left-1 top-1 text-placeholderColor' />
                 <input
                   type='text'
-                  name=''
-                  id=''
                   placeholder='Status'
                   value={searchQuery}
                   onChange={handleSearchChange}
@@ -166,27 +164,32 @@ const Dropdownmenu: React.FC<DropdownMenuProps> = ({ control, name }) => {
                   className='w-full border-b pl-8 placeholder:text-placeholderColor'
                 />
               </div>
-              {filteredSkills.map((skill) => (
-                <div key={skill} className='flex items-center gap-2 p-2'>
-                  <input
-                    type='checkbox'
-                    checked={(field.value || []).includes(skill)}
-                    onChange={() =>
-                      field.onChange(
-                        (field.value || []).includes(skill)
-                          ? (field.value || []).filter(
-                              (s: string) => s !== skill
-                            )
-                          : [...(field.value || []), skill]
-                      )
-                    }
-                    className='h-4 w-4 cursor-pointer'
-                  />
-                  <span>{skill}</span>
-                </div>
-              ))}
-              <div className='mt-2 cursor-pointer p-2' onClick={handleAddmore}>
-                <span>Add More</span>
+              <div className='h-[200px] overflow-y-auto'>
+                {filteredSkills.map((skill) => (
+                  <div key={skill} className='flex items-center gap-2 pb-2 pl-2 pr-2'>
+                    <input
+                      type='checkbox'
+                      checked={(field.value || []).includes(skill)}
+                      onChange={() =>
+                        field.onChange(
+                          (field.value || []).includes(skill)
+                            ? (field.value || []).filter(
+                                (s: string) => s !== skill
+                              )
+                            : [...(field.value || []), skill]
+                        )
+                      }
+                      className='h-4 w-4 cursor-pointer'
+                    />
+                    <span>{skill}</span>
+                  </div>
+                ))}
+              </div>
+              <div
+                className='sticky bottom-0 w-full cursor-pointer border-t bg-white p-2'
+                onClick={handleAddmore}
+              >
+                <span className='flex justify-center items-center'>Add More</span>
               </div>
             </div>
           )}

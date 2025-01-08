@@ -46,6 +46,7 @@ const InterviewStageDropdown: React.FC<InterviewStageDropdownProps> = ({
         borderColor: errors[name] ? 'red' : '',
         borderRadius: '200px',
         width: '120px',
+        height: '0px',
         backgroundColor: backgroundColor,
         boxShadow: 'none',
         '&:hover': {
@@ -86,6 +87,11 @@ const InterviewStageDropdown: React.FC<InterviewStageDropdownProps> = ({
       borderRadius: '0.375rem',
       width: '120px',
       color: 'black',
+      zIndex: 9999,
+    }),
+    menuPortal: (provided: any) => ({
+      ...provided,
+      zIndex: 9999, 
     }),
   };
 
@@ -112,14 +118,8 @@ const InterviewStageDropdown: React.FC<InterviewStageDropdownProps> = ({
               className={`text-nowrap text-twelve ${ClassName}`}
               styles={customStyles}
               isSearchable={false}
-              menuIsOpen={true}
+              menuPortalTarget={document.body} 
             />
-            {/* {fieldState.invalid && errors && (
-              <span className='absolute mt-2 flex justify-start text-xs text-red-500'>
-                <Warning className='mr-1 mt-[1px]' />
-                {errors[name]?.message}
-              </span>
-            )} */}
           </div>
         </div>
       )}
