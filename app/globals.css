@@ -32,3 +32,14 @@
   resize: both; /* Allows resizing both horizontally and vertically */
   overflow: auto; /* Ensures scrollbars appear when needed */
 }
+
+.select__value-container
+{
+  bottom: 2px;
+}
+
+.select__indicator,.select__dropdown-indicator
+{
+  padding-right: 8px !important;
+  padding-top: 0px !important;
+}

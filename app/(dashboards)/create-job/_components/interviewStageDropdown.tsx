@@ -46,7 +46,8 @@ const InterviewStageDropdown: React.FC<InterviewStageDropdownProps> = ({
         borderColor: errors[name] ? 'red' : '',
         borderRadius: '200px',
         width: '120px',
-        height: '0px',
+        height: '24px',
+        minHeight: '24px',
         backgroundColor: backgroundColor,
         boxShadow: 'none',
         '&:hover': {
@@ -81,6 +82,8 @@ const InterviewStageDropdown: React.FC<InterviewStageDropdownProps> = ({
     }),
     indicatorsContainer: () => ({
       color: 'black',
+      height: '24px',
+      
     }),
     menu: (provided: any) => ({
       ...provided,
@@ -119,6 +122,7 @@ const InterviewStageDropdown: React.FC<InterviewStageDropdownProps> = ({
               styles={customStyles}
               isSearchable={false}
               menuPortalTarget={document.body} 
+              classNamePrefix={'select'}
             />
           </div>
         </div>
