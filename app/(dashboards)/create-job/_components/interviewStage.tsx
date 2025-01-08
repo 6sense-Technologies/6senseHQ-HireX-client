@@ -62,6 +62,7 @@ const InterviewStage: React.FC<InterviewStageProps> = ({
   control,
   errors,
   setValue,
+  isButtonClicked,
 }) => {
   const queryClient = useQueryClient();
   const [itemsLeft, setItemsLeft] = useState<InterviewStageItem[]>([]);
@@ -72,6 +73,13 @@ const InterviewStage: React.FC<InterviewStageProps> = ({
   const [hoveredItemRight, setHoveredItemRight] =
     useState<InterviewStageItem | null>(null);
   const [newItemLabel, setNewItemLabel] = useState('');
+
+  const isInterviewMediumError = errors?.interviewStages?.length
+    ? errors?.interviewStages?.some(
+        (item: any) => item.interviewMedium?.message
+      )
+    : false;
+  console.log('🚀 ~ isInterviewMediumError:', isInterviewMediumError);
 
   const { data: interviewStages } = useQuery<
     InterViewStageList,
@@ -211,14 +219,19 @@ const InterviewStage: React.FC<InterviewStageProps> = ({
   // Collected data from right table and formatted the data as required
   useEffect(() => {
     const formattedInterviewStages = itemsRight.map((item) => ({
+      id: item.id,
       interviewStageName: item.label,
       interviewMedium: item.interviewMedium,
     }));
-    setValue('interviewStages', formattedInterviewStages);
+    setValue('interviewStages', formattedInterviewStages, {
+      shouldValidate: true,
+    });
   }, [itemsRight, setValue]);
 
+  console.log('right', itemsRight);
+
   return (
-    <div className='mt-[32px] rounded-2xl bg-jobBg'>
+    <div className='relative mt-[32px] rounded-2xl bg-jobBg'>
       <div>
         <h1 className='pl-[48px] pt-[38px] text-headingXXS font-semibold'>
           Interview Stages
@@ -227,7 +240,7 @@ const InterviewStage: React.FC<InterviewStageProps> = ({
       <div className='flex w-full items-center gap-[8px] pb-[38px] pl-[47px] pr-[38px] pt-[16px]'>
         <div className='h-[200px] w-full overflow-y-auto lg:max-w-[409px] xl:max-w-[605px]'>
           <table className='w-full rounded-md bg-white lg:max-w-[405px] xl:max-w-[600px]'>
-            <thead>
+            <thead className='sticky top-0 z-10 bg-white'>
               <tr>
                 <th className='flex items-center gap-[30px] border-b py-[9px] pl-[17px]'>
                   <input
@@ -284,82 +297,139 @@ const InterviewStage: React.FC<InterviewStageProps> = ({
             className='cursor-pointer border'
           />
         </span>
-        <div className='h-[200px] w-full overflow-y-auto lg:max-w-[655px] xl:max-w-[900px]'>
-          <table className='w-full rounded-md bg-white lg:max-w-[650px] xl:max-w-[900px]'>
-            <thead>
-              <tr className='border-b'>
-                <th className='flex max-w-[200px] justify-start py-[9px] pl-[40px]'>
-                  <p className='text-twelve font-medium text-placeholderColor'>
-                    Interview Selected
-                  </p>
-                </th>
-                <th className='text-start'>
-                  <p className='py-[9px] text-twelve font-medium text-placeholderColor'>
-                    Interview Medium
-                  </p>
-                </th>
-                <th className=''></th>
-              </tr>
-            </thead>
-            <tbody>
-              {itemsRight.map((item) => (
-                <tr
-                  key={item.id}
-                  className={cn('border-b', {
-                    'bg-blue-100 opacity-30': item.id === draggedItemRight?.id,
-                    'border-2': item.id === hoveredItemRight?.id,
-                    'border-gray-100': item.id !== hoveredItemRight?.id,
-                  })}
-                >
-                  <td className='flex items-center justify-between py-[9px] pl-[17px]'>
-                    <div className='flex items-center gap-[8px]'>
-                      <span
-                        draggable
-                        onDragStart={() => handleDragStartRight(item)}
-                        onDragOver={(e) => handleDragOverRight(e, item)}
-                        onDrop={(e) => handleDropRight(e, item)}
-                        onDragLeave={() => setHoveredItemRight(null)}
-                        className='cursor-pointer'
-                      >
-                        <DotsSixVertical className='text-lightGrayColor' />
-                      </span>
-                      <p className='text-twelve font-medium text-dropdownLabelColor'>
-                        {item.label}
-                      </p>
-                    </div>
-                  </td>
-                  <td className='py-1'>
-                    <InterviewStageDropdown
-                      name={`interviewMedium[${item.id}]`}
-                      control={control}
-                      value={item.interviewMedium}
-                      onChange={(value) => {
-                        const newItemsRight = itemsRight.map((rightItem) =>
-                          rightItem.id === item.id
-                            ? { ...rightItem, interviewMedium: value }
-                            : rightItem
-                        );
-                        setItemsRight(newItemsRight);
-                      }}
-                      options={interviewStageOptions}
-                      errors={{}}
-                      placeholder='Select'
-                      ClassName=''
-                    />
-                  </td>
-                  <td>
-                    <span
-                      className='cursor-pointer'
-                      onClick={() => removeItem(item.id)}
-                    >
-                      <Trash size={20} />
-                    </span>
-                  </td>
+        {itemsRight.length === 0 ? (
+          <div
+            className={cn(
+              'relative h-[200px] w-full overflow-y-auto border bg-white lg:max-w-[655px] xl:max-w-[900px]',
+              { 'border-red-500': isButtonClicked && errors?.interviewStages }
+            )}
+          >
+            <table className='w-full rounded-md bg-white lg:max-w-[650px] xl:max-w-[900px]'>
+              <thead className='sticky top-0 z-10 bg-white'>
+                <tr className='border-b'>
+                  {isButtonClicked && errors.interviewStages ? (
+                    <>
+                      <th className='flex max-w-[200px] justify-start py-[9px] pl-[40px]'>
+                        <p className='text-deepRedcolor text-twelve font-medium'>
+                          Interview Selected
+                        </p>
+                      </th>
+                      <th className='text-start'>
+                        <p className='text-deepRedcolor py-[9px] text-twelve font-medium'>
+                          Interview Medium
+                        </p>
+                      </th>
+                    </>
+                  ) : (
+                    <>
+                      <th className='flex max-w-[200px] justify-start py-[9px] pl-[40px]'>
+                        <p className='text-twelve font-medium text-placeholderColor'>
+                          Interview Selected
+                        </p>
+                      </th>
+                      <th className='text-start'>
+                        <p className='py-[9px] text-twelve font-medium text-placeholderColor'>
+                          Interview Medium
+                        </p>
+                      </th>
+                    </>
+                  )}
+                  <th className=''></th>
                 </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
+              </thead>
+              <tbody></tbody>
+            </table>
+          </div>
+        ) : (
+          <div className='h-[200px] w-full overflow-y-auto lg:max-w-[655px] xl:max-w-[900px]'>
+            <table className='w-full rounded-md bg-white lg:max-w-[650px] xl:max-w-[900px]'>
+              <thead className='sticky top-0 z-10 bg-white'>
+                <tr className='border-b'>
+                  <th className='flex max-w-[200px] justify-start py-[9px] pl-[40px]'>
+                    <p className='text-twelve font-medium text-placeholderColor'>
+                      Interview Selected
+                    </p>
+                  </th>
+                  <th className='text-start'>
+                    <p className='py-[9px] text-twelve font-medium text-placeholderColor'>
+                      Interview Medium
+                    </p>
+                  </th>
+                  <th className=''></th>
+                </tr>
+              </thead>
+              <tbody>
+                {itemsRight.map((item) => (
+                  <tr
+                    key={item.id}
+                    className={cn('border-b', {
+                      'bg-blue-100 opacity-30':
+                        item.id === draggedItemRight?.id,
+                      'border-2': item.id === hoveredItemRight?.id,
+                      'border-gray-100': item.id !== hoveredItemRight?.id,
+                    })}
+                  >
+                    <td className='flex items-center justify-between py-[9px] pl-[17px]'>
+                      <div className='flex items-center gap-[8px]'>
+                        <span
+                          draggable
+                          onDragStart={() => handleDragStartRight(item)}
+                          onDragOver={(e) => handleDragOverRight(e, item)}
+                          onDrop={(e) => handleDropRight(e, item)}
+                          onDragLeave={() => setHoveredItemRight(null)}
+                          className='cursor-pointer'
+                        >
+                          <DotsSixVertical className='text-lightGrayColor' />
+                        </span>
+                        <p className='text-twelve font-medium text-dropdownLabelColor'>
+                          {item.label}
+                        </p>
+                      </div>
+                    </td>
+                    <td className='py-1'>
+                      <InterviewStageDropdown
+                        name={`interviewMedium[${item.id}]`}
+                        control={control}
+                        value={item.interviewMedium}
+                        onChange={(value) => {
+                          const newItemsRight = itemsRight.map((rightItem) =>
+                            rightItem.id === item.id
+                              ? { ...rightItem, interviewMedium: value }
+                              : rightItem
+                          );
+                          setItemsRight(newItemsRight);
+                        }}
+                        options={interviewStageOptions}
+                        errors={{}}
+                        placeholder='Select'
+                        ClassName=''
+                      />
+                    </td>
+                    <td>
+                      <span
+                        className='cursor-pointer'
+                        onClick={() => removeItem(item.id)}
+                      >
+                        <Trash size={20} />
+                      </span>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        )}
+      </div>
+      <div className='absolute bottom-[10px] left-[545px]'>
+        <p className='bottom-3 right-[320px] text-xs text-gray-400'>
+          <span className='flex text-sm font-medium text-red-500'>
+          {isButtonClicked && errors?.interviewStages?.message ? (
+              errors?.interviewStages?.message
+            ) :isButtonClicked && isInterviewMediumError ? (
+              'Interview Medium is required.'
+            ) : null}
+            </span>
+        </p>
       </div>
     </div>
   );

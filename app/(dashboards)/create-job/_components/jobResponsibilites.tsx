@@ -21,7 +21,7 @@ const JobResponsibilites: React.FC<JobResponsibilitiesProps> = ({
           render={({ field }) => (
             <TextArea
               {...field}
-              errors={errors.jobResponsibilities?.message}
+              errors={errors}
               placeholder='Type Job Responsibilities'
               className='mt-[16px] h-[207px] resize bg-transparent px-[12px] pt-[10px] placeholder:text-placeholderColor lg:max-w-[1082px] xl:max-w-[1632px]'
             />

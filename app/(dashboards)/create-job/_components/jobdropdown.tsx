@@ -76,8 +76,7 @@ const JobDropdown: React.FC<DropdownProps> = ({
               isSearchable={false}
             />
             {fieldState.invalid && errors && (
-              <span className='absolute mt-2 flex justify-start text-xs text-red-500'>
-                <Warning className='mr-1 mt-[1px]' />
+              <span className='absolute mt-2 flex justify-start text-sm text-red-500 font-medium'>
                 {errors[name]?.message}
               </span>
             )}

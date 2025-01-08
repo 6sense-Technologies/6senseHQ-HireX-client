@@ -1,5 +1,5 @@
 'use client';
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { Button } from '@/components/ui/button';
 import JobInformation from './_components/jobInformation';
@@ -13,24 +13,31 @@ import {
   handleCreateJob,
 } from '@/api/Job/JobApi';
 import { useRouter } from 'next/navigation';
-import { JobDepartmentList, JobPositionList } from '@/types/Job/type';
+import { JobDepartmentList, JobFormInputs, JobPositionList } from '@/types/Job/type';
 import { useSession } from 'next-auth/react';
 import Loader from '@/components/loader';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { CreateJobSchema } from '@/Zodschema/jobSchema';
 
 const CreateJob = () => {
   const {
     handleSubmit,
     setValue,
+    getValues,
     control,
     formState: { errors },
-  } = useForm<any>({
+  } = useForm<JobFormInputs>({
+    resolver: zodResolver(CreateJobSchema),
     defaultValues: {
       interviewStages: [],
     },
   });
 
+    console.log("🚀 ~ CreateJob ~ getValues:", getValues())
+
   const router = useRouter();
   const session = useSession();
+  const [isButtonClicked, setIsButtonClicked] = useState(false);
 
   const { data: jobpositions } = useQuery<
     JobPositionList,
@@ -77,6 +84,8 @@ const CreateJob = () => {
     createJobMutation.mutate(filteredData);
   };
 
+  console.log('errors', errors);
+
   return (
     <div className='bg-white px-[16px]'>
       <form className='pb-28' onSubmit={handleSubmit(handleSubmission)}>
@@ -95,6 +104,7 @@ const CreateJob = () => {
             control={control}
             setValue={setValue}
             errors={errors}
+            isButtonClicked={isButtonClicked}
           />
 
           {/* Job Responsibilites Area */}
@@ -111,7 +121,7 @@ const CreateJob = () => {
             >
               Cancel
             </Button>
-            <Button variant='lightBlue' className='h-[40px] w-[80px]'>
+            <Button variant='lightBlue' className='h-[40px] w-[80px]' onClick={() => setIsButtonClicked(true)}>
               Create
             </Button>
           </div>

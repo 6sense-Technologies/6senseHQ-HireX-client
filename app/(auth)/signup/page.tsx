@@ -9,7 +9,7 @@ import { Button } from '@/components/ui/button';
 import { useRouter } from 'next/navigation';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useState } from 'react';
-import { SignupSchema } from '@/Zodschema/signupSchema';
+import { SignupSchema } from '@/Zodschema/authSchema';
 import { SingupFormInputs } from '@/types/Auth/types';
 import Dropdown from '@/components/dropdown';
 import { Input } from '@/components/ui/input';

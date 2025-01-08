@@ -1,4 +1,5 @@
 import { DragEvent } from 'react';
+import { UseFormSetValue } from 'react-hook-form';
 
 export type interviewStageInputTypes = {
   interviewStageName: string;
@@ -66,7 +67,7 @@ export interface JobDepartments {
 export type JobInformationProps = {
   control: any;
   errors: any;
-  setValue: (name: string, value: any) => void;
+  setValue: UseFormSetValue<JobFormInputs>;
   jobPositionOptions: { label: string; value: string }[];
   departmentOptions: { label: string; value: string }[];
 };
@@ -74,7 +75,8 @@ export type JobInformationProps = {
 export type InterviewStageProps = {
   control: any;
   errors: any;
-  setValue: (name: string, value: any) => void;
+  setValue: UseFormSetValue<JobFormInputs>;
+  isButtonClicked: boolean;
 };
 
 export type IdealCandidatesProps = {
@@ -87,4 +89,13 @@ export type InterviewStageItem = {
   interviewMedium?: string;
   label?: string;
   checked?: boolean;
+};
+
+export type JobFormInputs = {
+  jobPositionName: string;
+  jobDepartmentName?: string;
+  vacancy: string;
+  interviewStages?: InterviewStageItem[];
+  jobResponsibilities?: string;
+  idealCandidate?: string;
 };

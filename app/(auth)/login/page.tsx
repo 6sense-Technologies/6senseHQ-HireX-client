@@ -9,7 +9,7 @@ import { Button } from '@/components/ui/button';
 import { useRouter } from 'next/navigation';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useState } from 'react';
-import { LoginSchema } from '@/Zodschema/loginSchema';
+import { LoginSchema } from '@/Zodschema/authSchema';
 import { LoginFormInputs } from '@/types/Auth/types';
 import { Input } from '@/components/ui/input';
 import GoogleButton from './_components/googleButton';

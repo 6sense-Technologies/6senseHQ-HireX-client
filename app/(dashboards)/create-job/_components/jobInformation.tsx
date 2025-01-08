@@ -2,6 +2,7 @@ import { Input } from '@/components/ui/input';
 import { JobInformationProps } from '@/types/Job/type';
 import React from 'react';
 import JobDropdown from './jobdropdown';
+import cn from '@/utils/cn';
 
 const JobInformation: React.FC<JobInformationProps> = ({
   control,
@@ -22,7 +23,12 @@ const JobInformation: React.FC<JobInformationProps> = ({
         <div className='w-full'>
           <label
             htmlFor='jobPositionName'
-            className='text-nowrap text-twelve font-medium text-dropdownLabelColor'
+            className={cn(
+              'text-nowrap text-twelve font-medium',
+              errors?.jobPositionName
+                ? 'text-red-500'
+                : 'text-dropdownLabelColor'
+            )}
           >
             Job Position
           </label>
@@ -61,7 +67,12 @@ const JobInformation: React.FC<JobInformationProps> = ({
         <div className='w-full'>
           <label
             htmlFor='vacancy'
-            className='text-nowrap text-twelve font-medium text-dropdownLabelColor'
+            className={cn(
+              'text-nowrap text-twelve font-medium',
+              errors?.vacancy
+                ? 'text-red-500'
+                : 'text-dropdownLabelColor'
+            )}
           >
             No of Vacancy
           </label>
