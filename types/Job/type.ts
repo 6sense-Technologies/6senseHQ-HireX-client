@@ -99,3 +99,12 @@ export type JobFormInputs = {
   jobResponsibilities?: string;
   idealCandidate?: string;
 };
+
+export type TJobList = Joblist[]
+
+export interface Joblist {
+  jobPosition: string
+  createdAt: string
+  createdBy: string
+  numberOfVacancies: number
+}

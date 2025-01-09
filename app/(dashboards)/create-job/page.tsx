@@ -19,7 +19,6 @@ import {
   JobPositionList,
 } from '@/types/Job/type';
 import { useSession } from 'next-auth/react';
-import Loader from '@/components/loader';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { CreateJobSchema } from '@/Zodschema/jobSchema';
 import { Circle } from '@phosphor-icons/react';
@@ -28,7 +27,6 @@ const CreateJob = () => {
   const {
     handleSubmit,
     setValue,
-    getValues,
     control,
     formState: { errors },
   } = useForm<JobFormInputs>({
@@ -38,11 +36,12 @@ const CreateJob = () => {
     },
   });
 
-  console.log('🚀 ~ CreateJob ~ getValues:', getValues());
-
   const router = useRouter();
   const session = useSession();
   const [isButtonClicked, setIsButtonClicked] = useState(false);
+  const [showAlert, setShowAlert] = useState(false);
+  console.log('🚀 ~ CreateJob ~ showAlert:', showAlert);
+  const [isReloadConfirmed, setIsReloadConfirmed] = useState(false);
 
   const { data: jobpositions } = useQuery<
     JobPositionList,
@@ -83,19 +82,24 @@ const CreateJob = () => {
     },
   });
 
+  useEffect(() => {
+    const handleBeforeUnload = (e: BeforeUnloadEvent) => {
+      e.preventDefault();
+    };
+    window.addEventListener('beforeunload', handleBeforeUnload);
+    return () => {
+      window.removeEventListener('beforeunload', handleBeforeUnload);
+    };
+  }, []);
+
   const handleSubmission: SubmitHandler<any> = (data) => {
-    const { interviewMedium, ...filteredData } = data;
-
-    createJobMutation.mutate(filteredData);
+      createJobMutation.mutate(data);
   };
-
-  console.log('errors', errors);
 
   return (
     <div className='bg-white px-[16px]'>
       <form className='pb-28' onSubmit={handleSubmit(handleSubmission)}>
         <div className='min-h-screen'>
-          {/* Job Information Area*/}
           <JobInformation
             control={control}
             errors={errors}
@@ -103,21 +107,14 @@ const CreateJob = () => {
             jobPositionOptions={jobPositionOptions}
             departmentOptions={departmentOptions}
           />
-
-          {/* Interview Stage Area  */}
           <InterviewStage
             control={control}
             setValue={setValue}
             errors={errors}
             isButtonClicked={isButtonClicked}
           />
-
-          {/* Job Responsibilites Area */}
           <JobResponsibilites control={control} errors={errors} />
-
-          {/* Ideal Candidate Area */}
           <IdealCandidates control={control} errors={errors} />
-
           <div className='mt-[30px] flex justify-end gap-[16px]'>
             <Button
               variant='blackwhite'
