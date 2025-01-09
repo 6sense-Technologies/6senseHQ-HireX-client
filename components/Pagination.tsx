@@ -1,6 +1,6 @@
-import React, { FC } from "react";
-import { CaretLeft, CaretRight, DotsThree } from "@phosphor-icons/react";
-import { useRouter } from "next/navigation";
+import React, { FC } from 'react';
+import { CaretLeft, CaretRight, DotsThree } from '@phosphor-icons/react';
+import { useRouter } from 'next/navigation';
 
 type PaginationProps = {
   page: number;
@@ -34,7 +34,7 @@ const Pagination: FC<PaginationProps> = ({
       // console.log(items);
       setItems(items);
       router.push(
-        `/products?search=${searchText}&status=${status || ""}&page=${newPage}`
+        `/products?search=${searchText}&status=${status || ''}&page=${newPage}`
       );
     }
   };
@@ -53,7 +53,7 @@ const Pagination: FC<PaginationProps> = ({
       setItems(items);
 
       router.push(
-        `/products?search=${searchText}&status=${status || ""}&page=${newPage}`
+        `/products?search=${searchText}&status=${status || ''}&page=${newPage}`
       );
     }
   };
@@ -61,7 +61,7 @@ const Pagination: FC<PaginationProps> = ({
   const handlePageClick = (pageNumber: number) => {
     setPage(pageNumber);
     router.push(
-      `/products?search=${searchText}&status=${status || ""}&page=${pageNumber}`
+      `/products?search=${searchText}&status=${status || ''}&page=${pageNumber}`
     );
   };
 
@@ -74,7 +74,7 @@ const Pagination: FC<PaginationProps> = ({
         key={`page-1`}
         onClick={() => handlePageClick(1)}
         className={`mx-4 text-sm ${
-          page === 1 ? "text-blue-500" : "text-subheading"
+          page === 1 ? 'text-blue-500' : 'text-subheading'
         }`}
       >
         1
@@ -89,7 +89,7 @@ const Pagination: FC<PaginationProps> = ({
             key={`page-${i}`}
             onClick={() => handlePageClick(i)}
             className={`mx-4 text-sm ${
-              page === i ? "text-blue-500" : "text-subheading"
+              page === i ? 'text-blue-500' : 'text-subheading'
             }`}
           >
             {i}
@@ -101,9 +101,9 @@ const Pagination: FC<PaginationProps> = ({
       if (totalPage > 5) {
         pages.push(
           <DotsThree
-            key="dots-end"
+            key='dots-end'
             size={16}
-            className="mx-1 mt-1 text-subheading"
+            className='text-subheading mx-1 mt-1'
           />
         );
       }
@@ -112,9 +112,9 @@ const Pagination: FC<PaginationProps> = ({
       if (page > 4) {
         pages.push(
           <DotsThree
-            key="dots-start"
+            key='dots-start'
             size={16}
-            className="mx-1 mt-1 text-subheading"
+            className='text-subheading mx-1 mt-1'
           />
         );
       }
@@ -126,7 +126,7 @@ const Pagination: FC<PaginationProps> = ({
             key={`page-before-${i}`} // Ensure unique keys for "before" pages
             onClick={() => handlePageClick(i)}
             className={`mx-4 text-sm ${
-              page === i ? "text-blue-500" : "text-subheading"
+              page === i ? 'text-blue-500' : 'text-subheading'
             }`}
           >
             {i}
@@ -152,7 +152,7 @@ const Pagination: FC<PaginationProps> = ({
             key={`page-after-${i}`} // Ensure unique keys for "after" pages
             onClick={() => handlePageClick(i)}
             className={`mx-4 text-sm ${
-              page === i ? "text-blue-500" : "text-subheading"
+              page === i ? 'text-blue-500' : 'text-subheading'
             }`}
           >
             {i}
@@ -164,9 +164,9 @@ const Pagination: FC<PaginationProps> = ({
       if (page < totalPage - 2) {
         pages.push(
           <DotsThree
-            key="dots-end"
+            key='dots-end'
             size={16}
-            className="mx-1 mt-1 text-subheading"
+            className='text-subheading mx-1 mt-1'
           />
         );
       }
@@ -179,7 +179,7 @@ const Pagination: FC<PaginationProps> = ({
           key={`page-last-${totalPage}`} // Ensure unique key for the last page
           onClick={() => handlePageClick(totalPage)}
           className={`mx-4 text-sm ${
-            page === totalPage ? "text-blue-500" : "text-subheading"
+            page === totalPage ? 'text-blue-500' : 'text-subheading'
           }`}
         >
           {totalPage}
@@ -191,15 +191,15 @@ const Pagination: FC<PaginationProps> = ({
   };
 
   return (
-    <div className="mt-4 mb-4 flex justify-between lg:max-w-[1000px]">
-      <p className="text-subheading text-sm">
-        {`Showing ${Math.min(items, totalItems)} out of ${totalItems}`}{" "}
+    <div className='mb-4 mt-4 flex justify-between lg:max-w-[1000px]'>
+      <p className='text-subheading text-sm'>
+        {`Showing ${Math.min(items, totalItems)} out of ${totalItems}`}{' '}
       </p>
-      <div className="flex justify-end items-center">
+      <div className='flex items-center justify-end'>
         {page > 1 && (
           <CaretLeft
             size={16}
-            className="mr-4 cursor-pointer text-subheading hover:text-blue-700"
+            className='text-subheading mr-4 cursor-pointer hover:text-blue-700'
             onClick={handlePreviousPage}
           />
         )}
@@ -207,7 +207,7 @@ const Pagination: FC<PaginationProps> = ({
         {page < totalPage && (
           <CaretRight
             size={16}
-            className="ml-4 cursor-pointer text-subheading hover:text-blue-700"
+            className='text-subheading ml-4 cursor-pointer hover:text-blue-700'
             onClick={handleNextPage}
           />
         )}

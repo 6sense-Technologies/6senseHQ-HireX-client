@@ -93,7 +93,7 @@ const CreateJob = () => {
   }, []);
 
   const handleSubmission: SubmitHandler<any> = (data) => {
-      createJobMutation.mutate(data);
+    createJobMutation.mutate(data);
   };
 
   return (

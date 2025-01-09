@@ -11,6 +11,7 @@ const Dropdownmenu: React.FC<DropdownMenuProps> = ({ control, name }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
   const dropdownRef = useRef<HTMLDivElement>(null);
+  const newSkillInputRef = useRef<HTMLInputElement>(null);
   const [newSkill, setNewSkill] = useState('');
   const [showNewSkillInput, setShowNewSkillInput] = useState(false);
 
@@ -69,6 +70,12 @@ const Dropdownmenu: React.FC<DropdownMenuProps> = ({ control, name }) => {
       document.removeEventListener('mousedown', handleClickOutside);
     };
   }, []);
+
+  useEffect(() => {
+    if (showNewSkillInput && newSkillInputRef.current) {
+      newSkillInputRef.current.focus();
+    }
+  }, [showNewSkillInput]);
 
   const handleNewSkillChange = (event: ChangeEvent<HTMLInputElement>) => {
     setNewSkill(event.target.value);
@@ -139,6 +146,7 @@ const Dropdownmenu: React.FC<DropdownMenuProps> = ({ control, name }) => {
                   placeholder='New skill'
                   className='rounded border px-2 py-1'
                   onKeyDown={handleKeyDown}
+                  ref={newSkillInputRef}
                 />
                 <Check
                   className='absolute left-[205px] cursor-pointer'
@@ -154,7 +162,7 @@ const Dropdownmenu: React.FC<DropdownMenuProps> = ({ control, name }) => {
               className='absolute top-9 z-10 mt-2 h-[200px] max-w-[156px] overflow-hidden rounded-md border bg-white shadow-lg'
             >
               <div className='relative mb-2 pl-2 pr-2 pt-2'>
-                <MagnifyingGlass className='absolute left-1 top-1 text-placeholderColor' />
+                <MagnifyingGlass className='absolute left-[8px] top-[12px] text-placeholderColor' />
                 <input
                   type='text'
                   placeholder='Status'
@@ -164,7 +172,7 @@ const Dropdownmenu: React.FC<DropdownMenuProps> = ({ control, name }) => {
                   className='w-full border-b pl-8 placeholder:text-placeholderColor'
                 />
               </div>
-              <div className='h-[200px] overflow-y-auto'>
+              <div className='h-[116px] overflow-y-auto'>
                 {filteredSkills.map((skill) => (
                   <div
                     key={skill}

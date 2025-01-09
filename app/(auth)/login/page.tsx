@@ -20,6 +20,7 @@ import { useDispatch } from 'react-redux';
 import { setAuthData } from '@/redux/slices/authSlice';
 import Loader from '@/components/loader';
 import { signIn, useSession } from 'next-auth/react';
+import { BaseUrl } from '@/config';
 
 const Login = () => {
   const [passwordVisible, setPasswordVisible] = useState(false);
@@ -64,8 +65,12 @@ const Login = () => {
     },
   });
 
+  console.log('Env Testing', BaseUrl);
+
   const handleSubmission: SubmitHandler<LoginFormInputs> = (data) => {
-    loginMutation.mutate(data);
+    loginMutation.mutate(data, {
+      onSuccess: (data) => console.log('login Mutation data', data),
+    });
   };
 
   if (session.status === 'unauthenticated') {

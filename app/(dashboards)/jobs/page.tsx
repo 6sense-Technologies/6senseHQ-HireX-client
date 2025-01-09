@@ -15,8 +15,6 @@ const JobList = () => {
     enabled: true,
   });
 
-  console.log("🚀 ~ JobList ~ jobList:", jobList);
-
   return (
     <div className='bg-white px-[16px]'>
       <div className='min-h-screen'>
@@ -41,14 +39,19 @@ const JobList = () => {
                 </thead>
                 <tbody>
                   {jobList?.map((job, index) => (
-                    <tr key={index} className='h-10 border-b-[2px] text-left text-xs bg-white'>
+                    <tr
+                      key={index}
+                      className='h-10 border-b-[2px] bg-white text-left text-xs'
+                    >
                       <td className='pl-3'>{job.jobPosition}</td>
                       <td className='pl-3'>{job.numberOfVacancies}</td>
                       <td className='pl-3'>{job.createdBy}</td>
                       <td className='pl-3'>{job.createdAt}</td>
                       <td>
                         <div className='flex gap-6 pl-3'>
-                          <Button variant='lightBlue' size='xs'>Details</Button>
+                          <Button variant='lightBlue' size='xs'>
+                            Details
+                          </Button>
                         </div>
                       </td>
                     </tr>

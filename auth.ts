@@ -2,7 +2,7 @@ import axios from 'axios';
 import NextAuth, { Session } from 'next-auth';
 import GoogleProvider from 'next-auth/providers/google';
 import CredentialsProvider from 'next-auth/providers/credentials';
-
+import { AuthGoogleID, AuthGoogleSecret } from './config';
 declare module 'next-auth' {
   interface Session {
     accessToken?: string;
@@ -21,8 +21,8 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
   },
   providers: [
     GoogleProvider({
-      clientId: process.env.AUTH_GOOGLE_ID,
-      clientSecret: process.env.AUTH_GOOGLE_SECRET,
+      clientId: AuthGoogleID,
+      clientSecret: AuthGoogleSecret,
       authorization: {
         params: {
           prompt: 'select_account',

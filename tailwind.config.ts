@@ -51,6 +51,7 @@ export default {
         darkGreenColor: '#166534',
         lightGrayColor: '#9CA3AF',
         deepRedcolor: '#DC2626',
+        darkBlackColor: '#030712',
         sidebar: {
           DEFAULT: 'hsl(var(--sidebar-background))',
           foreground: 'hsl(var(--sidebar-foreground))',

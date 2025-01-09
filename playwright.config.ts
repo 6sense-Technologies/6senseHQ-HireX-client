@@ -70,7 +70,7 @@ export default defineConfig({
   /* Run your local dev server before starting the tests */
   webServer: {
     command: 'npm run start',
-    url: 'http://192.168.0.158:8000/',
+    url: 'BaseUrl/',
     reuseExistingServer: !process.env.CI,
     timeout: 120 * 1000, // 2 minutes
   },
