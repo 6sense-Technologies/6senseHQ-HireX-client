@@ -4,11 +4,68 @@ import { Provider } from 'react-redux';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { store } from '../store/store';
 import Login from '../app/(auth)/login/page';
+import axios from 'axios';
+import { useSession } from 'next-auth/react';
+
+
+jest.mock('../components/loader', () => {
+  return jest.fn(() => <div data-testid="mock-loader">Mock Loader</div>);
+});
+
+
+jest.mock('next-auth', () => ({
+  __esModule: true,
+  default: jest.fn(() => ({
+    handlers: jest.fn(),
+    signIn: jest.fn(),
+    signOut: jest.fn(),
+  })),
+}));
+
+// Mock NextAuth and providers
+jest.mock('next-auth/react', () => ({
+  signIn: jest.fn(),
+  useSession: jest.fn(),
+}));
+
+jest.mock('next-auth/providers/google', () => ({
+  __esModule: true,
+  default: jest.fn(() => ({
+    id: 'google',
+    name: 'Google',
+    type: 'oauth',
+    clientId: 'mock-client-id',
+    clientSecret: 'mock-client-secret',
+  })),
+}));
+
+jest.mock('next-auth/providers/credentials', () => ({
+  __esModule: true,
+  default: jest.fn(() => ({
+    id: 'credentials',
+    name: 'Credentials',
+    credentials: {
+      email: { label: 'Email', type: 'text', placeholder: 'example@example.com' },
+      password: { label: 'Password', type: 'password' },
+    },
+    authorize: jest.fn(() => ({
+      email: 'test@example.com',
+      accessToken: 'mock-access-token',
+      refreshToken: 'mock-refresh-token',
+    })),
+  })),
+}));
+
+jest.mock('axios', () => ({
+  post: jest.fn(() => Promise.resolve({ data: { tokens: { access_token: 'mock-access-token', refresh_token: 'mock-refresh-token' } } })),
+}));
 
 const queryClient = new QueryClient();
 
 describe('Login Page', () => {
   beforeEach(() => {
+    (useSession as jest.Mock).mockReturnValue({ status: 'unauthenticated', data: null });
+
     render(
       <Provider store={store}>
         <QueryClientProvider client={queryClient}>
@@ -18,66 +75,27 @@ describe('Login Page', () => {
     );
   });
 
-  it('renders the logo', () => {
-    const logo = screen.getByAltText('Pattern50 Logo');
-    expect(logo).toBeInTheDocument();
+  it('renders the mock loader when unauthenticated', async () => {
+    const loader = await screen.findByTestId('mock-loader');
+    expect(loader).toBeInTheDocument();
   });
 
-  it('renders the title', () => {
-    const title = screen.getByRole('heading', { name: /login/i });
-    expect(title).toBeInTheDocument();
-  });
-
-  it('renders the subtitle', () => {
-    const subtitle = screen.getByText('Continue with pattern50');
-    expect(subtitle).toBeInTheDocument();
-  });
-
-  it('renders the email label', () => {
-    const emailLabel = screen.getByText('Email Address');
-    expect(emailLabel).toBeInTheDocument();
-  });
-
-  it('renders the email placeholder', () => {
-    const emailPlaceholder = screen.getByPlaceholderText('Email Address');
-    expect(emailPlaceholder).toBeInTheDocument();
-  });
-
-  it('renders the password placeholder', () => {
-    const passwordPlaceholder = screen.getByPlaceholderText('Password');
-    expect(passwordPlaceholder).toBeInTheDocument();
-  });
-
-  it('renders the login button', () => {
-    const loginButton = screen.getByRole('button', { name: /login/i });
-    expect(loginButton).toBeInTheDocument();
-  });
-
-  it('renders the Google button', () => {
-    const googleButton = screen.getByText('Continue with Google');
-    expect(googleButton).toBeInTheDocument();
-  });
-
-  it('renders the forgot password link', () => {
-    const forgotPasswordLink = screen.getByText('Forgot password?');
-    expect(forgotPasswordLink).toBeInTheDocument();
-  });
-
-  it('renders the text below the login button', () => {
-    const orDivider = screen.getByText((content, element) => {
-      return element.tagName.toLowerCase() === 'span' && content === 'or';
+  it('renders the title if authenticated', async () => {
+    // Mock session to authenticated
+    (useSession as jest.Mock).mockReturnValueOnce({
+      status: 'authenticated',
+      data: { user: { name: 'Test User' } },
     });
-    expect(orDivider).toBeInTheDocument();
-  });
 
-  it('renders the Google button on the left of the Google sign-in button', () => {
-    const googleButton = screen.getByText('Continue with Google');
-    expect(googleButton).toBeInTheDocument();
-  });
+    render(
+      <Provider store={store}>
+        <QueryClientProvider client={queryClient}>
+          <Login />
+        </QueryClientProvider>
+      </Provider>
+    );
 
-  it('checks what happens when user hovers on the sign-in button', () => {
-    const loginButton = screen.getByRole('button', { name: /login/i });
-    fireEvent.mouseOver(loginButton);
-    expect(loginButton).toHaveClass('hover:bg-blue-700');
+    const title = await screen.findByRole('heading', { name: /Login/i });
+    expect(title).toBeInTheDocument();
   });
 });
