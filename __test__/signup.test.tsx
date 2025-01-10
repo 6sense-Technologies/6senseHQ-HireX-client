@@ -19,7 +19,7 @@ describe('Signup Page', () => {
   });
 
   it('renders the logo', () => {
-    const logo = screen.getByAltText('Pattern50 Logo');
+    const logo = screen.getByAltText('HireX Logo');
     expect(logo).toBeInTheDocument();
   });
 

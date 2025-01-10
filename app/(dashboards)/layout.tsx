@@ -21,8 +21,6 @@ export default function RootLayout({
       <body className={inter.className}>
         <Provider>
           <Sidebar 
-          
-          
           children={children} />
         </Provider>
       </body>
