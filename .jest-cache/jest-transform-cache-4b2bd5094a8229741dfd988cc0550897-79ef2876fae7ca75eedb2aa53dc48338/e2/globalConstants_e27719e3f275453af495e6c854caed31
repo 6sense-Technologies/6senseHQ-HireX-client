@@ -1,0 +1,14 @@
+cc6f4cc46185a8c79f9e6f56e60c3278
+"use strict";
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+Object.defineProperty(exports, "passwordRegex", {
+    enumerable: true,
+    get: function() {
+        return passwordRegex;
+    }
+});
+const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIkM6XFxVc2Vyc1xcVXNlclxcT25lRHJpdmVcXERlc2t0b3BcXDZzZW5zZUhRLUhpcmVYLWNsaWVudFxcY29uc3RhbnRzXFxnbG9iYWxDb25zdGFudHMudHMiXSwic291cmNlc0NvbnRlbnQiOlsiZXhwb3J0IGNvbnN0IHBhc3N3b3JkUmVnZXggPVxuICAvXig/PS4qW2Etel0pKD89LipbQS1aXSkoPz0uKlxcZCkoPz0uKltAJCElKj8mXSlbQS1aYS16XFxkQCQhJSo/Jl17OCx9JC87XG4iXSwibmFtZXMiOlsicGFzc3dvcmRSZWdleCJdLCJtYXBwaW5ncyI6Ijs7OzsrQkFBYUE7OztlQUFBQTs7O0FBQU4sTUFBTUEsZ0JBQ1gifQ==

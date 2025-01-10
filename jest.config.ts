@@ -12,7 +12,7 @@ const customJestConfig: Config = {
     '^.+\\.(js|jsx)$': 'babel-jest',
   },
   transformIgnorePatterns: [
-    'node_modules/(?!(next-auth|@auth/core|other-dependencies-to-transform)/)',
+    'node_modules/(?!(next-auth|@auth/core)/)',
   ],
   moduleNameMapper: {
     '\\.(css|less|scss|sass)$': 'identity-obj-proxy',

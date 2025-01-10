@@ -1,6 +1,7 @@
 'use client';
 import { Button } from '@/components/ui/button';
 import { ArrowUpRight } from '@phosphor-icons/react';
+import { Import } from 'lucide-react';
 import Link from 'next/link';
 import React from 'react';
 
@@ -54,40 +55,15 @@ const JoblistDetails = () => {
             <h1 className='pl-[24px] pt-[24px] text-headingXXS font-semibold'>
               Candidates
             </h1>
-            <Button variant='primary'>Upload CV</Button>
+            <span className='pt-[24px] pr-[24px]'>
+              <Button variant='lightBlue'><Import/>Upload CV</Button>
+            </span>
           </div>
           <div className='mt-[16px] flex items-center justify-between pl-[24px] lg:max-w-[400px]'>
-            <div>
-              <p className='mb-[2px] text-twelve text-subHeading'>Position</p>
-              <p className='text-twelve font-medium text-textSecondary'>
-                Content Writer
-              </p>
-            </div>
-            <div>
-              <p className='mb-[2px] text-twelve text-subHeading'>Department</p>
-              <p className='text-twelve font-medium text-textSecondary'>
-                Marketing
-              </p>
-            </div>
-          </div>
-          <div className='flex items-center'>
-            <div className='mt-[16px] flex items-center gap-x-[4px] pb-[24px] pl-[24px]'>
-              <Link
-                href='/'
-                className='text-twelve text-dropdownLabelColor underline'
-              >
-                Job Description
-              </Link>
-              <ArrowUpRight className='font-medium text-darkBlackColor' />
-            </div>
-            <div className='mt-[16px] flex items-center gap-x-[4px] pb-[24px] pl-[24px]'>
-              <Link
-                href='/'
-                className='text-twelve text-dropdownLabelColor underline'
-              >
-                Ideal Candidate
-              </Link>
-              <ArrowUpRight className='font-medium text-darkBlackColor' />
+            <div className='flex-col justify-center items-center'>
+              <span></span>
+              <h1>No candidate on this job</h1>
+              <p>Start uploading candidates cv here</p>
             </div>
           </div>
         </div>

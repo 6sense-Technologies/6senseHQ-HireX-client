@@ -1,0 +1,54 @@
+a876dfe2f419898b8df86be1d4c63f18
+"use strict";
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+Object.defineProperty(exports, "default", {
+    enumerable: true,
+    get: function() {
+        return _default;
+    }
+});
+const _jsxruntime = require("react/jsx-runtime");
+const _react = require("@phosphor-icons/react");
+const _react1 = /*#__PURE__*/ _interop_require_default(require("react"));
+function _interop_require_default(obj) {
+    return obj && obj.__esModule ? obj : {
+        default: obj
+    };
+}
+const ErrorCard = ({ errorFlag, setErrorFlag })=>{
+    const handleCrossClick = ()=>{
+        setErrorFlag(false);
+    };
+    return /*#__PURE__*/ (0, _jsxruntime.jsx)(_jsxruntime.Fragment, {
+        children: errorFlag ? /*#__PURE__*/ (0, _jsxruntime.jsx)("div", {
+            className: "mt-[32px] max-w-[320px] bg-errorBg",
+            children: /*#__PURE__*/ (0, _jsxruntime.jsxs)("div", {
+                className: "flex gap-[8px] px-[6px] py-[6px]",
+                children: [
+                    /*#__PURE__*/ (0, _jsxruntime.jsx)("span", {
+                        children: /*#__PURE__*/ (0, _jsxruntime.jsx)(_react.Warning, {
+                            weight: "fill",
+                            className: "text-errorColor"
+                        })
+                    }),
+                    /*#__PURE__*/ (0, _jsxruntime.jsx)("p", {
+                        className: "text-xs text-errorColor",
+                        children: "There is an issue with the credentials you have entered. Please try again."
+                    }),
+                    /*#__PURE__*/ (0, _jsxruntime.jsx)("span", {
+                        onClick: handleCrossClick,
+                        className: "cursor-pointer",
+                        children: /*#__PURE__*/ (0, _jsxruntime.jsx)(_react.X, {
+                            className: "pt-[4px] text-errorColor"
+                        })
+                    })
+                ]
+            })
+        }) : null
+    });
+};
+const _default = ErrorCard;
+
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIkM6XFxVc2Vyc1xcVXNlclxcT25lRHJpdmVcXERlc2t0b3BcXDZzZW5zZUhRLUhpcmVYLWNsaWVudFxcYXBwXFwoYXV0aClcXGxvZ2luXFxfY29tcG9uZW50c1xcZXJyb3JDYXJkLnRzeCJdLCJzb3VyY2VzQ29udGVudCI6WyJpbXBvcnQgeyBXYXJuaW5nLCBYIH0gZnJvbSAnQHBob3NwaG9yLWljb25zL3JlYWN0JztcbmltcG9ydCBSZWFjdCBmcm9tICdyZWFjdCc7XG5cbnR5cGUgRXJyb3JDYXJkVHlwZSA9IHtcbiAgc2V0RXJyb3JGbGFnOiAoZmxhZzogYm9vbGVhbikgPT4gdm9pZDtcbiAgZXJyb3JGbGFnOiBib29sZWFuO1xufTtcblxuY29uc3QgRXJyb3JDYXJkID0gKHsgZXJyb3JGbGFnLCBzZXRFcnJvckZsYWcgfTogRXJyb3JDYXJkVHlwZSkgPT4ge1xuICBjb25zdCBoYW5kbGVDcm9zc0NsaWNrID0gKCkgPT4ge1xuICAgIHNldEVycm9yRmxhZyhmYWxzZSk7XG4gIH07XG5cbiAgcmV0dXJuIChcbiAgICA8PlxuICAgICAge2Vycm9yRmxhZyA/IChcbiAgICAgICAgPGRpdiBjbGFzc05hbWU9J210LVszMnB4XSBtYXgtdy1bMzIwcHhdIGJnLWVycm9yQmcnPlxuICAgICAgICAgIDxkaXYgY2xhc3NOYW1lPSdmbGV4IGdhcC1bOHB4XSBweC1bNnB4XSBweS1bNnB4XSc+XG4gICAgICAgICAgICA8c3Bhbj5cbiAgICAgICAgICAgICAgPFdhcm5pbmcgd2VpZ2h0PSdmaWxsJyBjbGFzc05hbWU9J3RleHQtZXJyb3JDb2xvcicgLz5cbiAgICAgICAgICAgIDwvc3Bhbj5cbiAgICAgICAgICAgIDxwIGNsYXNzTmFtZT0ndGV4dC14cyB0ZXh0LWVycm9yQ29sb3InPlxuICAgICAgICAgICAgICBUaGVyZSBpcyBhbiBpc3N1ZSB3aXRoIHRoZSBjcmVkZW50aWFscyB5b3UgaGF2ZSBlbnRlcmVkLiBQbGVhc2VcbiAgICAgICAgICAgICAgdHJ5IGFnYWluLlxuICAgICAgICAgICAgPC9wPlxuICAgICAgICAgICAgPHNwYW4gb25DbGljaz17aGFuZGxlQ3Jvc3NDbGlja30gY2xhc3NOYW1lPSdjdXJzb3ItcG9pbnRlcic+XG4gICAgICAgICAgICAgIDxYIGNsYXNzTmFtZT0ncHQtWzRweF0gdGV4dC1lcnJvckNvbG9yJyAvPlxuICAgICAgICAgICAgPC9zcGFuPlxuICAgICAgICAgIDwvZGl2PlxuICAgICAgICA8L2Rpdj5cbiAgICAgICkgOiBudWxsfVxuICAgIDwvPlxuICApO1xufTtcblxuZXhwb3J0IGRlZmF1bHQgRXJyb3JDYXJkO1xuIl0sIm5hbWVzIjpbIkVycm9yQ2FyZCIsImVycm9yRmxhZyIsInNldEVycm9yRmxhZyIsImhhbmRsZUNyb3NzQ2xpY2siLCJkaXYiLCJjbGFzc05hbWUiLCJzcGFuIiwiV2FybmluZyIsIndlaWdodCIsInAiLCJvbkNsaWNrIiwiWCJdLCJtYXBwaW5ncyI6Ijs7OzsrQkFtQ0E7OztlQUFBOzs7O3VCQW5DMkI7K0RBQ1Q7Ozs7OztBQU9sQixNQUFNQSxZQUFZLENBQUMsRUFBRUMsU0FBUyxFQUFFQyxZQUFZLEVBQWlCO0lBQzNELE1BQU1DLG1CQUFtQjtRQUN2QkQsYUFBYTtJQUNmO0lBRUEscUJBQ0U7a0JBQ0dELDBCQUNDLHFCQUFDRztZQUFJQyxXQUFVO3NCQUNiLGNBQUEsc0JBQUNEO2dCQUFJQyxXQUFVOztrQ0FDYixxQkFBQ0M7a0NBQ0MsY0FBQSxxQkFBQ0MsY0FBTzs0QkFBQ0MsUUFBTzs0QkFBT0gsV0FBVTs7O2tDQUVuQyxxQkFBQ0k7d0JBQUVKLFdBQVU7a0NBQTBCOztrQ0FJdkMscUJBQUNDO3dCQUFLSSxTQUFTUDt3QkFBa0JFLFdBQVU7a0NBQ3pDLGNBQUEscUJBQUNNLFFBQUM7NEJBQUNOLFdBQVU7Ozs7O2FBSWpCOztBQUdWO01BRUEsV0FBZUwifQ==

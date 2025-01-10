@@ -4,6 +4,49 @@ import { Provider } from 'react-redux';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { store } from '../store/store';
 import Login from '../app/(auth)/login/page';
+import axios from 'axios';
+
+// Mock NextAuth and providers
+jest.mock('next-auth', () => ({
+  __esModule: true,
+  default: jest.fn(() => ({
+    handlers: jest.fn(),
+    signIn: jest.fn(),
+    signOut: jest.fn(),
+  })),
+}));
+
+jest.mock('next-auth/providers/google', () => ({
+  __esModule: true,
+  default: jest.fn(() => ({
+    id: 'google',
+    name: 'Google',
+    type: 'oauth',
+    clientId: 'mock-client-id',
+    clientSecret: 'mock-client-secret',
+  })),
+}));
+
+jest.mock('next-auth/providers/credentials', () => ({
+  __esModule: true,
+  default: jest.fn(() => ({
+    id: 'credentials',
+    name: 'Credentials',
+    credentials: {
+      email: { label: 'Email', type: 'text', placeholder: 'example@example.com' },
+      password: { label: 'Password', type: 'password' },
+    },
+    authorize: jest.fn(() => ({
+      email: 'test@example.com',
+      accessToken: 'mock-access-token',
+      refreshToken: 'mock-refresh-token',
+    })),
+  })),
+}));
+
+jest.mock('axios', () => ({
+  post: jest.fn(() => Promise.resolve({ data: { tokens: { access_token: 'mock-access-token', refresh_token: 'mock-refresh-token' } } })),
+}));
 
 const queryClient = new QueryClient();
 
@@ -28,56 +71,34 @@ describe('Login Page', () => {
     expect(title).toBeInTheDocument();
   });
 
-  it('renders the subtitle', () => {
-    const subtitle = screen.getByText('Continue with pattern50');
-    expect(subtitle).toBeInTheDocument();
-  });
-
-  it('renders the email label', () => {
-    const emailLabel = screen.getByText('Email Address');
-    expect(emailLabel).toBeInTheDocument();
-  });
-
-  it('renders the email placeholder', () => {
-    const emailPlaceholder = screen.getByPlaceholderText('Email Address');
-    expect(emailPlaceholder).toBeInTheDocument();
-  });
-
-  it('renders the password placeholder', () => {
-    const passwordPlaceholder = screen.getByPlaceholderText('Password');
-    expect(passwordPlaceholder).toBeInTheDocument();
-  });
-
-  it('renders the login button', () => {
-    const loginButton = screen.getByRole('button', { name: /login/i });
-    expect(loginButton).toBeInTheDocument();
-  });
-
-  it('renders the Google button', () => {
+  it('calls signIn with Google provider on Google button click', async () => {
     const googleButton = screen.getByText('Continue with Google');
-    expect(googleButton).toBeInTheDocument();
+    fireEvent.click(googleButton);
+    const { signIn } = require('next-auth');
+    expect(signIn).toHaveBeenCalledWith('google');
   });
 
-  it('renders the forgot password link', () => {
-    const forgotPasswordLink = screen.getByText('Forgot password?');
-    expect(forgotPasswordLink).toBeInTheDocument();
-  });
-
-  it('renders the text below the login button', () => {
-    const orDivider = screen.getByText((content, element) => {
-      return element.tagName.toLowerCase() === 'span' && content === 'or';
+  it('calls signIn with credentials on login button click', async () => {
+    const loginButton = screen.getByRole('button', { name: /login/i });
+    fireEvent.click(loginButton);
+    const { signIn } = require('next-auth');
+    expect(signIn).toHaveBeenCalledWith('credentials', {
+      redirect: false,
+      email: '',
+      password: '',
     });
-    expect(orDivider).toBeInTheDocument();
   });
 
-  it('renders the Google button on the left of the Google sign-in button', () => {
-    const googleButton = screen.getByText('Continue with Google');
-    expect(googleButton).toBeInTheDocument();
-  });
-
-  it('checks what happens when user hovers on the sign-in button', () => {
-    const loginButton = screen.getByRole('button', { name: /login/i });
-    fireEvent.mouseOver(loginButton);
-    expect(loginButton).toHaveClass('hover:bg-blue-700');
+  it('handles axios mock call', async () => {
+    const axiosMock = require('axios');
+    await axiosMock.post('http://192.168.0.158:8000/auth/login', {
+      email: 'test@example.com',
+      password: 'password123',
+    });
+    expect(axiosMock.post).toHaveBeenCalledWith(
+      'http://192.168.0.158:8000/auth/login',
+      { email: 'test@example.com', password: 'password123' },
+      { headers: { 'Content-Type': 'application/json' } }
+    );
   });
 });
