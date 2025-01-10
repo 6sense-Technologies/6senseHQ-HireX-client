@@ -72,7 +72,6 @@ const JobList = () => {
                 totalPage={jobList?.meta?.totalPages}
                 totalItems={jobList?.meta?.totalCount}
                 items={items}
-
               />
             </div>
           </div>

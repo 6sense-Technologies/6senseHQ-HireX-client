@@ -113,7 +113,11 @@ const Pagination: FC<PaginationProps> = ({
       );
 
       // Add the pages after the current page, but only if it's not the last page
-      for (let i = page + 1; i <= Math.min(page + 1, (totalPage ?? 0) - 1); i++) {
+      for (
+        let i = page + 1;
+        i <= Math.min(page + 1, (totalPage ?? 0) - 1);
+        i++
+      ) {
         pages.push(
           <button
             key={`page-after-${i}`} // Ensure unique keys for "after" pages

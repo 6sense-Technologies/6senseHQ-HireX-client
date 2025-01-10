@@ -25,19 +25,19 @@ import {
 
 const interviewStageOptions = [
   {
-    value: 'Onsite Interview',
+    value: 'Offline',
     label: 'Onsite Interview',
   },
   {
-    value: 'Online Test',
+    value: 'Online-Voice',
     label: 'Online Test',
   },
   {
-    value: 'Online Interview',
+    value: 'Online-Quiz',
     label: 'Online Interview',
   },
   {
-    value: 'Phone/Audio Interview',
+    value: 'Online-Voice',
     label: 'Phone/Audio Interview',
   },
 ];

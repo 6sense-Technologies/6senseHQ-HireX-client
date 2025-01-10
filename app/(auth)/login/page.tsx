@@ -156,13 +156,14 @@ const Login = () => {
                 </div>
               </div>
               <div className='mb-[18px] flex justify-end'>
-                  <Link
+                <Link
                   href='/signup'
                   className='text-forgotpassword text-primar px-2 text-sm'
                 >
-                  Don't have an account? <span className='text-blue-600'>Signup</span>
+                  Don't have an account?{' '}
+                  <span className='text-blue-600 hover:underline'>Signup</span>
                 </Link>
-                </div>
+              </div>
               <div>
                 <Button variant={'primary'} size={'medium'} className='text-sm'>
                   {loginMutation.isPending ? (

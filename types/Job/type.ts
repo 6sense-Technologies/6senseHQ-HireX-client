@@ -101,20 +101,20 @@ export type JobFormInputs = {
 };
 
 export interface TJobList {
-  jobs: Job[]
-  meta: Meta
+  jobs: Job[];
+  meta: Meta;
 }
 
 export interface Job {
-  jobId: string
-  jobPosition: string
-  numberOfVacancies: number
-  createdBy: string
-  createdAt: string
+  jobId: string;
+  jobPosition: string;
+  numberOfVacancies: number;
+  createdBy: string;
+  createdAt: string;
 }
 
 export interface Meta {
-  totalCount: number
-  currentPage: number
-  totalPages: number
+  totalCount: number;
+  currentPage: number;
+  totalPages: number;
 }

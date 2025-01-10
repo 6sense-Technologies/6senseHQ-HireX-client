@@ -22,6 +22,7 @@ import { useSession } from 'next-auth/react';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { CreateJobSchema } from '@/Zodschema/jobSchema';
 import { Circle } from '@phosphor-icons/react';
+import Loader from '@/components/loader';
 
 const CreateJob = () => {
   const {
@@ -96,6 +97,11 @@ const CreateJob = () => {
     createJobMutation.mutate(data);
   };
 
+  const handleCancel = (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault();
+    router.push('/jobs');
+  };
+
   return (
     <div className='bg-white px-[16px]'>
       <form className='pb-28' onSubmit={handleSubmit(handleSubmission)}>
@@ -119,7 +125,7 @@ const CreateJob = () => {
             <Button
               variant='blackwhite'
               className='h-[40px] w-[80px]'
-              onClick={() => router.push('/dashboard')}
+              onClick={handleCancel}
             >
               Cancel
             </Button>

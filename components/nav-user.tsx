@@ -28,8 +28,6 @@ import {
 import { signOut } from 'next-auth/react';
 import { Router } from 'next/navigation';
 
-
-
 const handleLogout = async () => {
   await signOut({ redirect: false });
   Router.push('/login');
@@ -108,9 +106,12 @@ export function NavUser({
             </DropdownMenuGroup>
             <DropdownMenuSeparator />
             <DropdownMenuItem>
-              <span className='flex items-center gap-[7px] cursor-pointer' onClick={handleLogout}>
-              <LogOut />
-              Log out
+              <span
+                className='flex cursor-pointer items-center gap-[7px]'
+                onClick={handleLogout}
+              >
+                <LogOut />
+                Log out
               </span>
             </DropdownMenuItem>
           </DropdownMenuContent>

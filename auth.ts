@@ -66,7 +66,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
               refreshToken: data.tokens.refresh_token,
             } as any;
           }
-          
+
           return false; // Login failed
         } catch (error) {
           console.error('Error during credential login:', error);
@@ -103,7 +103,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
         token.accessToken = response.data?.tokens?.access_token;
         token.refreshToken = response.data?.tokens?.refresh_token;
       }
- 
+
       return token;
     },
     async session({ session, token }) {

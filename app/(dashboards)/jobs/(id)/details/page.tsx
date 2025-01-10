@@ -55,12 +55,15 @@ const JoblistDetails = () => {
             <h1 className='pl-[24px] pt-[24px] text-headingXXS font-semibold'>
               Candidates
             </h1>
-            <span className='pt-[24px] pr-[24px]'>
-              <Button variant='lightBlue'><Import/>Upload CV</Button>
+            <span className='pr-[24px] pt-[24px]'>
+              <Button variant='lightBlue'>
+                <Import />
+                Upload CV
+              </Button>
             </span>
           </div>
           <div className='mt-[16px] flex items-center justify-between pl-[24px] lg:max-w-[400px]'>
-            <div className='flex-col justify-center items-center'>
+            <div className='flex-col items-center justify-center'>
               <span></span>
               <h1>No candidate on this job</h1>
               <p>Start uploading candidates cv here</p>
