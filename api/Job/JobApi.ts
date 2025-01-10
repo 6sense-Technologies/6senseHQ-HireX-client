@@ -64,8 +64,8 @@ export const handleCreateJob = async (data: any) => {
   return response.data;
 };
 
-export const getJobList = async () => {
-  const response = await axios.get(`${BaseUrl}/job/list`, {
+export const getJobList = async (pageNumber:string) => {
+  const response = await axios.get(`${BaseUrl}/job/list?page=${pageNumber}`, {
     headers: {
       Authorization: `Bearer ${accessToken}`,
       'Content-Type': 'application/json',

@@ -37,7 +37,7 @@ const InterviewStageDropdown: React.FC<InterviewStageDropdownProps> = ({
         const selectedValue = state.getValue()[0].value;
         if (selectedValue.includes('Online')) {
           backgroundColor = '#DCFCE7';
-        } else if (selectedValue.includes('Offline')) {
+        } else {
           backgroundColor = '#E5E7EB';
         }
       }
@@ -45,7 +45,7 @@ const InterviewStageDropdown: React.FC<InterviewStageDropdownProps> = ({
         ...provided,
         borderColor: errors[name] ? 'red' : '',
         borderRadius: '200px',
-        width: '120px',
+        width: '140px',
         height: '24px',
         minHeight: '24px',
         backgroundColor: backgroundColor,

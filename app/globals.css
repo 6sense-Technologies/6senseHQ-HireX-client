@@ -42,3 +42,15 @@
   padding-right: 8px !important;
   padding-top: 0px !important;
 }
+
+.select__menu
+{
+  width: 140px !important;
+
+}
+
+.select__option
+{
+  text-wrap: nowarp !important;
+  font-size: 12px !important;
+}

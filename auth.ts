@@ -55,16 +55,18 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
           );
 
           const data = response.data;
-
+          // console.log('DATA:', response.data);
+          // console.log(data?.userInfo?.name);
           // Ensure tokens are included in the returned object
           if (data?.tokens?.access_token) {
             return {
               email: credentials.email,
+              name: data?.userInfo?.name,
               accessToken: data.tokens.access_token,
               refreshToken: data.tokens.refresh_token,
             } as any;
           }
-
+          
           return false; // Login failed
         } catch (error) {
           console.error('Error during credential login:', error);
@@ -97,11 +99,11 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
             },
           }
         );
-
+        console.log('DATA:', response.data);
         token.accessToken = response.data?.tokens?.access_token;
         token.refreshToken = response.data?.tokens?.refresh_token;
       }
-
+ 
       return token;
     },
     async session({ session, token }) {

@@ -25,36 +25,20 @@ import {
 
 const interviewStageOptions = [
   {
-    value: 'Online-Video',
-    label: (
-      <span className='flex items-center justify-start gap-[4px] text-nowrap'>
-        <VideoCamera size={16} /> Online
-      </span>
-    ),
+    value: 'Onsite Interview',
+    label: 'Onsite Interview',
   },
   {
-    value: 'Online-Voice',
-    label: (
-      <span className='flex items-center justify-start gap-[4px] text-nowrap'>
-        <Phone size={16} /> Online
-      </span>
-    ),
+    value: 'Online Test',
+    label: 'Online Test',
   },
   {
-    value: 'Online-Quiz',
-    label: (
-      <span className='flex items-center justify-start gap-[4px] text-nowrap'>
-        <PuzzlePiece size={16} /> Online
-      </span>
-    ),
+    value: 'Online Interview',
+    label: 'Online Interview',
   },
   {
-    value: 'Offline',
-    label: (
-      <span className='flex items-center justify-start gap-[4px] text-nowrap'>
-        <UsersThree size={16} /> Offline
-      </span>
-    ),
+    value: 'Phone/Audio Interview',
+    label: 'Phone/Audio Interview',
   },
 ];
 

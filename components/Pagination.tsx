@@ -1,68 +1,35 @@
 import React, { FC } from 'react';
 import { CaretLeft, CaretRight, DotsThree } from '@phosphor-icons/react';
-import { useRouter } from 'next/navigation';
 
 type PaginationProps = {
   page: number;
   setPage: (page: number) => void;
-  searchText?: string;
-  setItems?: (items: number) => void;
-  totalPage?: number;
-  totalItems?: number;
+  totalPage: number | undefined;
+  totalItems: number | undefined;
   items?: number;
-  status?: string | null | undefined;
 };
 
 const Pagination: FC<PaginationProps> = ({
   page,
   setPage,
-  searchText,
-  setItems,
   totalPage,
   totalItems,
   items,
-  status,
 }) => {
-  const router = useRouter();
-
   const handlePreviousPage = () => {
     if (page > 1) {
-      const newPage = page - 1;
-      setPage(newPage);
-
-      const items = newPage * 10;
-      // console.log(items);
-      setItems(items);
-      router.push(
-        `/products?search=${searchText}&status=${status || ''}&page=${newPage}`
-      );
+      setPage(page - 1);
     }
   };
 
   const handleNextPage = () => {
-    if (page < totalPage) {
-      const newPage = page + 1;
-      setPage(newPage);
-
-      let items;
-      if (newPage * 10 > totalItems) {
-        items = totalItems;
-      } else {
-        items = newPage * 10;
-      }
-      setItems(items);
-
-      router.push(
-        `/products?search=${searchText}&status=${status || ''}&page=${newPage}`
-      );
+    if (page < (totalPage ?? 0)) {
+      setPage(page + 1);
     }
   };
 
   const handlePageClick = (pageNumber: number) => {
     setPage(pageNumber);
-    router.push(
-      `/products?search=${searchText}&status=${status || ''}&page=${pageNumber}`
-    );
   };
 
   const renderPagination = () => {
@@ -83,7 +50,7 @@ const Pagination: FC<PaginationProps> = ({
 
     // Show pages 2 to 5 when the current page is 1, 2, 3, or 4
     if (page <= 4) {
-      for (let i = 2; i <= Math.min(5, totalPage); i++) {
+      for (let i = 2; i <= Math.min(5, totalPage ?? 0); i++) {
         pages.push(
           <button
             key={`page-${i}`}
@@ -98,7 +65,7 @@ const Pagination: FC<PaginationProps> = ({
       }
 
       // Show "DotsThree" if there are pages between the visible range and the last page
-      if (totalPage > 5) {
+      if ((totalPage ?? 0) > 5) {
         pages.push(
           <DotsThree
             key='dots-end'
@@ -146,7 +113,7 @@ const Pagination: FC<PaginationProps> = ({
       );
 
       // Add the pages after the current page, but only if it's not the last page
-      for (let i = page + 1; i <= Math.min(page + 1, totalPage - 1); i++) {
+      for (let i = page + 1; i <= Math.min(page + 1, (totalPage ?? 0) - 1); i++) {
         pages.push(
           <button
             key={`page-after-${i}`} // Ensure unique keys for "after" pages
@@ -161,7 +128,7 @@ const Pagination: FC<PaginationProps> = ({
       }
 
       // Show "DotsThree" if there are pages between the visible range and the last page
-      if (page < totalPage - 2) {
+      if (page < (totalPage ?? 0) - 2) {
         pages.push(
           <DotsThree
             key='dots-end'
@@ -173,11 +140,11 @@ const Pagination: FC<PaginationProps> = ({
     }
 
     // Always include the last page, but only if it's not already part of the visible range
-    if (totalPage > 4 && page !== totalPage) {
+    if ((totalPage ?? 0) > 4 && page !== (totalPage ?? 0)) {
       pages.push(
         <button
           key={`page-last-${totalPage}`} // Ensure unique key for the last page
-          onClick={() => handlePageClick(totalPage)}
+          onClick={() => totalPage !== undefined && handlePageClick(totalPage)}
           className={`mx-4 text-sm ${
             page === totalPage ? 'text-blue-500' : 'text-subheading'
           }`}
@@ -190,10 +157,15 @@ const Pagination: FC<PaginationProps> = ({
     return pages;
   };
 
+  // Only show pagination controls if there is more than one page
+  if ((totalPage ?? 0) <= 1) {
+    return null;
+  }
+
   return (
     <div className='mb-4 mt-4 flex justify-between lg:max-w-[1000px]'>
       <p className='text-subheading text-sm'>
-        {`Showing ${Math.min(items, totalItems)} out of ${totalItems}`}{' '}
+        {`Showing ${Math.min(items ?? 0, totalItems ?? 0)} out of ${totalItems ?? 0}`}{' '}
       </p>
       <div className='flex items-center justify-end'>
         {page > 1 && (
@@ -204,7 +176,7 @@ const Pagination: FC<PaginationProps> = ({
           />
         )}
         {renderPagination()}
-        {page < totalPage && (
+        {page < (totalPage ?? 0) && (
           <CaretRight
             size={16}
             className='text-subheading ml-4 cursor-pointer hover:text-blue-700'

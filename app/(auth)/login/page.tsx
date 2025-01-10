@@ -146,7 +146,7 @@ const Login = () => {
                     </div>
                   </div>
                 </div>
-                <div className='mb-[32px] mt-[16px] flex justify-end'>
+                <div className='mb-[10px] mt-[16px] flex justify-end'>
                   <Link
                     href='/forgotpassword'
                     className='text-forgotpassword px-2 text-sm text-textSecondary'
@@ -155,7 +155,14 @@ const Login = () => {
                   </Link>
                 </div>
               </div>
-
+              <div className='mb-[18px] flex justify-end'>
+                  <Link
+                  href='/signup'
+                  className='text-forgotpassword text-primar px-2 text-sm'
+                >
+                  Don't have an account? <span className='text-blue-600'>Signup</span>
+                </Link>
+                </div>
               <div>
                 <Button variant={'primary'} size={'medium'} className='text-sm'>
                   {loginMutation.isPending ? (

@@ -72,7 +72,7 @@ const Signup = () => {
       <div className='w-full max-w-[384px] py-10'>
         <div className='mx-auto'>
           <div className='logo-area mb-2 flex justify-center'>
-            <Image src={Logo} alt='HireX Logo' />
+            <Link href="/login"><Image src={Logo} alt='HireX Logo' /></Link>
           </div>
           <form
             onSubmit={handleSubmit(handleSubmission)}
@@ -213,9 +213,9 @@ const Signup = () => {
               <div className='mb-[32px] mt-[16px] flex justify-end'>
                 <Link
                   href='/login'
-                  className='text-forgotpassword text-primar px-2 text-sm'
+                  className='text-subHeading text-primar px-2 text-sm'
                 >
-                  have a account? Login
+                  have a account? <span className='hover:underline'> Login</span>
                 </Link>
               </div>
             </div>

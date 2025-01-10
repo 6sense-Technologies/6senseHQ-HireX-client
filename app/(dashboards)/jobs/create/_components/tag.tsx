@@ -10,7 +10,7 @@ const Tag: FC<TagProps> = ({ selectedSkills, onRemoveSkill }) => {
           {selectedSkills.map((skill) => (
             <div
               key={skill}
-              className='flex items-center justify-between rounded-[4px] bg-dropdownSecondaryBg px-[8px] py-[4px]'
+              className='flex items-center justify-between rounded-[4px] bg-white px-[8px] py-[4px]'
             >
               <p className='text-tagText text-twelve'>{skill}</p>
               <span

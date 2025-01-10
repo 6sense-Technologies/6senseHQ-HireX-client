@@ -8,12 +8,18 @@ import React, { useState } from 'react';
 
 const JobList = () => {
   const [page, setPage] = useState<number>(1);
+  const [items, setItems] = useState<number>(10);
 
-  const { data: jobList } = useQuery<TJobList, any, TJobList>({
-    queryKey: ['jobList'],
-    queryFn: () => getJobList(),
+  const { data: jobList, refetch } = useQuery<TJobList, any, TJobList>({
+    queryKey: ['jobList', page],
+    queryFn: () => getJobList(page.toString()),
     enabled: true,
   });
+
+  const handlePageChange = (newPage: number) => {
+    setPage(newPage);
+    refetch();
+  };
 
   return (
     <div className='bg-white px-[16px]'>
@@ -38,7 +44,7 @@ const JobList = () => {
                   </tr>
                 </thead>
                 <tbody>
-                  {jobList?.map((job, index) => (
+                  {jobList?.jobs?.map((job, index) => (
                     <tr
                       key={index}
                       className='h-10 border-b-[2px] bg-white text-left text-xs'
@@ -62,10 +68,11 @@ const JobList = () => {
               {/* Pagination starts here */}
               <Pagination
                 page={page}
-                setPage={setPage}
-                totalPage={1}
-                totalItems={jobList?.length || 0}
-                items={1}
+                setPage={handlePageChange}
+                totalPage={jobList?.meta?.totalPages}
+                totalItems={jobList?.meta?.totalCount}
+                items={items}
+
               />
             </div>
           </div>

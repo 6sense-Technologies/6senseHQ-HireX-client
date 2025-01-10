@@ -23,7 +23,7 @@ const JobResponsibilites: React.FC<JobResponsibilitiesProps> = ({
               {...field}
               errors={errors}
               placeholder='Type Job Responsibilities'
-              className='mt-[16px] h-[207px] resize bg-transparent px-[12px] pt-[10px] placeholder:text-placeholderColor lg:max-w-[1082px] xl:max-w-[1632px]'
+              className='mt-[16px] h-[207px] resize bg-white px-[12px] pt-[10px] placeholder:text-placeholderColor lg:max-w-[1082px] xl:max-w-[1632px]'
             />
           )}
         />
