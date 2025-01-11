@@ -51,3 +51,8 @@
   text-wrap: nowarp !important;
   font-size: 12px !important;
 }
+
+.job-dropdown__menu
+{
+  z-index: 1000 !important;
+}

@@ -1,6 +1,7 @@
 'use client';
 import { getJobList } from '@/api/Job/JobApi';
 import Pagination from '@/components/Pagination';
+import Topbreadcrumb from '@/components/topbreadcrumb';
 import { Button } from '@/components/ui/button';
 import { TJobList } from '@/types/Job/type';
 import { useQuery } from '@tanstack/react-query';
@@ -23,6 +24,12 @@ const JobList = () => {
 
   return (
     <div className='bg-white px-[16px]'>
+      <Topbreadcrumb
+      initialData='Jobs'
+      secondayData='List'
+      initalLink='/jobs'
+      secondayLink='/jobs'
+      />
       <div className='min-h-screen'>
         <div className='rounded-2xl bg-jobBg'>
           <div>

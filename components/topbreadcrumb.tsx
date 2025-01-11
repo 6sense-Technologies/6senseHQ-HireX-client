@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { FC } from 'react';
 import { SidebarTrigger } from './ui/sidebar';
 import { Separator } from '@radix-ui/react-separator';
 import {
@@ -10,7 +10,23 @@ import {
   BreadcrumbSeparator,
 } from './ui/breadcrumb';
 
-const Topbreadcrumb = () => {
+type TopbreadcrumbProps = {
+  initialData?: string;
+  secondayData?: string;
+  thirdData?: string;
+  initalLink?: string;
+  secondayLink?: string;
+  thirdLink?: string;
+};
+
+const Topbreadcrumb: FC<TopbreadcrumbProps> = ({
+  initialData,
+  secondayData,
+  thirdData,
+  initalLink,
+  secondayLink,
+  thirdLink,
+}: TopbreadcrumbProps) => {
   return (
     <header className='flex h-16 shrink-0 items-center gap-2 transition-[width,height] ease-linear group-has-[[data-collapsible=icon]]/sidebar-wrapper:h-12'>
       <div className='flex items-center gap-2 px-4'>
@@ -19,11 +35,11 @@ const Topbreadcrumb = () => {
         <Breadcrumb>
           <BreadcrumbList>
             <BreadcrumbItem className='hidden md:block'>
-              <BreadcrumbLink href='/'>Dashboard</BreadcrumbLink>
+              <BreadcrumbLink href={initalLink}>{initialData}</BreadcrumbLink>
             </BreadcrumbItem>
             <BreadcrumbSeparator className='hidden md:block' />
             <BreadcrumbItem>
-              <BreadcrumbPage>Data Fetching</BreadcrumbPage>
+            <BreadcrumbLink href={secondayLink}>{secondayData}</BreadcrumbLink>
             </BreadcrumbItem>
           </BreadcrumbList>
         </Breadcrumb>

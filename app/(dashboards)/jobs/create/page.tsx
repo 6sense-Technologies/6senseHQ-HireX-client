@@ -23,6 +23,8 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { CreateJobSchema } from '@/Zodschema/jobSchema';
 import { Circle } from '@phosphor-icons/react';
 import Loader from '@/components/loader';
+import Topbreadcrumb from '@/components/topbreadcrumb';
+import Head from 'next/head';
 
 const CreateJob = () => {
   const {
@@ -40,9 +42,6 @@ const CreateJob = () => {
   const router = useRouter();
   const session = useSession();
   const [isButtonClicked, setIsButtonClicked] = useState(false);
-  const [showAlert, setShowAlert] = useState(false);
-  console.log('🚀 ~ CreateJob ~ showAlert:', showAlert);
-  const [isReloadConfirmed, setIsReloadConfirmed] = useState(false);
 
   const { data: jobpositions } = useQuery<
     JobPositionList,
@@ -103,47 +102,59 @@ const CreateJob = () => {
   };
 
   return (
-    <div className='bg-white px-[16px]'>
-      <form className='pb-28' onSubmit={handleSubmit(handleSubmission)}>
-        <div className='min-h-screen'>
-          <JobInformation
-            control={control}
-            errors={errors}
-            setValue={setValue}
-            jobPositionOptions={jobPositionOptions}
-            departmentOptions={departmentOptions}
-          />
-          <InterviewStage
-            control={control}
-            setValue={setValue}
-            errors={errors}
-            isButtonClicked={isButtonClicked}
-          />
-          <JobResponsibilites control={control} errors={errors} />
-          <IdealCandidates control={control} errors={errors} />
-          <div className='mt-[30px] flex justify-end gap-[16px]'>
-            <Button
-              variant='blackwhite'
-              className='h-[40px] w-[80px]'
-              onClick={handleCancel}
-            >
-              Cancel
-            </Button>
-            <Button
-              variant='lightBlue'
-              className='h-[40px] w-[80px]'
-              onClick={() => setIsButtonClicked(true)}
-            >
-              {createJobMutation.isPending ? (
-                <Circle className='animate-spin text-sm' />
-              ) : (
-                'Create'
-              )}
-            </Button>
+    <>
+      <Head>
+        <title>HireX - Create Job</title>
+        <meta name="description" content="Create a new job listing on HireX." />
+      </Head>
+      <div className='bg-white px-[16px]'>
+        <Topbreadcrumb
+          initialData='Jobs'
+          secondayData='Create Job'
+          initalLink='/jobs'
+          secondayLink='/jobs/create'
+        />
+        <form className='pb-28' onSubmit={handleSubmit(handleSubmission)}>
+          <div className='min-h-screen'>
+            <JobInformation
+              control={control}
+              errors={errors}
+              setValue={setValue}
+              jobPositionOptions={jobPositionOptions}
+              departmentOptions={departmentOptions}
+            />
+            <InterviewStage
+              control={control}
+              setValue={setValue}
+              errors={errors}
+              isButtonClicked={isButtonClicked}
+            />
+            <JobResponsibilites control={control} errors={errors} />
+            <IdealCandidates control={control} errors={errors} />
+            <div className='mt-[30px] flex justify-end gap-[16px]'>
+              <Button
+                variant='blackwhite'
+                className='h-[40px] w-[80px]'
+                onClick={handleCancel}
+              >
+                Cancel
+              </Button>
+              <Button
+                variant='lightBlue'
+                className='h-[40px] w-[80px]'
+                onClick={() => setIsButtonClicked(true)}
+              >
+                {createJobMutation.isPending ? (
+                  <Circle className='animate-spin text-sm' />
+                ) : (
+                  'Create'
+                )}
+              </Button>
+            </div>
           </div>
-        </div>
-      </form>
-    </div>
+        </form>
+      </div>
+    </>
   );
 };
 

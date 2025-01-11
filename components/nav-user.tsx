@@ -27,10 +27,21 @@ import {
 } from '@/components/ui/sidebar';
 import { signOut } from 'next-auth/react';
 import { Router } from 'next/navigation';
+import Swal from 'sweetalert2';
+import 'sweetalert2/dist/sweetalert2.min.css';
 
 const handleLogout = async () => {
   await signOut({ redirect: false });
   Router.push('/login');
+};
+
+const handleComingSoon = () => {
+  Swal.fire({
+    title: 'Coming Soon!',
+    text: 'This feature is coming soon.',
+    icon: 'info',
+    confirmButtonText: 'OK',
+  });
 };
 
 export function NavUser({
@@ -85,23 +96,43 @@ export function NavUser({
             <DropdownMenuSeparator />
             <DropdownMenuGroup>
               <DropdownMenuItem>
-                <Sparkles />
-                Upgrade to Pro
+                <span
+                  className='flex cursor-pointer items-center gap-[7px]'
+                  onClick={handleComingSoon}
+                >
+                  <Sparkles />
+                  Upgrade to Pro
+                </span>
               </DropdownMenuItem>
             </DropdownMenuGroup>
             <DropdownMenuSeparator />
             <DropdownMenuGroup>
               <DropdownMenuItem>
-                <BadgeCheck />
-                Account
+                <span
+                  className='flex cursor-pointer items-center gap-[7px]'
+                  onClick={handleComingSoon}
+                >
+                  <BadgeCheck />
+                  Account
+                </span>
               </DropdownMenuItem>
               <DropdownMenuItem>
-                <CreditCard />
-                Billing
+                <span
+                  className='flex cursor-pointer items-center gap-[7px]'
+                  onClick={handleComingSoon}
+                >
+                  <CreditCard />
+                  Billing
+                </span>
               </DropdownMenuItem>
               <DropdownMenuItem>
-                <Bell />
-                Notifications
+                <span
+                  className='flex cursor-pointer items-center gap-[7px]'
+                  onClick={handleComingSoon}
+                >
+                  <Bell />
+                  Notifications
+                </span>
               </DropdownMenuItem>
             </DropdownMenuGroup>
             <DropdownMenuSeparator />

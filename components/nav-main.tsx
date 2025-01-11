@@ -17,6 +17,8 @@ import {
   SidebarMenuSubItem,
 } from '@/components/ui/sidebar';
 import { useState, useEffect } from 'react';
+import { useRouter, usePathname } from 'next/navigation';
+import Link from 'next/link';
 
 export function NavMain({
   items,
@@ -33,13 +35,15 @@ export function NavMain({
   }[];
 }) {
   const [selectedItem, setSelectedItem] = useState<string | null>(null);
+  const pathname = usePathname();
+  const router = useRouter();
 
   useEffect(() => {
     const savedSelectedItem = localStorage.getItem('selectedItem');
-    if (savedSelectedItem) {
+    if (savedSelectedItem && pathname !== '/dashboard') {
       setSelectedItem(savedSelectedItem);
     }
-  }, []);
+  }, [pathname]);
 
   const handleItemClick = (title: string) => {
     setSelectedItem(title);
@@ -48,7 +52,7 @@ export function NavMain({
 
   return (
     <SidebarGroup>
-      <SidebarGroupLabel>Platform</SidebarGroupLabel>
+      <SidebarGroupLabel><Link href="/dashboard">Dashboard</Link></SidebarGroupLabel>
       <SidebarMenu>
         {items.map((item) => (
           <Collapsible
@@ -77,9 +81,9 @@ export function NavMain({
                         className={`hover:bg-gray-100 ${selectedItem === subItem.title ? 'bg-gray-100' : ''}`}
                         onClick={() => handleItemClick(subItem.title)}
                       >
-                        <a href={subItem.url}>
+                        <Link href={subItem.url}>
                           <span>{subItem.title}</span>
-                        </a>
+                        </Link>
                       </SidebarMenuSubButton>
                     </SidebarMenuSubItem>
                   ))}

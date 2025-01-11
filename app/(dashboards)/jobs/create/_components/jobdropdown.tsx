@@ -74,6 +74,8 @@ const JobDropdown: React.FC<DropdownProps> = ({
               className={`w-full ${ClassName}`}
               styles={customStyles}
               isSearchable={false}
+              // menuIsOpen={true}
+              classNamePrefix={'job-dropdown'}
             />
             {fieldState.invalid && errors && (
               <span className='absolute mt-2 flex justify-start text-sm font-medium text-red-500'>

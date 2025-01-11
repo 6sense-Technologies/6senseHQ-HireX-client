@@ -1,6 +1,6 @@
 'use client';
 
-import * as React from 'react';
+import { useEffect } from 'react';
 import {
   AudioWaveform,
   BookOpen,
@@ -25,11 +25,9 @@ import {
   SidebarHeader,
   SidebarRail,
 } from '@/components/ui/sidebar';
-import { signOut } from 'next-auth/react';
-import { Router } from 'next/navigation';
+import { useSession } from 'next-auth/react';
 
-// This is sample data.
-const data = {
+const defaultData = {
   user: {
     name: 'Khan Atik Faisal',
     email: '',
@@ -119,6 +117,20 @@ const data = {
 };
 
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
+  const session = useSession();
+
+  const userData = {
+    name: session?.data?.user?.name || defaultData.user.name,
+    email: session?.data?.user?.email || defaultData.user.email,
+    avatar: defaultData.user.avatar,
+  };
+
+  const data = {
+    ...defaultData,
+    user: userData,
+  };
+
+
   return (
     <Sidebar collapsible='icon' {...props}>
       <SidebarHeader>
