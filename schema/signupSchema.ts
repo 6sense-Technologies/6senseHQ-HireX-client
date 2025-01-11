@@ -22,19 +22,17 @@ export const SignupSchema = z
       .array(z.string({ required_error: 'Role is required.' }))
       .min(1, { message: 'Role is required.' }),
   })
-  .superRefine((data, ctx) => {
-    if (data.password && data.Cpassword && data.password !== data.Cpassword) {
-      ctx.addIssue({
-        path: ['password'],
-        message: "Passwords doesn't match.",
-        code: z.ZodIssueCode.custom,
-      });
-    }
-    if (data.password && data.Cpassword && data.password !== data.Cpassword) {
-      ctx.addIssue({
-        path: ['Cpassword'],
-        message: "Passwords doesn't match.",
-        code: z.ZodIssueCode.custom,
-      });
-    }
-  });
+  // .superRefine((data, ctx) => {
+  //   if (data.password !== data.Cpassword) {
+  //     ctx.addIssue({
+  //       path: ['password'],
+  //       message: "Passwords doesn't match.",
+  //       code: z.ZodIssueCode.custom,
+  //     });
+  //     ctx.addIssue({
+  //       path: ['Cpassword'],
+  //       message: "Passwords doesn't match.",
+  //       code: z.ZodIssueCode.custom,
+  //     });
+  //   }
+  // });

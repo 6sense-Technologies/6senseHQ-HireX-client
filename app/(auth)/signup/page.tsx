@@ -1,14 +1,13 @@
 'use client';
-import * as React from 'react';
-import { useForm, SubmitHandler } from 'react-hook-form';
-import { Circle, Eye, EyeSlash, X } from '@phosphor-icons/react';
+import { useForm, SubmitHandler, Controller } from 'react-hook-form';
+import { Circle, Eye, EyeSlash } from '@phosphor-icons/react';
 import Link from 'next/link';
 import Image from 'next/image';
 import Logo from '../../../public/logos/HireXLogo.png';
 import { Button } from '@/components/ui/button';
 import { useRouter } from 'next/navigation';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { SignupSchema } from '@/Zodschema/authSchema';
 import { SingupFormInputs } from '@/types/Auth/types';
 import Dropdown from '@/components/dropdown';
@@ -31,6 +30,9 @@ const Signup = () => {
     setValue,
     control,
     formState: { errors },
+    watch,
+    setError,
+    clearErrors,
   } = useForm<SingupFormInputs>({
     resolver: zodResolver(SignupSchema),
     defaultValues: {
@@ -65,8 +67,44 @@ const Signup = () => {
       ? rest.roleNames
       : [rest.roleNames];
 
+    if (data.password !== data.Cpassword) {
+      setError('password', {
+        type: 'manual',
+        message: "Passwords doesn't match.",
+      });
+      setError('Cpassword', {
+        type: 'manual',
+        message: "Passwords doesn't match.",
+      });
+      return;
+    } else {
+      clearErrors('password');
+      clearErrors('Cpassword');
+    }
+
     signupMutation.mutate(rest);
   };
+
+  const password = watch('password');
+  const Cpassword = watch('Cpassword');
+
+  useEffect(() => {
+    if (password && Cpassword) {
+      if (password !== Cpassword) {
+        setError('password', {
+          type: 'manual',
+          message: "Passwords doesn't match.",
+        });
+        setError('Cpassword', {
+          type: 'manual',
+          message: "Passwords doesn't match.",
+        });
+      } else {
+        clearErrors('password');
+        clearErrors('Cpassword');
+      }
+    }
+  }, [password, Cpassword, setError, clearErrors]);
 
   console.log(errors);
 
@@ -90,8 +128,6 @@ const Signup = () => {
                 </h1>
                 <p className='text-[14px] text-subHeading'>Create an account</p>
               </div>
-
-              {/* <ErrorCard /> */}
 
               <div className='flex flex-col gap-2'>
                 <div className='mt-[32px]'>
@@ -221,7 +257,7 @@ const Signup = () => {
                     href='/login'
                     className='text-primar px-2 text-sm text-subHeading'
                   >
-                    Have an account?{' '}
+                    Have an account?
                     <span className='text-blue-600 hover:underline'>Login</span>
                   </Link>
                 </div>
