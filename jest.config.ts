@@ -13,6 +13,12 @@ const customJestConfig: Config = {
   preset: 'ts-jest',
   collectCoverage: true,
   coverageDirectory: 'coverage',
+  moduleNameMapper: {
+    '^@/components/loader$': '<rootDir>/__mocks__/Loader.tsx',
+  },
+  transformIgnorePatterns: [
+    '/node_modules/(?!lucide-react)',
+  ],
 };
 
 export default createJestConfig(customJestConfig);

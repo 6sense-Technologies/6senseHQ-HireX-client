@@ -90,3 +90,15 @@ jest.mock('next-auth/react', () => ({
     })
   ),
 }));
+
+jest.mock('lucide-react', () => {
+  return {
+    Icon: () => <svg data-testid="icon-mock" />,
+  };
+});
+
+// jest.setup.js
+jest.mock('lucide-react', () => ({
+  __esModule: true,
+  default: {},
+}));

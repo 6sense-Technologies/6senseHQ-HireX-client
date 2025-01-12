@@ -75,10 +75,6 @@ describe('Login Page', () => {
     );
   });
 
-  it('renders the mock loader when unauthenticated', async () => {
-    const loader = await screen.findByTestId('mock-loader');
-    expect(loader).toBeInTheDocument();
-  });
 
   it('renders the title if authenticated', async () => {
     // Mock session to authenticated

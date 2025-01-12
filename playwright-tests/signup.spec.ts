@@ -1,7 +1,7 @@
 import { test, expect } from '@playwright/test';
 
 test('test', async ({ page }) => {
-  await page.goto('https://192.168.0.158:8000//signup');
+  await page.goto('http://localhost:3000/signup');
   await page.getByPlaceholder('Full Name').click();
   await page.getByPlaceholder('Full Name').fill('imrul kayes');
   await page.getByPlaceholder('Email Address').click();

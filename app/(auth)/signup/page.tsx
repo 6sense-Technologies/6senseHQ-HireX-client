@@ -7,7 +7,7 @@ import Logo from '../../../public/logos/HireXLogo.png';
 import { Button } from '@/components/ui/button';
 import { useRouter } from 'next/navigation';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { useEffect, useState } from 'react';
+import { useState, useEffect } from 'react';
 import { SignupSchema } from '@/Zodschema/authSchema';
 import { SingupFormInputs } from '@/types/Auth/types';
 import Dropdown from '@/components/dropdown';
@@ -16,6 +16,7 @@ import { useMutation } from '@tanstack/react-query';
 import { handleSignup } from '@/api/Auth/authApi';
 import { useSession } from 'next-auth/react';
 import Loader from '@/components/loader';
+import Swal from 'sweetalert2';
 
 const Signup = () => {
   const [passwordVisible, setPasswordVisible] = useState(false);
@@ -57,7 +58,15 @@ const Signup = () => {
   const signupMutation = useMutation({
     mutationFn: handleSignup,
     onSuccess: () => {
-      router.push('/login');
+      Swal.fire({
+        icon: 'success',
+        title: 'Signup Successful',
+        text: 'You have successfully signed up!',
+        showConfirmButton: false,
+        timer: 1500,
+      }).then(() => {
+        router.push('/login');
+      });
     },
   });
 
@@ -89,22 +98,11 @@ const Signup = () => {
   const Cpassword = watch('Cpassword');
 
   useEffect(() => {
-    if (password && Cpassword) {
-      if (password !== Cpassword) {
-        setError('password', {
-          type: 'manual',
-          message: "Passwords doesn't match.",
-        });
-        setError('Cpassword', {
-          type: 'manual',
-          message: "Passwords doesn't match.",
-        });
-      } else {
-        clearErrors('password');
-        clearErrors('Cpassword');
-      }
+    if (password && Cpassword && password === Cpassword) {
+      clearErrors('password');
+      clearErrors('Cpassword');
     }
-  }, [password, Cpassword, setError, clearErrors]);
+  }, [password, Cpassword, clearErrors]);
 
   console.log(errors);
 

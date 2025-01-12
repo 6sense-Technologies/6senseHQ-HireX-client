@@ -26,14 +26,10 @@ import {
   useSidebar,
 } from '@/components/ui/sidebar';
 import { signOut } from 'next-auth/react';
-import { Router } from 'next/navigation';
+import { useRouter } from 'next/navigation';
 import Swal from 'sweetalert2';
 import 'sweetalert2/dist/sweetalert2.min.css';
 
-const handleLogout = async () => {
-  await signOut({ redirect: false });
-  Router.push('/login');
-};
 
 const handleComingSoon = () => {
   Swal.fire({
@@ -54,6 +50,13 @@ export function NavUser({
   };
 }) {
   const { isMobile } = useSidebar();
+  const Router = useRouter();
+
+  const handleLogout = async () => {
+    await signOut({ redirect: false });
+    Router.push('/login');
+  };
+  
 
   return (
     <SidebarMenu>

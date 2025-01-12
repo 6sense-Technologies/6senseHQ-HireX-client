@@ -3,16 +3,6 @@ import { useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { useSession } from 'next-auth/react';
 import Loader from '@/components/loader';
-import { SidebarTrigger } from '@/components/ui/sidebar';
-import { Separator } from '@radix-ui/react-separator';
-import {
-  Breadcrumb,
-  BreadcrumbItem,
-  BreadcrumbLink,
-  BreadcrumbList,
-  BreadcrumbPage,
-  BreadcrumbSeparator,
-} from '@/components/ui/breadcrumb';
 import Topbreadcrumb from '@/components/topbreadcrumb';
 
 const Page = () => {

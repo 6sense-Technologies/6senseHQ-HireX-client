@@ -102,11 +102,6 @@ const CreateJob = () => {
   };
 
   return (
-    <>
-      <Head>
-        <title>HireX - Create Job</title>
-        <meta name="description" content="Create a new job listing on HireX." />
-      </Head>
       <div className='bg-white px-[16px]'>
         <Topbreadcrumb
           initialData='Jobs'
@@ -154,7 +149,6 @@ const CreateJob = () => {
           </div>
         </form>
       </div>
-    </>
   );
 };
 

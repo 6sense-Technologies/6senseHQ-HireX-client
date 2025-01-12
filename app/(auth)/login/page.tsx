@@ -47,7 +47,7 @@ const Login = () => {
   const loginMutation = useMutation({
     mutationFn: async (data: LoginFormInputs) => {
       const result = await signIn('credentials', {
-        redirect: false, // Prevent automatic redirection
+        redirect: false,
         email: data.email,
         password: data.password,
       });
@@ -65,7 +65,6 @@ const Login = () => {
     },
   });
 
-  console.log('Env Testing', BaseUrl);
 
   const handleSubmission: SubmitHandler<LoginFormInputs> = (data) => {
     loginMutation.mutate(data, {
