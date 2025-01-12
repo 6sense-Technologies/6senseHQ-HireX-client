@@ -16,9 +16,9 @@ import GoogleButton from './_components/googleButton';
 import OrDivider from './_components/orDivider';
 import ErrorCard from './_components/errorCard';
 import { useMutation } from '@tanstack/react-query';
-import { useDispatch } from 'react-redux';
 import Loader from '@/components/loader';
 import { signIn, useSession } from 'next-auth/react';
+import Swal from 'sweetalert2';
 
 
 const Login = () => {
@@ -53,15 +53,7 @@ const Login = () => {
       return result;
     },
     onSuccess: () => {
-          Swal.fire({
-            icon: 'success',
-            title: 'Signin Successful',
-            text: 'You have successfully signed in!',
-            showConfirmButton: false,
-            timer: 1500,
-          }).then(() => {
             router.push('/dashboard');
-          });
         },
     onError: () => {
       setErrorFlag(true);

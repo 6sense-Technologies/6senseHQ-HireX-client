@@ -1,18 +1,19 @@
-import React from 'react';
-import Head from 'next/head';
+import { Metadata } from 'next';
 
-interface MetadataProps {
+type MetadataProps = {
   title: string;
   description: string;
-}
-
-const Metadata: React.FC<MetadataProps> = ({ title, description }) => {
-  return (
-    <Head>
-      <title>{title}</title>
-      <meta name="description" content={description} />
-    </Head>
-  );
 };
 
-export default Metadata;
+export const metadata: Metadata = {
+  title: 'Default Title',
+  description: 'Default Description',
+};
+
+const MetadataComponent = ({ title, description }: MetadataProps) => {
+  metadata.title = title;
+  metadata.description = description;
+  return null;
+};
+
+export default MetadataComponent;
