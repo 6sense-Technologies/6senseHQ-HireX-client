@@ -2,7 +2,6 @@
 import * as React from 'react';
 import { Controller } from 'react-hook-form';
 import Select from 'react-select';
-import { Warning } from '@phosphor-icons/react';
 
 type OptionType = {
   value: string;
@@ -101,7 +100,7 @@ const InterviewStageDropdown: React.FC<InterviewStageDropdownProps> = ({
     <Controller
       control={control}
       name={name}
-      render={({ field, fieldState }) => (
+      render={({ field }) => (
         <div className={`relative flex items-center`}>
           <div className='relative w-full max-w-[110px]'>
             <Select

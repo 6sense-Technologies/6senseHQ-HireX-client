@@ -18,13 +18,10 @@ import {
   JobFormInputs,
   JobPositionList,
 } from '@/types/Job/type';
-import { useSession } from 'next-auth/react';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { CreateJobSchema } from '@/Zodschema/jobSchema';
 import { Circle } from '@phosphor-icons/react';
-import Loader from '@/components/loader';
 import Topbreadcrumb from '@/components/topbreadcrumb';
-import Head from 'next/head';
 
 const CreateJob = () => {
   const {
@@ -40,7 +37,6 @@ const CreateJob = () => {
   });
 
   const router = useRouter();
-  const session = useSession();
   const [isButtonClicked, setIsButtonClicked] = useState(false);
 
   const { data: jobpositions } = useQuery<

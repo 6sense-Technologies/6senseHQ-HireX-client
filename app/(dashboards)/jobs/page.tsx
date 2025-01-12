@@ -40,7 +40,7 @@ const JobList = () => {
 
           <div className='pb-[38px] pl-[47px] pr-[30px] pt-[16px]'>
             <div className='w-full pb-[38px] pr-[30px] pt-[16px]'>
-              <table className='w-full lg:max-w-[1000px]'>
+              <table className='w-full lg:max-w-[1000px] xl:max-w-[1600px]'>
                 <thead>
                   <tr className='h-10 border-b-[2px] bg-white text-left text-xs'>
                     <th className='w-1/6 pl-3'>POSITION</th>

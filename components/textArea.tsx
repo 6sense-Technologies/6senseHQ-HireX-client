@@ -1,6 +1,5 @@
 'use client';
 import { FC } from 'react';
-import { Warning } from '@phosphor-icons/react';
 import cn from '../utils/cn';
 
 type TextAreaProps = {

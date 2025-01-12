@@ -1,10 +1,6 @@
 'use client';
 import {
   ArrowRight,
-  Phone,
-  PuzzlePiece,
-  UsersThree,
-  VideoCamera,
   Trash,
   Plus,
   DotsSixVertical,
@@ -25,19 +21,19 @@ import {
 
 const interviewStageOptions = [
   {
-    value: 'Offline',
+    value: 'Onsite Interview',
     label: 'Onsite Interview',
   },
   {
-    value: 'Online-Voice',
+    value: 'Online Test',
     label: 'Online Test',
   },
   {
-    value: 'Online-Quiz',
+    value: 'Online Interview',
     label: 'Online Interview',
   },
   {
-    value: 'Online-Voice',
+    value: 'Phone/Audio Interview',
     label: 'Phone/Audio Interview',
   },
 ];

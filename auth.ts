@@ -1,5 +1,5 @@
 import axios from 'axios';
-import NextAuth, { Session } from 'next-auth';
+import NextAuth from 'next-auth';
 import GoogleProvider from 'next-auth/providers/google';
 import CredentialsProvider from 'next-auth/providers/credentials';
 import { AuthGoogleID, AuthGoogleSecret } from './config';
@@ -112,7 +112,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
       // console.log('SESSION ACTIVATED: ' + session.accessToken);
       return session;
     },
-    async redirect({ url, baseUrl }) {
+    async redirect({ baseUrl }) {
       return baseUrl + '/dashboard';
     },
   },

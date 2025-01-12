@@ -4,7 +4,6 @@ import { IdealCandidatesProps } from '@/types/Job/type';
 
 const IdealCandidates: React.FC<IdealCandidatesProps> = ({
   control,
-  errors,
 }) => {
   return (
     <div className='mt-[32px] rounded-2xl bg-jobBg'>

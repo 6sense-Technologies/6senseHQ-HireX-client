@@ -2,15 +2,6 @@
 import React, { FC } from 'react';
 import { SidebarProvider, SidebarTrigger } from './ui/sidebar';
 import { AppSidebar } from './app-sidebar';
-import { Separator } from './ui/separator';
-import {
-  Breadcrumb,
-  BreadcrumbItem,
-  BreadcrumbLink,
-  BreadcrumbList,
-  BreadcrumbPage,
-  BreadcrumbSeparator,
-} from './ui/breadcrumb';
 import { useRouter } from 'next/navigation';
 import Loader from './loader';
 import { useSession } from 'next-auth/react';

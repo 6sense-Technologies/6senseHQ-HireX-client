@@ -2,7 +2,6 @@
 import * as React from 'react';
 import { Controller, UseFormSetValue } from 'react-hook-form';
 import Select from 'react-select';
-import { Warning } from '@phosphor-icons/react';
 
 type OptionType = {
   value: string;
@@ -30,7 +29,7 @@ const Dropdown: React.FC<DropdownProps> = ({
   ClassName,
 }) => {
   const customStyles = {
-    control: (provided: any, state: any) => ({
+    control: (provided: any) => ({
       ...provided,
       borderColor: errors[name] ? 'red' : provided.borderColor,
       '&:hover': {

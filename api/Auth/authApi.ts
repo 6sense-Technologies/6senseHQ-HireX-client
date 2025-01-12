@@ -1,8 +1,6 @@
 'use client';
 import axios from 'axios';
 import { LoginFormInputs, SingupFormInputs } from '@/types/Auth/types';
-import { setAuthData } from '@/redux/slices/authSlice';
-import { useDispatch } from 'react-redux';
 import { BaseUrl } from '@/config';
 
 export const handleLogin = async (data: LoginFormInputs) => {

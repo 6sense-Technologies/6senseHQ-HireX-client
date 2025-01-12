@@ -1,4 +1,3 @@
-import { DragEvent } from 'react';
 import { UseFormSetValue } from 'react-hook-form';
 
 export type interviewStageInputTypes = {

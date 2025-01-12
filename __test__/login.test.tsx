@@ -4,7 +4,6 @@ import { Provider } from 'react-redux';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { store } from '../store/store';
 import Login from '../app/(auth)/login/page';
-import axios from 'axios';
 import { useSession } from 'next-auth/react';
 
 

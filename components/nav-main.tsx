@@ -17,7 +17,7 @@ import {
   SidebarMenuSubItem,
 } from '@/components/ui/sidebar';
 import { useState, useEffect } from 'react';
-import { useRouter, usePathname } from 'next/navigation';
+import { usePathname } from 'next/navigation';
 import Link from 'next/link';
 
 export function NavMain({
@@ -36,7 +36,6 @@ export function NavMain({
 }) {
   const [selectedItem, setSelectedItem] = useState<string | null>(null);
   const pathname = usePathname();
-  const router = useRouter();
 
   useEffect(() => {
     const savedSelectedItem = localStorage.getItem('selectedItem');

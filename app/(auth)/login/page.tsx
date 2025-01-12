@@ -17,21 +17,17 @@ import OrDivider from './_components/orDivider';
 import ErrorCard from './_components/errorCard';
 import { useMutation } from '@tanstack/react-query';
 import { useDispatch } from 'react-redux';
-import { setAuthData } from '@/redux/slices/authSlice';
 import Loader from '@/components/loader';
 import { signIn, useSession } from 'next-auth/react';
-import { BaseUrl } from '@/config';
+
 
 const Login = () => {
   const [passwordVisible, setPasswordVisible] = useState(false);
   const router = useRouter();
-  const dispatch = useDispatch();
   const [errorFlag, setErrorFlag] = useState(false);
 
   const {
-    register,
     handleSubmit,
-    setValue,
     control,
     formState: { errors },
   } = useForm<LoginFormInputs>({
@@ -56,10 +52,17 @@ const Login = () => {
       }
       return result;
     },
-    onSuccess: (data) => {
-      // Handle successful login
-      router.push('/dashboard');
-    },
+    onSuccess: () => {
+          Swal.fire({
+            icon: 'success',
+            title: 'Signin Successful',
+            text: 'You have successfully signed in!',
+            showConfirmButton: false,
+            timer: 1500,
+          }).then(() => {
+            router.push('/dashboard');
+          });
+        },
     onError: () => {
       setErrorFlag(true);
     },

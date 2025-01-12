@@ -1,5 +1,5 @@
 'use client';
-import { useForm, SubmitHandler, Controller } from 'react-hook-form';
+import { useForm, SubmitHandler} from 'react-hook-form';
 import { Circle, Eye, EyeSlash } from '@phosphor-icons/react';
 import Link from 'next/link';
 import Image from 'next/image';
@@ -26,7 +26,6 @@ const Signup = () => {
   const session = useSession();
 
   const {
-    register,
     handleSubmit,
     setValue,
     control,
@@ -78,11 +77,9 @@ const Signup = () => {
 
     if (data.password !== data.Cpassword) {
       setError('password', {
-        type: 'manual',
         message: "Passwords doesn't match.",
       });
       setError('Cpassword', {
-        type: 'manual',
         message: "Passwords doesn't match.",
       });
       return;
@@ -104,7 +101,7 @@ const Signup = () => {
     }
   }, [password, Cpassword, clearErrors]);
 
-  console.log(errors);
+  // console.log(errors);
 
   if (session.status === 'unauthenticated') {
     return (
