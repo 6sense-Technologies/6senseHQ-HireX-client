@@ -49,9 +49,14 @@ export function NavMain({
     localStorage.setItem('selectedItem', title);
   };
 
+  const handleReset = () => {
+    setSelectedItem(null);
+    localStorage.removeItem('selectedItem');
+  }
+
   return (
     <SidebarGroup>
-      <SidebarGroupLabel><Link href="/dashboard">Dashboard</Link></SidebarGroupLabel>
+      <SidebarGroupLabel onClick={handleReset}><Link href="/dashboard">Dashboard</Link></SidebarGroupLabel>
       <SidebarMenu>
         {items.map((item) => (
           <Collapsible
