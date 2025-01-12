@@ -1,6 +1,6 @@
 'use client';
 import React, { FC } from 'react';
-import { SidebarProvider, SidebarTrigger } from './ui/sidebar';
+import { SidebarProvider} from './ui/sidebar';
 import { AppSidebar } from './app-sidebar';
 import { useRouter } from 'next/navigation';
 import Loader from './loader';

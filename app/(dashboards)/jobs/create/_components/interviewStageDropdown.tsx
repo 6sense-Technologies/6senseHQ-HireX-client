@@ -69,7 +69,7 @@ const InterviewStageDropdown: React.FC<InterviewStageDropdownProps> = ({
         color: selectedValue.includes('Online') ? '#166534' : 'black',
       };
     },
-    option: (provided: any, state: any) => ({
+    option: (provided: any) => ({
       ...provided,
       color: 'black',
       '&:hover': {

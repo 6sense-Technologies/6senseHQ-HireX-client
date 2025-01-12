@@ -71,10 +71,7 @@ const Signup = () => {
 
   const handleSubmission: SubmitHandler<SingupFormInputs> = (data) => {
     const { Cpassword, ...rest } = data;
-    rest.roleNames = Array.isArray(rest.roleNames)
-      ? rest.roleNames
-      : [rest.roleNames];
-
+    
     if (data.password !== data.Cpassword) {
       setError('password', {
         message: "Passwords doesn't match.",

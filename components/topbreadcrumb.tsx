@@ -40,6 +40,10 @@ const Topbreadcrumb: FC<TopbreadcrumbProps> = ({
             <BreadcrumbItem>
             <BreadcrumbLink href={secondayLink}>{secondayData}</BreadcrumbLink>
             </BreadcrumbItem>
+            <BreadcrumbSeparator className='hidden md:block' />
+            <BreadcrumbItem>
+            <BreadcrumbLink href={thirdLink}>{thirdData}</BreadcrumbLink>
+            </BreadcrumbItem>
           </BreadcrumbList>
         </Breadcrumb>
       </div>

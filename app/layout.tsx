@@ -1,4 +1,3 @@
-import type { Metadata } from 'next';
 import './globals.css';
 import { WebVitals } from './_components/web-vitals';
 import { Inter } from 'next/font/google';

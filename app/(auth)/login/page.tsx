@@ -18,7 +18,6 @@ import ErrorCard from './_components/errorCard';
 import { useMutation } from '@tanstack/react-query';
 import Loader from '@/components/loader';
 import { signIn, useSession } from 'next-auth/react';
-import Swal from 'sweetalert2';
 
 
 const Login = () => {
@@ -154,7 +153,7 @@ const Login = () => {
                   href='/signup'
                   className='text-forgotpassword text-primar px-2 text-sm'
                 >
-                  Don't have an account?{' '}
+                  Don't have an account?
                   <span className='text-blue-600 hover:underline'>Signup</span>
                 </Link>
               </div>

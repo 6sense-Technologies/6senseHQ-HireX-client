@@ -1,7 +1,6 @@
 import '../globals.css';
 import Provider from '@/components/provider';
 import { Inter } from 'next/font/google';
-import { Metadata } from 'next';
 import Sidebar from '@/components/sidebar';
 
 const inter = Inter({ subsets: ['latin'] });

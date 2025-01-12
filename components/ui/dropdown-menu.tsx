@@ -2,10 +2,10 @@
 
 import * as React from 'react';
 import * as DropdownMenuPrimitive from '@radix-ui/react-dropdown-menu';
-import { Check, ChevronRight, Circle } from 'lucide-react';
+import {ChevronRight, Circle } from 'lucide-react';
 
 import { cn } from '@/lib/utils';
-import { CheckSquare, Square } from '@phosphor-icons/react';
+import {Square } from '@phosphor-icons/react';
 
 const DropdownMenu = DropdownMenuPrimitive.Root;
 

@@ -1,7 +1,6 @@
 import * as React from 'react';
 import { cn } from '@/lib/utils';
 import { Controller } from 'react-hook-form';
-import { Warning } from '@phosphor-icons/react';
 
 interface InputProps extends React.ComponentProps<'input'> {
   control: any;
