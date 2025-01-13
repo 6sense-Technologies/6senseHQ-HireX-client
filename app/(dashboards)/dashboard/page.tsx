@@ -4,6 +4,7 @@ import { useRouter } from 'next/navigation';
 import { useSession } from 'next-auth/react';
 import Loader from '@/components/loader';
 import Topbreadcrumb from '@/components/topbreadcrumb';
+import Head from 'next/head';
 
 const Page = () => {
   const router = useRouter();
@@ -29,10 +30,18 @@ const Page = () => {
 
   console.log(session);
 
+  useEffect(() => {
+    document.title = 'HireX - Dashboard ';
+  }, []);
+
   if (session.status === 'authenticated') {
     return (
       <>
-        <Topbreadcrumb />
+        <Topbreadcrumb initialData='Dashboard' initalLink='/dashboard' />
+        <Head>
+          <title>{document.title}</title>
+          <meta name='description' content='HireX dashboard' />
+        </Head>
         <div className='dashboard-area w-full bg-white px-4'>
           <div className='upper-area mt-0 flex justify-between'>
             <h1 className='mt-1 text-3xl font-bold lg:ml-5 lg:mt-1'>

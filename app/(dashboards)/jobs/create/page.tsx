@@ -22,6 +22,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { CreateJobSchema } from '@/Zodschema/jobSchema';
 import { Circle } from '@phosphor-icons/react';
 import Topbreadcrumb from '@/components/topbreadcrumb';
+import Head from 'next/head';
 
 const CreateJob = () => {
   const {
@@ -97,6 +98,10 @@ const CreateJob = () => {
     router.push('/jobs');
   };
 
+    useEffect(() => {
+      document.title = 'HireX - Create Job ';
+    }, []);
+
   return (
       <div className='bg-white px-[16px]'>
         <Topbreadcrumb
@@ -105,6 +110,10 @@ const CreateJob = () => {
           initalLink='/jobs'
           secondayLink='/jobs/create'
         />
+        <Head>
+        <title>{document.title}</title>
+        <meta name='description' content='HireX Create Job' />
+        </Head>
         <form className='pb-28' onSubmit={handleSubmit(handleSubmission)}>
           <div className='min-h-screen'>
             <JobInformation

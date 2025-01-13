@@ -5,7 +5,8 @@ import Topbreadcrumb from '@/components/topbreadcrumb';
 import { Button } from '@/components/ui/button';
 import { TJobList } from '@/types/Job/type';
 import { useQuery } from '@tanstack/react-query';
-import React, { useState } from 'react';
+import Head from 'next/head';
+import React, { useEffect, useState } from 'react';
 
 const JobList = () => {
   const [page, setPage] = useState<number>(1);
@@ -22,14 +23,22 @@ const JobList = () => {
     refetch();
   };
 
+  useEffect(() => {
+    document.title = 'HireX - Jobs ';
+  }, []);
+
   return (
     <div className='bg-white px-[16px]'>
       <Topbreadcrumb
-      initialData='Jobs'
-      secondayData='List'
-      initalLink='/jobs'
-      secondayLink='/jobs'
+        initialData='Jobs'
+        secondayData='List'
+        initalLink='/jobs'
+        secondayLink='/jobs'
       />
+      <Head>
+        <title>{document.title}</title>
+        <meta name='description' content='HireX Jobs' />
+      </Head>
       <div className='min-h-screen'>
         <div className='rounded-2xl bg-jobBg'>
           <div>

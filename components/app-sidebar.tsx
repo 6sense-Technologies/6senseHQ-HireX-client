@@ -60,7 +60,7 @@ const defaultData = {
         },
         {
           title: 'Details',
-          url: '/jobs/details',
+          url: '#',
         },
       ],
     },

@@ -36,14 +36,24 @@ const Topbreadcrumb: FC<TopbreadcrumbProps> = ({
             <BreadcrumbItem className='hidden md:block'>
               <BreadcrumbLink href={initalLink}>{initialData}</BreadcrumbLink>
             </BreadcrumbItem>
-            <BreadcrumbSeparator className='hidden md:block' />
-            <BreadcrumbItem>
-            <BreadcrumbLink href={secondayLink}>{secondayData}</BreadcrumbLink>
-            </BreadcrumbItem>
-            <BreadcrumbSeparator className='hidden md:block' />
-            <BreadcrumbItem>
-            <BreadcrumbLink href={thirdLink}>{thirdData}</BreadcrumbLink>
-            </BreadcrumbItem>
+            {secondayData ? (
+              <>
+                <BreadcrumbSeparator className='hidden md:block' />
+                <BreadcrumbItem>
+                  <BreadcrumbLink href={secondayLink}>
+                    {secondayData}
+                  </BreadcrumbLink>
+                </BreadcrumbItem>
+              </>
+            ) : null}
+            {thirdData ? (
+              <>
+                <BreadcrumbSeparator className='hidden md:block' />
+                <BreadcrumbItem>
+                  <BreadcrumbLink href={thirdLink}>{thirdData}</BreadcrumbLink>
+                </BreadcrumbItem>
+              </>
+            ) : null}
           </BreadcrumbList>
         </Breadcrumb>
       </div>
