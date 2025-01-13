@@ -1,81 +1,59 @@
-const dummyToken = {
-  name: 'Dummy User',
-  email: 'dummy@example.com',
-  picture: 'https://dummy-profile-pic.com/image.jpg',
-  sub: 'dummy-user-id-123',
-  accessToken: 'dummy-access-token-12345',
-  iat: Math.floor(Date.now() / 1000),
-  exp: Math.floor(Date.now() / 1000) + 24 * 60 * 60, // 24 hours from now
-  jti: 'dummy-jwt-id-789',
-};
+const axios = require('axios');
 
-const dummyAccount = {
-  provider: 'google',
+const signIn = jest.fn();
+const signOut = jest.fn();
+const useSession = jest.fn(() => ({
+  status: 'unauthenticated',
+  data: null,
+}));
+
+const GoogleProvider = jest.fn(() => ({
+  id: 'google',
+  name: 'Google',
   type: 'oauth',
-  providerAccountId: 'dummy-provider-account-id',
-  access_token: 'dummy-access-token-12345',
-  expires_at: Math.floor(Date.now() / 1000) + 24 * 60 * 60,
-  scope: 'openid profile email',
-  token_type: 'Bearer',
-  id_token: 'dummy-id-token-abcdef',
-};
+  clientId: 'mock-client-id',
+  clientSecret: 'mock-client-secret',
+}));
 
-const mockCallbacks = {
-  async jwt({ token = dummyToken, account = dummyAccount }) {
-    if (account) {
-      token.accessToken = 'dummy-access-token-12345';
+const CredentialsProvider = jest.fn(() => ({
+  id: 'credentials',
+  name: 'Credentials',
+  credentials: {
+    email: { label: 'Email', type: 'text', placeholder: 'example@example.com' },
+    password: { label: 'Password', type: 'password' },
+  },
+  authorize: jest.fn(async (credentials) => {
+    const response = await axios.post(
+      'http://192.168.0.158:8000/auth/login',
+      {
+        email: credentials?.email,
+        password: credentials?.password,
+      },
+      {
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      }
+    );
+
+    const data = response.data;
+    if (data?.tokens?.access_token) {
+      return {
+        email: credentials.email,
+        name: data?.userInfo?.name,
+        accessToken: data.tokens.access_token,
+        refreshToken: data.tokens.refresh_token,
+      };
     }
-    return token;
-  },
-  async session({ session, token = dummyToken }) {
-    return {
-      ...session,
-      accessToken: token.accessToken,
-      user: {
-        ...session.user,
-        id: token.sub,
-      },
-    };
-  },
-  async redirect() {
-    return '/dashboard';
-  },
-};
 
-const mockAuth = {
-  handlers: {
-    GET: jest.fn((req, res) =>
-      Promise.resolve(res.status(200).json({ status: 'ok' }))
-    ),
-    POST: jest.fn((req, res) =>
-      Promise.resolve(res.status(200).json({ status: 'ok' }))
-    ),
-  },
-  signIn: jest.fn(() =>
-    Promise.resolve({
-      ok: true,
-      error: null,
-      url: '/dashboard',
-    })
-  ),
-  signOut: jest.fn(() =>
-    Promise.resolve({
-      ok: true,
-      url: '/',
-    })
-  ),
-  auth: jest.fn(() =>
-    Promise.resolve({
-      user: {
-        id: 'dummy-user-id',
-        name: 'Dummy User',
-        email: 'dummy@example.com',
-        image: 'https://dummy-profile-pic.com/image.jpg',
-      },
-      token: dummyToken,
-      ...mockCallbacks,
-    })
-  ),
-};
+    return null;
+  }),
+}));
 
-export const { handlers, signIn, signOut, auth } = mockAuth;
+module.exports = {
+  signIn,
+  signOut,
+  useSession,
+  GoogleProvider,
+  CredentialsProvider,
+};

@@ -7,6 +7,9 @@ import Login from '../app/(auth)/login/page';
 import { useSession } from 'next-auth/react';
 
 
+// Mock handleLogin and handleSignup
+jest.mock('../api/Auth/authApi.ts', () => require('../__mocks__/auths.ts'));
+
 jest.mock('../components/loader', () => {
   return jest.fn(() => <div data-testid="mock-loader">Mock Loader</div>);
 });
