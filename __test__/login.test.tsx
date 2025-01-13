@@ -62,6 +62,8 @@ jest.mock('axios', () => ({
   post: jest.fn(() => Promise.resolve({ data: { tokens: { access_token: 'mock-access-token', refresh_token: 'mock-refresh-token' } } })),
 }));
 
+
+
 const queryClient = new QueryClient();
 
 describe('Login Page', () => {
@@ -76,6 +78,13 @@ describe('Login Page', () => {
       </Provider>
     );
   });
+
+  it('handles login error', async () => {
+    // Mock signIn to throw a CustomError
+    (signIn as jest.Mock).mockImplementationOnce(() => {
+      throw new Error(JSON.stringify({ message: 'Invalid credentials' }));
+    });
+
 
 
   it('renders the title if authenticated', async () => {

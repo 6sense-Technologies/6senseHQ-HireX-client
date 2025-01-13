@@ -80,7 +80,7 @@ export function NavUser({
             </SidebarMenuButton>
           </DropdownMenuTrigger>
           <DropdownMenuContent
-            className='w-[--radix-dropdown-menu-trigger-width] min-w-56 rounded-lg'
+            className='w-[--radix-dropdown-menu-trigger-width] min-w-56 rounded-lg bg-white'
             side={isMobile ? 'bottom' : 'right'}
             align='end'
             sideOffset={4}
@@ -99,7 +99,7 @@ export function NavUser({
             </DropdownMenuLabel>
             <DropdownMenuSeparator />
             <DropdownMenuGroup>
-              <DropdownMenuItem>
+              <DropdownMenuItem className='hover:bg-gray-100'>
                 <span
                   className='flex cursor-pointer items-center gap-[7px]'
                   onClick={handleComingSoon}
@@ -111,7 +111,7 @@ export function NavUser({
             </DropdownMenuGroup>
             <DropdownMenuSeparator />
             <DropdownMenuGroup>
-              <DropdownMenuItem>
+              <DropdownMenuItem className='hover:bg-gray-100'>
                 <span
                   className='flex cursor-pointer items-center gap-[7px]'
                   onClick={handleComingSoon}
@@ -120,7 +120,7 @@ export function NavUser({
                   Account
                 </span>
               </DropdownMenuItem>
-              <DropdownMenuItem>
+              <DropdownMenuItem className='hover:bg-gray-100'>
                 <span
                   className='flex cursor-pointer items-center gap-[7px]'
                   onClick={handleComingSoon}
@@ -129,7 +129,7 @@ export function NavUser({
                   Billing
                 </span>
               </DropdownMenuItem>
-              <DropdownMenuItem>
+              <DropdownMenuItem className='hover:bg-gray-100'>
                 <span
                   className='flex cursor-pointer items-center gap-[7px]'
                   onClick={handleComingSoon}
@@ -140,7 +140,7 @@ export function NavUser({
               </DropdownMenuItem>
             </DropdownMenuGroup>
             <DropdownMenuSeparator />
-            <DropdownMenuItem>
+            <DropdownMenuItem className='hover:bg-gray-100'>
               <span
                 className='flex cursor-pointer items-center gap-[7px]'
                 onClick={handleLogout}
