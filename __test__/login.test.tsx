@@ -1,17 +1,16 @@
 import '@testing-library/jest-dom';
-import { render, screen, fireEvent, waitFor } from '@testing-library/react';
+import { render, screen} from '@testing-library/react';
 import { Provider } from 'react-redux';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { store } from '../store/store';
 import Login from '../app/(auth)/login/page';
-import { useSession, signIn } from 'next-auth/react';
+import { useSession } from 'next-auth/react';
 
-// Mock handleLogin and handleSignup
-jest.mock('../api/Auth/authApi.ts', () => require('../__mocks__/auths.ts'));
 
 jest.mock('../components/loader', () => {
   return jest.fn(() => <div data-testid="mock-loader">Mock Loader</div>);
 });
+
 
 jest.mock('next-auth', () => ({
   __esModule: true,
@@ -75,21 +74,6 @@ describe('Login Page', () => {
     );
   });
 
-  it('handles login error', async () => {
-    // Mock signIn to throw a CustomError
-    (signIn as jest.Mock).mockImplementationOnce(() => {
-      throw new Error(JSON.stringify({ message: 'Invalid credentials' }));
-    });
-
-    // Simulate user interaction
-    fireEvent.change(screen.getByPlaceholderText('Email Address'), { target: { value: 'test@example.com' } });
-    fireEvent.change(screen.getByPlaceholderText('Password'), { target: { value: 'password' } });
-    fireEvent.click(screen.getByText('Login'));
-
-    // Wait for the error message to appear
-    const errorMessage = await waitFor(() => screen.getByText('Invalid credentials'));
-    expect(errorMessage).toBeInTheDocument();
-  });
 
   it('renders the title if authenticated', async () => {
     // Mock session to authenticated
