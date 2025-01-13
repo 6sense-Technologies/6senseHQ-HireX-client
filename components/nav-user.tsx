@@ -30,7 +30,6 @@ import { useRouter } from 'next/navigation';
 import Swal from 'sweetalert2';
 import 'sweetalert2/dist/sweetalert2.min.css';
 
-
 const handleComingSoon = () => {
   Swal.fire({
     title: 'Coming Soon!',
@@ -57,7 +56,14 @@ export function NavUser({
     localStorage.setItem('logout', 'true');
     Router.push('/login');
   };
-  
+
+  const getInitials = (name: string) => {
+    const nameParts = name.split(' ');
+    const initials = nameParts.length > 1
+      ? `${nameParts[0][0]}${nameParts[1][0]}`
+      : `${nameParts[0][0]}${nameParts[0][1]}`;
+    return initials.toUpperCase();
+  };
 
   return (
     <SidebarMenu>
@@ -70,7 +76,9 @@ export function NavUser({
             >
               <Avatar className='h-8 w-8 rounded-lg'>
                 <AvatarImage src={user.avatar} alt={user.name} />
-                <AvatarFallback className='rounded-lg'>CN</AvatarFallback>
+                <AvatarFallback className='rounded-lg'>
+                  {getInitials(user.name)}
+                </AvatarFallback>
               </Avatar>
               <div className='grid flex-1 text-left text-sm leading-tight'>
                 <span className='truncate font-semibold'>{user.name}</span>
@@ -89,7 +97,9 @@ export function NavUser({
               <div className='flex items-center gap-2 px-1 py-1.5 text-left text-sm'>
                 <Avatar className='h-8 w-8 rounded-lg'>
                   <AvatarImage src={user.avatar} alt={user.name} />
-                  <AvatarFallback className='rounded-lg'>CN</AvatarFallback>
+                  <AvatarFallback className='rounded-lg'>
+                    {getInitials(user.name)}
+                  </AvatarFallback>
                 </Avatar>
                 <div className='grid flex-1 text-left text-sm leading-tight'>
                   <span className='truncate font-semibold'>{user.name}</span>
