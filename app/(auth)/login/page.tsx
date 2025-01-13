@@ -52,6 +52,7 @@ const Login = () => {
       return result;
     },
     onSuccess: () => {
+      localStorage.setItem('logout', 'false');
       router.push('/dashboard');
     },
     onError: () => {
@@ -163,11 +164,12 @@ const Login = () => {
                   </div>
                 </div>
                 <div className='mb-[18px] flex justify-end'>
-                  <Link
-                    href='/signup'
-                    className='text-forgotpassword text-primar px-2 text-sm'
-                  >
+                  
                     Don't have an account?
+                    <Link
+                    href='/signup'
+                    className='text-forgotpassword text-primar px-1 py-1 text-sm'
+                  >
                     <span className='text-blue-600 hover:underline'>
                       Signup
                     </span>

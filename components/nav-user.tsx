@@ -54,6 +54,7 @@ export function NavUser({
 
   const handleLogout = async () => {
     await signOut({ redirect: false });
+    localStorage.setItem('logout', 'true');
     Router.push('/login');
   };
   
