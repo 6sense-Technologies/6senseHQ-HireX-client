@@ -1,5 +1,5 @@
 import axios from 'axios';
-import NextAuth from 'next-auth';
+import NextAuth, { CredentialsSignin } from 'next-auth';
 import GoogleProvider from 'next-auth/providers/google';
 import CredentialsProvider from 'next-auth/providers/credentials';
 import { AuthGoogleID, AuthGoogleSecret } from './config';
@@ -14,7 +14,12 @@ declare module 'next-auth' {
     refreshToken?: string;
   }
 }
-
+class CustomError extends CredentialsSignin{
+  constructor(message: string) {
+    super();
+    this.code=message
+  }
+}
 export const { handlers, signIn, signOut, auth } = NextAuth({
   session: {
     strategy: 'jwt',
@@ -42,7 +47,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
       async authorize(credentials) {
         try {
           const response = await axios.post(
-            'http://192.168.0.158:8000/auth/login',
+            'http://192.168.0.158:8000/auth/v2/login',
             {
               email: credentials?.email,
               password: credentials?.password,
@@ -54,6 +59,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
             }
           );
 
+          console.log('RESPONSE:', response.status);
           const data = response.data;
           // console.log('DATA:', response.data);
           // console.log(data?.userInfo?.name);
@@ -68,9 +74,12 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
           }
 
           return false; // Login failed
-        } catch (error) {
-          console.error('Error during credential login:', error);
-          return false;
+        } catch (error: any) {
+          console.log('error',error.response.status);
+          if(error.response.status===401) throw new CustomError('User not verified');
+          else if(error.response.status===400 || error.response.status ===404) throw new CustomError('Invalid credentials');
+          // console.error('Error during credential login:', error);
+          // return false;
         }
       },
     }),

@@ -23,6 +23,7 @@ const Login = () => {
   const [passwordVisible, setPasswordVisible] = useState(false);
   const router = useRouter();
   const [errorFlag, setErrorFlag] = useState(false);
+  const [errorMessage, setErrorMessage] = useState('');
 
   const {
     handleSubmit,
@@ -46,8 +47,10 @@ const Login = () => {
         email: data.email,
         password: data.password,
       });
-      if (result?.error) {
-        throw new Error(result.error);
+      
+      // console.log("🚀 ~ mutationFn: ~ result:", result?.code)
+      if (result?.code) {
+        throw new Error(result.code);
       }
       return result;
     },
@@ -55,8 +58,10 @@ const Login = () => {
       localStorage.setItem('logout', 'false');
       router.push('/dashboard');
     },
-    onError: () => {
+    onError: (error:any) => {
+      console.log('Error:', error.message);
       setErrorFlag(true);
+      setErrorMessage(error.message);
     },
   });
 
@@ -100,7 +105,9 @@ const Login = () => {
                   </p>
                 </div>
 
-                <ErrorCard setErrorFlag={setErrorFlag} errorFlag={errorFlag} />
+                <ErrorCard 
+                errorMessage={errorMessage}
+                setErrorFlag={setErrorFlag} errorFlag={errorFlag} />
 
                 <div className='flex flex-col gap-2'>
                   <div className='mt-[32px]'>
