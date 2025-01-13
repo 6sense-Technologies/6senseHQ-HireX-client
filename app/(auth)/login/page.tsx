@@ -1,5 +1,5 @@
 'use client';
-import {useEffect} from 'react';
+import { useEffect, useState } from 'react';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import { Eye, EyeSlash, Circle } from '@phosphor-icons/react';
 import Link from 'next/link';
@@ -8,7 +8,6 @@ import Logo from '../../../public/logos/HireXLogo.png';
 import { Button } from '@/components/ui/button';
 import { useRouter } from 'next/navigation';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { useState } from 'react';
 import { LoginSchema } from '@/Zodschema/authSchema';
 import { LoginFormInputs } from '@/types/Auth/types';
 import { Input } from '@/components/ui/input';
@@ -29,6 +28,7 @@ const Login = () => {
     handleSubmit,
     control,
     formState: { errors },
+    watch,
   } = useForm<LoginFormInputs>({
     resolver: zodResolver(LoginSchema),
   });
@@ -66,9 +66,13 @@ const Login = () => {
     });
   };
 
-    useEffect(() => {
-      document.title = 'HireX - Signin ';
-    }, []);
+  useEffect(() => {
+    document.title = 'HireX - Signin ';
+  }, []);
+
+  const email = watch('email');
+  const password = watch('password');
+  const isFormValid = email && password;
 
   if (session.status === 'unauthenticated') {
     return (
@@ -164,11 +168,10 @@ const Login = () => {
                   </div>
                 </div>
                 <div className='mb-[18px] flex justify-end'>
-                  
-                    Don't have an account?
-                    <Link
+                  Don't have an account?
+                  <Link
                     href='/signup'
-                    className='text-forgotpassword text-primar px-1 py-1 text-sm'
+                    className='text-forgotpassword text-primar px-1 py-[3px] text-sm'
                   >
                     <span className='text-blue-600 hover:underline'>
                       Signup
@@ -180,6 +183,7 @@ const Login = () => {
                     variant={'primary'}
                     size={'medium'}
                     className='text-sm'
+                    disabled={!isFormValid}
                   >
                     {loginMutation.isPending ? (
                       <Circle className='animate-spin text-sm' />
