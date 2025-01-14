@@ -1,3 +1,4 @@
+import { KeyboardEvent } from 'react';
 import { UseFormSetValue } from 'react-hook-form';
 
 export type interviewStageInputTypes = {
@@ -117,3 +118,35 @@ export interface Meta {
   currentPage: number;
   totalPages: number;
 }
+
+export type TInterViewStagesLeftTableProps = {
+  selectAll: boolean;
+  handleSelectAll: () => void;
+  itemsLeft: InterviewStageItem[];
+  handleCheckboxChange: (id: number) => void;
+  handleAddNewItem: () => void;
+  newItemLabel: string;
+  setNewItemLabel: (value: string) => void;
+  handleKeyDown: (e: KeyboardEvent<HTMLInputElement>) => void;
+};
+
+export type TEmptyViewInterviewStageRightTableProps = 
+{
+    isButtonClicked: boolean;
+    errors: any;
+}
+
+export type TInterviewStageRightTableProps = {
+  itemsRight: InterviewStageItem[];
+  draggedItemRight: InterviewStageItem | null;
+  hoveredItemRight: InterviewStageItem | null;
+  handleDragStartRight: (item: InterviewStageItem) => void;
+  handleDragOverRight: (e: any, item: InterviewStageItem) => void;
+  handleDropRight: (e: any, item: InterviewStageItem) => void;
+  setHoveredItemRight: (item: InterviewStageItem | null) => void;
+  control: any;
+  setItemsRight: (items: InterviewStageItem[]) => void;
+  interviewStageOptions: { value: string; label: string }[];
+  removeItem: (id: number) => void;
+};
+

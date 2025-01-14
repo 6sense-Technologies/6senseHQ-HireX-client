@@ -53,6 +53,8 @@ export function NavUser({
 
   const handleLogout = async () => {
     await signOut({ redirect: false });
+    localStorage.removeItem('accessToken');
+    localStorage.removeItem('refreshToken');
     localStorage.setItem('logout', 'true');
     Router.push('/login');
   };

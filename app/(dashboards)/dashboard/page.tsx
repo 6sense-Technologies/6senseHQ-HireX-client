@@ -11,8 +11,9 @@ const Page = () => {
   const session = useSession();
 
   useEffect(() => {
-    if (session.status === 'authenticated' && session?.data?.accessToken) {
+    if (session.status === 'authenticated' && session?.data?.accessToken && session?.data?.refreshToken) {
       localStorage.setItem('accessToken', session?.data?.accessToken);
+      localStorage.setItem('refreshToken', session?.data?.refreshToken);
     }
   }, [session.status, session?.data?.accessToken]);
 
@@ -34,7 +35,10 @@ const Page = () => {
     document.title = 'HireX - Dashboard ';
   }, []);
 
-  if (session.status === 'authenticated') {
+  if (session.status !== 'authenticated') {
+    router.push('/login');
+    return <Loader />;
+  }
     return (
       <>
         <Topbreadcrumb initialData='Dashboard' initalLink='/dashboard' />
@@ -51,10 +55,6 @@ const Page = () => {
         </div>
       </>
     );
-  } else {
-    router.push('/login');
-    return <Loader />;
-  }
 };
 
 export default Page;

@@ -19,7 +19,7 @@ import Loader from '@/components/loader';
 import { signIn, useSession } from 'next-auth/react';
 import Head from 'next/head';
 
-const Login = () => {
+const Login =  () => {
   const [passwordVisible, setPasswordVisible] = useState(false);
   const router = useRouter();
   const [errorFlag, setErrorFlag] = useState(false);
@@ -79,7 +79,10 @@ const Login = () => {
   const password = watch('password');
   const isFormValid = email && password;
 
-  if (session.status === 'unauthenticated') {
+  if (session.status !== 'unauthenticated') {
+    router.push('/dashboard');
+    return <Loader />;
+  }
     return (
       <>
         <Head>
@@ -209,10 +212,6 @@ const Login = () => {
         </div>
       </>
     );
-  } else {
-    router.push('/dashboard');
-    return <Loader />;
-  }
 };
 
 export default Login;
